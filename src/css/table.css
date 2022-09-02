@@ -1,0 +1,353 @@
+@import '../color.css';
+
+:root {
+  --padding-table: 15px;
+  --radius-table: 5px;
+  --padding-gap: 10px;
+  --padding-gap2: 6px;
+}
+
+.empty_back {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  flex: 1;
+  margin-top: var(--padding-table);
+  background-color: var(--root-color);
+  border-radius: var(--radius-table);
+  justify-content: center;
+}
+
+#empty_id {
+  margin-top: 0;
+}
+
+.empty_text {
+  color: var(--back-color);
+  font-weight: bold;
+  margin: 0;
+  font-size: 16px;
+}
+
+.table_container {
+  overflow-x: scroll;
+  overflow-y: scroll;
+  margin: var(--padding-table) 0 0 0;
+  border-radius: var(--radius-table);
+}
+
+.table_back {
+  background-color: var(--root-color);
+  width: 100%;
+  min-width: 600px;
+  flex: 1;
+}
+
+.table_header_text {
+  color: var(--text-color2);
+  text-align: left;
+  padding: var(--padding-gap2);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.table_header_cell {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+}
+
+.table_sort {
+  display: flex;
+  flex-flow: column;
+  margin-left: 5px;
+}
+
+.table_sort_icon {
+  color: var(--back-color);
+}
+
+.table_sort_icon_selected {
+  color: var(--link-color);
+}
+
+.table_body_back {
+  background-color: var(--root-color);
+}
+
+.table_row {
+  border-style: solid;
+  border-width: 1px 0 0 0;
+  border-color: var(--border-color);
+  cursor: pointer;
+}
+
+.table_row_selected {
+  /* border-style: solid; */
+  border-width: 1px 0 0 0;
+  border-color: var(--border-color);
+  cursor: pointer;
+  background-color: var(--link-color3);
+}
+
+.table_cell_text {
+  color: var(--text-color);
+  font-size: 15px;
+  padding: var(--padding-gap2);
+}
+
+tr > th:last-child {
+  text-align: right;
+}
+
+tr > td:last-child {
+  text-align: right;
+}
+
+.table_footer {
+  border-style: solid;
+  border-width: 1px 0 0 0;
+  border-color: var(--border-color);
+}
+
+.table_footer_text {
+  color: var(--text-color);
+  text-align: left;
+  padding: var(--padding-gap2);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.pagination_back {
+  margin-top: var(--padding-gap);
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  min-height: 40px;
+}
+
+.pagination_btn {
+  display: flex;
+  flex-flow: row;
+  border: none;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  box-shadow: none;
+  background-color: rgba(0, 0, 0, 0);
+  padding: 0 3px;
+}
+
+.pagination_btn:hover {
+  background-color: var(--link-color3);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pagination_arrow {
+  color: var(--link-color);
+  font-size: 20px;
+}
+
+.pagination_arrow_disabled {
+  color: var(--header-mobile-color);
+  font-size: 20px;
+}
+
+.pagination_dots {
+  color: var(--header-mobile-color);
+  font-size: 20px;
+}
+
+.page_current_btn {
+  border: none;
+  box-shadow: none;
+  background-color: var(--link-color);
+  border-radius: var(--radius-table);
+  margin: 0 2px;
+  min-width: 30px;
+}
+
+.page_btn {
+  border: none;
+  box-shadow: none;
+  margin: 0 2px;
+  background-color: rgba(0, 0, 0, 0);
+  min-width: 30px;
+}
+
+.page_btn:hover {
+  background-color: var(--link-color3);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.page_current_text {
+  color: var(--root-color);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.page_text {
+  color: var(--header-mobile-color);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.page_select {
+  margin-left: 10px;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--border-color);
+  overflow: hidden;
+}
+
+.page_select .ant-select-selector {
+  background-color: rgba(0, 0, 0, 0) !important;
+  color: var(--text-color) !important;;
+}
+
+.page_select:focus-within {
+  border-color: var(--link-color);
+  -webkit-box-shadow: 0 0 3px 2px var(--link-color2);
+  -moz-box-shadow: 0 0 3px 2px var(--link-color2);
+  box-shadow: 0 0 3px 2px var(--link-color2);
+}
+
+.footer_label {
+  color: var(--text-color2);
+  text-align: right;
+  font-size: 13px;
+  font-weight: 550;
+  margin: 0;
+}
+
+.footer_value {
+  color: var(--text-color);
+  text-align: right;
+  font-size: 14px;
+  font-weight: 550;
+  margin: 0;
+}
+
+.detail_back {
+  background-color: var(--hover2-color);
+  padding: 10px 10px 10px 20px;
+}
+
+.detail_table {
+  border-radius: var(--radius-table);
+  overflow-y: scroll;
+  max-height: 55vh;
+}
+
+.expand_icon {
+  color: var(--text-color2);
+  font-size: 22px;
+  height: 20px;
+  width: 20px;
+  line-height: 20px;
+  margin: auto 0;
+  text-align: center;
+}
+
+.table_check {
+  color: var(--link-color);
+  font-size: 20px;
+  height: 20px;
+  width: 20px;
+  line-height: 20px;
+  margin: auto 5px;
+  text-align: center;
+}
+
+.table_check1 {
+  color: var(--link-color);
+  font-size: 20px;
+  height: 20px;
+  width: 20px;
+  line-height: 20px;
+  margin: auto 5px;
+  text-align: center;
+}
+
+.table_check:hover {
+  cursor: pointer;
+  color: var(--hover-color);
+}
+
+.disabled_check {
+  color: var(--text-color2);
+  font-size: 20px;
+  height: 20px;
+  width: 20px;
+  line-height: 20px;
+  margin: auto 5px;
+  text-align: center;
+}
+
+.table_descr {
+  color: var(--text-color2);
+  font-size: 14px;
+  text-align: left;
+  margin: -4px 5px 5px 5px;
+  line-height: 15px;
+}
+
+.cancel_row {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.cancel_btn {
+  height: 36px;
+  background-color: var(--danger-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 15px;
+  box-shadow: none;
+  border-radius: 5px;
+  border: none;
+  margin: 0;
+}
+
+.cancel_btn:hover {
+  cursor: pointer;
+}
+
+#cancel_page {
+  margin-top: 0;
+}
+
+.cancel_icon {
+  color: var(--root-color);
+  font-size: 16px;
+}
+
+.cancel_text {
+  color: var(--root-color);
+  font-size: 15px;
+  font-weight: 550;
+  margin-left: 5px;
+}
+
+@media only screen and (min-width: 440px) {
+  .empty_img {
+    filter: var(--placeholder-filter);
+    width: 200px;
+    height: 200px;
+  }
+}
+
+@media only screen and (max-width: 440px) {
+  .empty_img {
+    filter: var(--placeholder-filter);
+    width: 120px;
+    height: 120px;
+  }
+}

@@ -1,0 +1,704 @@
+@import '../color.css';
+
+:root {
+  --filter-width: 200px;
+  --filter-min-width: 150px;
+  --filter-height: 40px;
+}
+
+.filter_container {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+}
+
+.filter_back:focus-within {
+  border-color: var(--link-color);
+  -webkit-box-shadow: 0 0 3px 2px var(--link-color2);
+  -moz-box-shadow: 0 0 3px 2px var(--link-color2);
+  box-shadow: 0 0 3px 2px var(--link-color2);
+}
+
+.filter_input_back:focus-within {
+  border-color: var(--link-color);
+  -webkit-box-shadow: 0 0 3px 2px var(--link-color2);
+  -moz-box-shadow: 0 0 3px 2px var(--link-color2);
+  box-shadow: 0 0 3px 2px var(--link-color2);
+}
+
+.filter_icon {
+  color: var(--text-color);
+  margin: 0 5px;
+  font-size: 18px;
+}
+
+.filter_input:focus {
+  outline: none;
+}
+
+.filter_clear {
+  color: var(--text-color2);
+  font-size: 16px;
+  position: absolute;
+  right: 5px;
+}
+
+.ant-select-selector {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.filter_drop_icon {
+  position: absolute;
+  color: var(--text-color);
+  font-size: 18px;
+  left: 10px;
+}
+
+.filter_back .ant-select-selection-search {
+  padding-left: 22px;
+}
+
+.filter_back .ant-select-selection-placeholder {
+  margin-left: 22px;
+}
+
+.filter_back .ant-select-selection-item {
+  color: var(--text-color);
+  font-size: 14px;
+  margin-left: 22px;
+}
+
+.filter_back .ant-select-clear {
+  font-size: 16px;
+  margin-top: -8px;
+  color: var(--text-color2);
+  right: 11px;
+}
+
+.ant-select-arrow {
+  color: var(--text-color);
+}
+
+.search_btn:hover {
+  background-color: var(--link-color3);
+  cursor: pointer;
+}
+
+.search_icon {
+  color: var(--link-color);
+  font-size: 20px;
+}
+
+.search_text {
+  color: var(--link-color);
+  font-size: 15px;
+  font-weight: 550;
+  margin-left: 5px;
+}
+
+.search2_btn:hover {
+  background-color: var(--link-color3);
+  cursor: pointer;
+}
+
+.search2_icon {
+  color: var(--link-color);
+  font-size: 20px;
+}
+
+.search2_text {
+  color: var(--link-color);
+  font-size: 15px;
+  font-weight: 550;
+  margin-left: 5px;
+}
+
+.add_btn:hover {
+  background-color: var(--hover-color);
+  cursor: pointer;
+}
+
+.add_icon {
+  color: var(--root-color);
+  font-size: 20px;
+}
+
+.add_text {
+  color: var(--root-color);
+  font-size: 15px;
+  font-weight: 550;
+  margin-left: 5px;
+}
+
+.fab_btn:hover {
+  background-color: var(--hover-color);
+  cursor: pointer;
+}
+
+.icon_btn:hover {
+  background-color: var(--link-color3);
+  cursor: pointer;
+}
+
+.icon_btn2:hover {
+  background-color: var(--link-color3);
+  cursor: pointer;
+}
+
+.filter_range_back .ant-picker-active-bar, .filter_date_back .ant-picker-active-bar {
+  display: none;
+}
+
+.filter_range_back.ant-picker-range {
+  padding-left: 37px;
+}
+
+.filter_range_back .ant-picker-input>input, .filter_date_back .ant-picker-input>input {
+  color: var(--text-color);
+  font-size: 14px;
+}
+
+.filter_range_back .ant-picker-range-separator {
+  padding: 0 2px;
+}
+
+.filter_date_back .ant-picker-input {
+  padding-left: 32px;
+}
+
+@media only screen and (min-width: 960px) {
+  .filter_back {
+    background-color: var(--root-color);
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--border-color);
+    height: var(--filter-height);
+    padding: 0 5px;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    position: relative;
+    margin-right: 10px;
+    width: var(--filter-width);
+  }
+
+  .filter_range_back {
+    background-color: var(--root-color);
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--border-color);
+    height: var(--filter-height);
+    padding: 0 5px;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    position: relative;
+    margin-right: 10px;
+    width: calc(var(--filter-width) * 1.25);
+  }
+
+  .filter_date_back {
+    background-color: var(--root-color);
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--border-color);
+    height: var(--filter-height);
+    padding: 0 5px;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    position: relative;
+    margin-right: 10px;
+    width: var(--filter-width);
+  }
+
+  .filter_input_back {
+    background-color: var(--root-color);
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--border-color);
+    height: var(--filter-height);
+    padding: 0 5px;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    position: relative;
+    margin-right: 10px;
+    width: var(--filter-width);
+  }
+
+  .filter_input {
+    border: none;
+    height: calc(var(--filter-height) - 2px);
+    color: var(--text-color);
+    font-size: 14px;
+    padding: 0 5px;
+    width: calc(var(--filter-width) - 55px);
+  }
+
+  .filter_drop_container {
+    position: relative;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+  }
+
+  .filter_range_container {
+    position: relative;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+  }
+
+  .search_btn {
+    height: var(--filter-height);
+    min-width: var(--filter-min-width);
+    width: var(--filter-width);
+    background-color: var(--root-color);
+    border: none;
+    box-shadow: none;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    border-color: var(--link-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    margin-right: 10px;
+  }
+
+  .icon_btn {
+    display: none;
+  }
+  
+  .add_btn {
+    height: var(--filter-height);
+    min-width: var(--filter-min-width);
+    width: var(--filter-width);
+    background-color: var(--link-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    box-shadow: none;
+    border-radius: 5px;
+    border: none;
+    margin: 0 0 0 auto;
+  }
+
+  .fab_btn {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 660px) and (max-width: 960px) {
+  .filter_back {
+    background-color: var(--root-color);
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--border-color);
+    height: var(--filter-height);
+    padding: 0 5px;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    position: relative;
+    margin-right: 10px;
+    flex: 1;
+    max-width: 320px;
+  }
+
+  .filter_range_back {
+    background-color: var(--root-color);
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--border-color);
+    height: var(--filter-height);
+    padding: 0 5px;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    position: relative;
+    margin-right: 10px;
+    flex: 1;
+    min-width: 240px;
+    max-width: 580px;
+  }
+
+  .filter_date_back {
+    background-color: var(--root-color);
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--border-color);
+    height: var(--filter-height);
+    padding: 0 5px;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    position: relative;
+    margin-right: 10px;
+    max-width: 320px;
+    flex: 1;
+  }
+
+  .filter_input_back {
+    background-color: var(--root-color);
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--border-color);
+    height: var(--filter-height);
+    padding: 0 5px;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    position: relative;
+    margin-right: 10px;
+    flex: 1;
+    max-width: 320px;
+  }
+
+  .filter_input {
+    border: none;
+    height: calc(var(--filter-height) - 2px);
+    color: var(--text-color);
+    font-size: 14px;
+    padding: 0 5px;
+    width: calc(100% - 45px);
+  }
+
+  .filter_drop_container {
+    position: relative;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    flex: 1;
+    max-width: 320px;
+  }
+
+  .filter_range_container {
+    position: relative;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    flex: 1;
+    max-width: 590px;
+  }
+
+  .search_btn {
+    height: var(--filter-height);
+    background-color: var(--root-color);
+    border: none;
+    box-shadow: none;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    border-color: var(--link-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    width: 120px;
+  }
+
+  .icon_btn {
+    display: none;
+  }
+  
+  .add_btn {
+    display: none;
+  }
+
+  .fab_btn {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background-color: var(--link-color);
+    border: none;
+    box-shadow: none;
+    border-radius: 30px;
+    height: 40px;
+    width: 40px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media only screen and (max-width: 660px) {
+  .filter_input_back {
+    background-color: var(--root-color);
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--border-color);
+    height: var(--filter-height);
+    padding: 0 5px;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    position: relative;
+    margin-right: 10px;
+    flex: 1;
+    min-width: calc((100% - 60px) / 2);
+    max-width: calc((100% - 60px) / 2);
+  }
+
+  .filter_back {
+    background-color: var(--root-color);
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--border-color);
+    height: var(--filter-height);
+    padding: 0 5px;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    position: relative;
+    flex: 1;
+    width: 100px;
+  }
+
+  .filter_range_back, .filter_date_back {
+    background-color: var(--root-color);
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--border-color);
+    height: var(--filter-height);
+    padding: 0 5px;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    position: relative;
+    flex: 1;
+  }
+
+  .filter_input {
+    border: none;
+    height: calc(var(--filter-height) - 2px);
+    color: var(--text-color);
+    font-size: 14px;
+    width: calc(100% - 41px);
+  }
+
+  .filter_drop_container {
+    position: relative;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    flex: 1;
+    min-width: calc((100% - 60px) / 2);
+    max-width: calc((100% - 60px) / 2);
+    margin-right: 10px;
+  }
+
+  .filter_range_container {
+    position: relative;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    flex: 1;
+    min-width: calc((100% - 60px) / 2);
+    max-width: calc(100% - 50px);
+    margin-right: 10px;
+  }
+
+  .search_btn {
+    display: none;
+  }
+
+  .icon_btn {
+    height: var(--filter-height);
+    width: var(--filter-height);
+    border: none;
+    box-shadow: none;
+    background-color: var(--root-color);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--link-color);
+  }
+
+  .add_btn {
+    display: none;
+  }
+
+  .fab_btn {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background-color: var(--link-color);
+    border: none;
+    box-shadow: none;
+    border-radius: 30px;
+    height: var(--filter-height);
+    width: var(--filter-height);
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .filter_container2 {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+  }
+
+  .filter_container3 {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+  }
+
+  .filter_col {
+    display: flex;
+    flex-wrap: row;
+  }
+
+  .filter_row {
+    display: flex;
+    flex-wrap: row;
+  }
+
+  .search2_btn {
+    height: var(--filter-height);
+    min-width: var(--filter-min-width);
+    width: var(--filter-width);
+    background-color: var(--root-color);
+    border: none;
+    box-shadow: none;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    border-color: var(--link-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+  }
+
+  .icon_btn2 {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 960px) and (max-width: 1200px) {
+  .filter_container2 {
+    display: flex;
+    flex-flow: row;
+  }
+
+  .filter_col {
+    display: flex;
+    flex-wrap: row;
+  }
+
+  .filter_row {
+    display: flex;
+    flex-wrap: row;
+  }
+
+  .search2_btn {
+    display: none;
+  }
+
+  .icon_btn2 {
+    height: var(--filter-height);
+    width: var(--filter-height);
+    border: none;
+    box-shadow: none;
+    background-color: var(--root-color);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--link-color);
+  }
+
+  .filter_check {
+    margin-top: 3px;
+  }
+}
+
+@media only screen and (max-width: 960px) {
+  .filter_row {
+    display: flex;
+    flex-wrap: row;
+    margin-bottom: 10px;
+    position: relative;
+  }
+
+  .filter_row.bottom {
+    margin-bottom: 0;
+  }
+
+  .search2_btn {
+    display: none;
+  }
+
+  .icon_btn2 {
+    height: var(--filter-height);
+    width: var(--filter-height);
+    border: none;
+    box-shadow: none;
+    background-color: var(--root-color);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--link-color);
+  }
+
+  .filter_check {
+    margin-top: 3px;
+  }
+}
+
+@media only screen and (max-width: 660px) {
+  .icon_btn2 {
+    height: 90px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+}
+
+.filter_check .ant-checkbox .ant-checkbox-inner {
+  background-color: var(--root-color);
+  border-color: var(--border-color);
+  height: 18px;
+  width: 18px;
+}
+
+.filter_check .ant-checkbox-checked .ant-checkbox-inner {
+  background-color: var(--link-color);
+  border-color: var(--link-color);
+}
+
+.filter_check > span {
+  color: var(--text-color2);
+  font-size: 14px;
+  font-weight: 500;
+}

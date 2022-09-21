@@ -16,9 +16,9 @@
 }
 
 .menu_logo_back {
-  background-color: var(--root-color);
+  /* background-color: var(--root-color); */
   border-radius: 5px;
-  min-width: 40px;
+  width: 36px;
   height: 40px;
   display: flex;
   justify-content: center;
@@ -31,7 +31,7 @@
 
 .menu_logo_title {
   font-weight: 500;
-  font-size: 18px;
+  font-size: 20px;
   margin-left: var(--padding-gap);
   flex: 1;
   margin: 10px 10px ;
@@ -364,6 +364,15 @@
   color: var(--root-color);
   margin-right: var(--padding-gap);
 }
+.drop_icon {
+  background-color: var(--back-color);
+  height: 20px;
+  width: 20px;
+  border-radius: 20px;
+  color: var(--root-color);
+  margin-right: var(--padding-gap);
+  rotate: 270deg;
+}
 
 .drop_user_name {
   color: var(--text-color);
@@ -373,7 +382,7 @@
 }
 
 .drop_user_email {
-  color: var(--text-color2);
+  color: #1a1a1a;
   margin: 0;
   font-size: 13px;
   line-height: 20px;

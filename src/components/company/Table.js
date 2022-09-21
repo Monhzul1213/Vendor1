@@ -3,12 +3,11 @@ import { useTranslation } from 'react-i18next';
 import {collection, doc, getDocs} from 'firebase/firestore'
 import {db} from '../../firebase'
 import { useTable, usePagination, useRowSelect, useSortBy } from 'react-table';
-
+import { formatNumber } from '../../helpers/formatNumber';
 import '../../css/table.css';
 import { Pagination, Sort } from '../all';
 
 export function Table(props){
-  // const[user, setUser]= useState([])
   
   const { data, setVisible, selected, setSelected, setData } = props;
   const { t, i18n } = useTranslation();
@@ -16,15 +15,21 @@ export function Table(props){
   
   useEffect(() => {
     setColumns([
-      { Header: t('table.company'), accessor: 'CpnyID', },
-      { Header: t('login.email'), accessor: 'VendUserID', },
-      { Header: t('table.vendor'), accessor: 'VendID',  },     
-      { Header:<div style={{textAlign:'right', width: '60px'}}>{ t('table.uselicensedate')}</div>, accessor: 'UseLicenseDate',},      
-      { Header: <div style={{textAlign:'right', width: '6 0px'}}>{ t('table.licenseExpireDate')}</div> , accessor: 'LicenseExpireDate' },
-      { Header: <div style={{ width: '80px'}}>{ t('table.phone')}</div>, accessor: 'Phone' , },
-      { Header: <div style={{ width: '50px'}}>{ t('login.email')}</div>, accessor: 'Email' , },
-      { Header: <div style={{ width: '50px'}}>{ t('table.bank')}</div>, accessor: 'Bank' , },
-      { Header: t('table.bankacct'), accessor: 'BankAcct' , },
+      { Header: <div style={{textAlign:'center',}}> {t('table.company')}</div>, accessor: 'CpnyID', },
+      { Header: <div style={{textAlign:'center'}}> { t('table.vendorcode')}</div> , accessor: 'VendID', Cell: props => <div style={{textAlign: 'center'}}>{(props.value)}</div>   }, 
+      { Header: <div style={{textAlign:'center'}}> { t('table.vendorname')}</div> , accessor: 'VendName',  },
+      { Header: <div style={{textAlign:'center'}}> {t('user_email')}</div> , accessor: 'VendUserID', },
+      { Header: <div style={{textAlign:'center',}}> {t('user_password')}</div> , accessor: 'VendPass', },
+      { Header: <div style={{textAlign: 'center'}}>{ t('table.phone')}</div>, accessor: 'Phone' , Cell: props => <div style={{textAlign: 'center', paddingRight: 15}}>{(props.value)}</div>  },
+      { Header: <div style={{ textAlign:'center'}}>{ t('login.email')}</div>, accessor: 'Email' , },
+       { Header: <div style={{ textAlign:'center'}}>{ t('table.bank')}</div>, accessor: 'Bank' ,Cell: props => <div style={{ paddingRight: 15}}>{(props.value)}</div> },
+      { Header:<div style={{ textAlign:'center'}}>{ t('table.bankacct')}</div>, accessor: 'BankAcct' , Cell: props => <div style={{textAlign: 'center', paddingRight: 15}}>{(props.value)}</div> },
+      { Header: <div style={{textAlign:'center'}}>{ t('table.address')}</div> , accessor: 'Address' , Cell: props => <div style={{width: '200px'}}>{(props.value)}</div> },
+      { Header:<div style={{textAlign:'center'}}>{ t('table.uselicensedate')}</div>, accessor: 'UseLicenseDate', Cell: props => <div style={{textAlign: 'center'}}>{(props.value)}</div>},      
+      { Header: <div style={{textAlign:'center'}}>{ t('table.licenseExpireDate')}</div> , accessor: 'LicenseExpireDate' , Cell: props => <div style={{textAlign: 'center' , paddingRight: 10}}>{(props.value)}</div>},
+      { Header: <div style={{textAlign:'center'}}>{ t('Үүсгэсэн огноо')}</div> , accessor: 'CreatedDate' , Cell: props => <div style={{textAlign: 'center' , paddingRight: 10}}>{(props.value)}</div>},
+      
+     
     ])
     return () => {};
   }, [i18n?.language])
@@ -46,7 +51,7 @@ export function Table(props){
     toggleAllRowsSelected(false);
     row?.toggleRowSelected();
   }
-  const tableInstance = useTable( { columns, data, initialState: { pageIndex: 0, pageSize: 100 }}, useSortBy, usePagination, useRowSelect);
+  const tableInstance = useTable( { columns, data, initialState: { pageIndex: 0, pageSize: 100, sortBy: [{ id: 'CreatedDate', desc: true }]  }}, useSortBy, usePagination, useRowSelect);
   const { getTableProps, getTableBodyProps, headerGroups, prepareRow, page, toggleAllRowsSelected } = tableInstance;
 
   return (
@@ -70,7 +75,7 @@ export function Table(props){
           <tbody className='table_body_back' {...getTableBodyProps()}>
             {page.map((row, i) => {
               prepareRow(row)
-              let style = row?.original?.HexColor ? {backgroundColor: row?.original?.HexColor} : {};
+              let style = row?.original?.HexColor ? {backgroundColor: row?.original?.HexColor, borderColor: '#fff'} : {};
               return (
                 <>
                 <tr className={row?.isSelected ? 'table_row_selected' : 'table_row'} {...row.getRowProps()} style={style} onClick={() => onClick(row)} onDoubleClick={() => onRowClick(row)}>
@@ -78,16 +83,16 @@ export function Table(props){
                     return <td className='table_cell_text' {...cell.getCellProps()}>{cell.render('Cell')}</td>
                   })}
                 </tr>
-                 {row?.original?.Address ? <tr className={row?.isSelected ? 'table_row_selected' : ''} colSpan={13} style={style} ><td colSpan={13}>
+                 {/* {row?.original?.Address ? <tr className={row?.isSelected ? 'table_row_selected' : ''} colSpan={13} style={style} onClick={() => onClick(row)} onDoubleClick={() => onRowClick(row)}><td colSpan={13}>
                  <p className='table_descr'>{t('table.address')}:     {row?.original?.Address}  </p>
-               </td></tr> : null}
+               </td></tr> : null} */}
                </>
               )
             })}
           </tbody>
         </table>
       </div>
-      <Pagination tableInstance={tableInstance} />
+      <Pagination tableInstance={tableInstance} hasTotal={true} total={data?.length}  />
     </div>
   )
 }

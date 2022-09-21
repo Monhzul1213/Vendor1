@@ -14,8 +14,11 @@ import '../css/list.css'
 // LoadingOverlay.propTypes = undefined;
 export function Company(){
   const login = useSelector(state => state.login?.user);
+  const [VendID, setVendID] = useState('');
+
   const { height } = useDimensions();
   const [data, setData] = useState([]);
+  const [originaldata, setOriginalData] = useState([]);
   const [error, setError] = useState([]);
   
 const [selected, setSelected] =useState(null);
@@ -26,14 +29,7 @@ const [selected, setSelected] =useState(null);
     setVisible(true)
     setSelected(null)
 }
-// useEffect(() => {
-//   console.log(login)
-//   const scroll = document?.getElementById('price_page');
-//   if(scroll) scroll.scrollLeft = visible ? scroll.scrollWidth : 0;
-//   return () => {};
-// }, [visible]);
-let cardProps = { visible, setVisible, selected, setSelected,  setData };
-  let filterProps = { addRequest,   setError, setData , setVisible};
+
 
   function getUser(){
     let users = []
@@ -49,9 +45,22 @@ let cardProps = { visible, setVisible, selected, setSelected,  setData };
       })
       // console.log(users)
       setData(users)
+      setOriginalData(users)
       return Promise.resolve(setData(users))
      }).catch(error=> console.log(error.message))
   }
+  // const getData = async (VendName) => {
+  //   let filters = [{ "FieldName": "VendID", "Value": login?.vendID }];
+  //   if(VendName) filters.push({ "FieldName": "VendName", "Value": VendName });
+    
+  //   let data = { BusinessObject: filters };
+  //   setLoading(true);
+  //   setError(null);
+  //   const response = await dispatch(getList(login, 'InventoryInfo', data));
+  //   response?.error ? setError(response?.error) : setData(response?.data?.inInventory);
+  //   setLoading(false);
+  //   if(!keepOpen) setVisible(false);
+  // }
 
 useEffect(() => {
     getUser();
@@ -64,6 +73,16 @@ useEffect(() => {
       getUser()
     }
   }
+const changeVendID = value => {
+    console.log(value);
+    setVendID(value);
+    let newData = originaldata?.filter(word => word.VendID.toLowerCase().includes(VendID.toLowerCase()) ) 
+    // let originalData = data 
+    setData(newData)
+    // setData(originaldata)
+}
+let cardProps = { visible, setVisible, selected, setSelected,  setData,  VendID, setVendID: changeVendID  };
+let filterProps = { addRequest,   setError, setData , setVisible ,VendID, setVendID: changeVendID };
   return (
         <>
           <Header/>
@@ -73,9 +92,9 @@ useEffect(() => {
             {/* {error ? <Error error={error} /> : null} */}
             <Filter {...filterProps} />            
             <div className='data_back' id='inventory_page'>
-            <Table data={data} setData={setData} selected={selected} setVisible={setVisible} 
-            setSelected={setSelected} />  
-            {/* <Empty /> */}
+              
+            {data?.length ? <Table data={data} setData={setData} selected={selected} setVisible={setVisible} 
+            setSelected={setSelected} />: <Empty />}
              </div>
             </div>
           </div>

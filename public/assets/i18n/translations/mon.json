@@ -1,18 +1,20 @@
 {
   "login": {
     "login": "Нэвтрэх",
-    "email": "Имэйл",
+    "email": "Имэйл хаяг",
     "password": "Нууц үг",
     "logout": "Гарах",
     "link": "www.ultimate.mn",
-    "signup":"Бүртгүүлэх"
+    "signup":"Бүртгүүлэх",
+    "username": "Хэрэглэгч"
   },
   "copyright": "@2022 Хязгааргүй шийдэл, ХХК",
   "errors": {
     "auth/invalid-email": "Имейл буруу байна.",
     "auth/user-not-found": "Хэрэглэгч бүртгэгдээгүй байна.",
     "auth/wrong-password": "Нууц үг буруу байна.",
-    "is_empty": " хоосон байж болохгүй.",
+    "is_invalid": " имэйл биш байна",
+    "is_empty": " оруулна уу!",
     "not_zero": " 0 байж болохгүй.",
     "less_than": " = Авлага - Өглөг дүнгээс их тоо оруулах боломжгүй.",
     "must_number": " тоо байх ёстой.",
@@ -107,11 +109,13 @@
     "License":"Төлбөрийн дүн",
     "webservice":"Web  хаяг",
     "address": "Хаяг",
-    "phone":"Утас",
+    "phone":"Утасны дугаар",
     "uselicensedate": "Лиценз сунгах",
     "licenseExpireDate":"Лиценз дуусах",
-    "bank":"Банк",
-    "bankacct":"Банк данс"
+    "bank":"Банкны нэр",
+    "bankacct":"Дансны дугаар",
+    "vendorname": "Нийлүүлэгчийн нэр",
+    "vendorcode":"Нийлүүлэгчийн код"
   },
   "filter": {
     "start_date": "Эхлэх огноо",
@@ -177,8 +181,14 @@
   "version": 6,
   "cmp_list":"Компаний жагсаалт",
   "new_cmp":"Шинэ компани нэмэх",
-  "new_vendor":"Шинэ Нийлүүлэгч",
+  "new_vendor":"Нийлүүлэгч бүртгэх",
   "vendor_list":"Нийлүүлэгчийн жагсаалт",
-  "user_email":"Хэрэглэгчийн имэйл",
-  "user_password": "Хэрэглэгчийн нууц үг"
+  "user_email":"Хэрэглэгчийн имэйл хаяг",
+  "user_password": "Хэрэглэгчийн нууц үг",
+  "AppServer_IP": "Сервэрийн хаяг",
+  "AppServer_Port": "Сервэрийн порт",
+  "AppServer_UserID": " Холбогдох хэрэглэгч",
+  "AppServer_UserPass": " Холбогдох хэрэглэгчийн нууц үг ",
+  "true": "Тийм",
+  "false": "Үгүй"
 }

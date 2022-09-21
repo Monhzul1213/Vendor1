@@ -80,9 +80,11 @@ export const getUser = async (email, password) => {
   try {
     const userRef = collection(db, "smWebUsers");
     const q1 = query(userRef, where("WebUserID", "==", email), limit(1));
+    // const q2 = query(userRef, where("WebUserID", "==", email), limit(1));
+
     const query1 = await getDocs(q1);
-    let webUser = null;
-    query1.forEach(doc => webUser = doc.data());
+      let webUser = null;
+      query1.forEach(doc => webUser = doc.data());
     if(!webUser){
       return Promise.resolve({ error: 'Хэрэглэгч бүртгэлгүй байна.' });
     } else if(webUser?.WebPassword !== password){

@@ -16,19 +16,22 @@
   font-weight: 700;
   margin: 10px 20px ;
 }
-/* .card1{
-  width: 300px;
 
-  margin-top: 10px;
-}
-.card2{
-margin-top: -70px;
-margin-left: 350px;
-width:300px;
-}
-.card3{
-  width: 650px;
+/* .ss{
+   height: 40px;
+    background-color: var(--hover2-color);
+    border: none;
+    border-style: solid;
+    border-color: #d9d9d9;
+    border-radius: var(--radius-table);
+    border-width: 1px;
+    width: 100%;
+    margin: 5px 0  ;
+    color: var(--text-color);
+    font-size: 15px;
+    padding: 0 10px;
 } */
+
 .ant-modal-wrap{
   overflow: hidden;
 }
@@ -54,18 +57,33 @@ width:300px;
 .login_form_btn:hover {
   background-color: var(--hover-color);
 }
-  
+.ant-radio-wrapper {
+  box-sizing: border-box;
+  margin: 5px 15px;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 14px;
+  font-variant: tabular-nums;
+  line-height: 1.5715;
+  list-style: none;
+  font-feature-settings: 'tnum', "tnum";
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  margin-right: 8px;
+  cursor: pointer;
+}
 @media only screen and (min-width: 960px) {
   .card_container {
     width: 600px;
     display: flex;
     flex-flow: column;
-    margin: var(--padding-card) 0 0 var(--padding-card);
+    /* margin: var(--padding-card) 0 0 var(--padding-card); */
     border-radius: var(--radius-table);
     background-color: var(--root-color);
     padding: var(--padding-card);
     position: relative;
-    min-width: 650px;
+    min-width: 670px;
     /* max-height: 70vh;
     overflow-y: scroll; */
   }
@@ -82,29 +100,38 @@ width:300px;
   .card1{
     width: 600px;
     columns: 2;
+    display: flex;
+    flex: row;
   }
   .card2{
     width: 600px;
     columns: 2;
+    display: flex;
+    flex: row;
   }
   .card3{
     width: 600px;
     columns: 2;
+    display: flex;
+    flex: row;
   }
   .card4{
     width: 600px;
     columns: 2;
+    display: flex;
+    flex: row;
   }
   .card5{
     width: 600px;
     columns: 2;
+    display: flex;
+    flex: row;
   }
   .card6{
     width: 600px;
     columns: 2;
-  }
-  .card{
-    width: 600px;
+    display: flex;
+    flex: row;
   }
   .ant-modal-content {
     border-radius: var(--radius-table);
@@ -113,9 +140,106 @@ width:300px;
     background-clip: padding-box;
     border: 0;
     border-radius: 2px;
-    overflow: scroll;
+    /* overflow: scroll; */
   }
-   
+  .card_input_label1 {
+    color: var(--text-color2);
+    font-size: 13px;
+    font-weight: 500;
+    margin: 0 0 0  20px ;
+  }
+  .card_input1 {
+    height: 40px;
+    /* background-color: var(--hover2-color); */
+    /* border: none;
+    border-style: solid; */
+    border-color: #d9d9d9;
+    border-radius: var(--radius-table);
+    border-width: 1px;
+    width: 100%;
+    color: var(--text-color);
+    font-size: 15px;
+    padding: 0 10px;
+  }
+  .card_input2 {
+    height: 40px;
+    /* background-color: var(--hover2-color); */
+    border: none;
+    border-style: solid;
+    border-color: #d9d9d9;
+    border-radius: var(--radius-table);
+    border-width: 1px;
+    width: 300px;
+    margin: 5px 0 0 20px ;
+    color: var(--text-color);
+    font-size: 15px;
+    padding: 0 10px;
+  }
+  .card_input3 {
+    height: 40px;
+    border: none;
+    border-style: solid;
+    border-color: #d9d9d9;
+    border-radius: var(--radius-table);
+    border-width: 1px;
+    width: 300px;
+    margin: 5px 0 0 20px ;
+    color: var(--text-color);
+    font-size: 15px;
+    padding: 0 10px;
+  }
+  .ant-row {
+    display: flex;
+    flex-flow: row wrap;
+    min-width: 300px;
+    border: solid;
+    border-color: #d9d9d9;
+    border-radius: var(--radius-table);
+    height: 40px;
+    border-width: 1px;
+    width: 100%;
+  }
+  .card_input {
+    height: 40px;
+    background-color: var(--hover2-color);
+    border: none;
+    border-style: solid;
+    border-color: #d9d9d9;
+    border-radius: var(--radius-table);
+    border-width: 1px;
+    width: 300px;
+    margin: 5px 0;
+    color: var(--text-color);
+    font-size: 15px;
+    padding: 0 10px;
+  }
+  .password{
+    width: 300px;
+    border: solid 1px #d9d9d9;
+    height: 40px;
+    flex: 1 1;
+    border-radius: var(--radius);
+    color: var(--text-color);
+    font-size: 16px;
+    padding: 0 10px;
+    margin: 5px  0 0 20px;
+    align-items: center;
+    /* background-color: var(--hover2-color); */
+  }
+  .card_note {
+    min-height: 80px;
+    background-color: var(--root-color);
+    border: none;
+    border-style: solid;
+    border-color: #d9d9d9;
+    border-radius: var(--radius-table);
+    border-width: 1px;
+    width: 98%;
+    margin: 5px 0 0 0;
+    color: var(--text-color);
+    font-size: 15px;
+    padding: 5px 10px;
+  }
 }
 @media only screen and (max-width: 440px) {
   .ant-modal-content {
@@ -125,7 +249,7 @@ width:300px;
     background-clip: padding-box;
     border: 0;
     border-radius: 2px;
-    overflow: scroll;
+    /* overflow: scroll; */
     width: 500px;
     
     margin: 0 110px;
@@ -136,17 +260,32 @@ width:300px;
     width: 420px;
     display: flex;
     flex-flow: column;
-    margin: var(--padding-card) 0 50px var(--padding-card);
+    /* margin: var(--padding-card) 0 50px var(--padding-card); */
     border-radius: var(--radius-table);
     background-color: var(--root-color);
     padding: var(--padding-card);
     position: relative;
-    min-width: 420px;
-    max-height: 60vh;
+    min-width: 470px;
+  }
+  .cart{
+    max-height: 70vh;
     overflow-y: scroll;
   }
   .ant-modal-footer{
     display: none;
+  }
+  .password{
+    border: solid 1px #d9d9d9;
+    height: 40px;
+    flex: 1 1;
+    border-radius: var(--radius);
+    color: var(--text-color);
+    font-size: 16px;
+    padding: 0 10px;
+    margin: 5px  0 0 0;
+    align-items: center;
+    width: 420px;
+    /* background-color: var(--hover2-color); */
   }
   .ant-modal-close{
     display: none;
@@ -158,29 +297,101 @@ width:300px;
     background-clip: padding-box;
     border: 0;
     border-radius: 2px;
-    overflow: scroll;
+    /* overflow: scroll; */
     width: 500px;
     margin: 0 110px;
   }
-  
-  /* .login_form_btn {
-    width: 390px;
-    box-shadow: none;
+  .card_input_label1 {
+    color: var(--text-color2);
+    font-size: 13px;
+    font-weight: 500;
+    margin: 0 ;
+  }
+  .card_input1 {
+    height: 40px;
+    /* background-color: var(--hover2-color); */
+    /* border: none;
+    border-style: solid; */
+    border-color: #d9d9d9;
+    border-radius: var(--radius-table);
+    border-width: 1px;
+    width: 420px;
+    color: var(--text-color);
+    font-size: 15px;
+    padding: 0 10px;
+  }
+ 
+  .card_input2 {
+    height: 40px;
+    /* background-color: var(--hover2-color); */
+    /* border: none;
+    border-style: solid; */
+    border-color: #d9d9d9;
+    border-radius: var(--radius-table);
+    border-width: 1px;
+    width: 420px;
+    margin: 5px 0  ;
+    color: var(--text-color);
+    font-size: 15px;
+    padding: 0 10px;
+  }
+  .ant-row {
+    display: flex;
+    flex-flow: row wrap;
+    min-width: 0;
+    border: solid;
+    border-color: #d9d9d9;
+    border-radius: var(--radius-table);
+    height: 40px;
+    border-width: 1px;
+    width: 100%;
+  }
+  .card_input3 {
+    height: 40px;
     border: none;
-    background-color: var(--link-color);
-    height: var(--height);
-    min-height: var(--height);
-    border-radius: var(--radius);
-    color: var(--root-color);
-    font-size: 16px;
-    font-weight: 550;
-    text-align: center;
-    margin-top: var(--padding-mobile);
-  } */
-
+    border-style: solid;
+    border-color: #d9d9d9;
+    border-radius: var(--radius-table);
+    border-width: 1px;
+    width: 420px;
+    margin: 5px 0 0 0;
+    color: var(--text-color);
+    font-size: 15px;
+    padding: 0 10px;
+  }
+  .card_input {
+    height: 40px;
+    background-color: var(--hover2-color);
+    border: none;
+    border-style: solid;
+    border-color: #d9d9d9;
+    border-radius: var(--radius-table);
+    border-width: 1px;
+    width: 420px;
+    margin: 5px 0;
+    color: var(--text-color);
+    font-size: 15px;
+    padding: 0 10px;
+  }
+  .card_note {
+    min-height: 80px;
+    background-color: var(--root-color);
+    border: none;
+    border-style: solid;
+    border-color: #d9d9d9;
+    border-radius: var(--radius-table);
+    border-width: 1px;
+    width: 96%;
+    margin: 5px 0 0 0;
+    color: var(--text-color);
+    font-size: 15px;
+    padding: 5px 10px;
+  }
 }
 
-
+.ant-col{
+  margin: 5px;
+}
 
 .ant-upload.ant-upload-select-picture-card {
   width: 60%;
@@ -226,27 +437,21 @@ width:300px;
   margin: 0;
 }
 
-.card_input {
-  height: 40px;
-  background-color: var(--hover2-color);
-  border: none;
-  border-style: solid;
-  border-color: #d9d9d9;
-  border-radius: var(--radius-table);
-  border-width: 1px;
-  width: 100%;
-  margin: 5px 0;
-  color: var(--text-color);
-  font-size: 15px;
-  padding: 0 10px;
-}
-
 .card_input:focus {
   outline: none;
   border-color: var(--link-color);
 }
 
 .card_input:focus-within {
+  outline: none;
+  border-color: var(--link-color);
+}
+.card_input3:focus {
+  outline: none;
+  border-color: var(--link-color);
+}
+
+.card_input3:focus-within {
   outline: none;
   border-color: var(--link-color);
 }
@@ -503,21 +708,6 @@ width:300px;
   -webkit-line-clamp: 4;
   line-clamp: 4;
   -webkit-box-orient: vertical;
-}
-
-.card_note {
-  min-height: 80px;
-  background-color: var(--root-color);
-  border: none;
-  border-style: solid;
-  border-color: #d9d9d9;
-  border-radius: var(--radius-table);
-  border-width: 1px;
-  width: 100%;
-  margin: 5px 0 0 0;
-  color: var(--text-color);
-  font-size: 15px;
-  padding: 5px 10px;
 }
 
 .card_note:focus {

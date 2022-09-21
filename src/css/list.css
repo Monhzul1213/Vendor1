@@ -3,9 +3,9 @@
 .page_container {
   padding: 15px;
   background-color: var(--hover2-color);
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   flex: 1;
-  overflow-x: scroll;
+  /* overflow-x: scroll; */
   /* height: 600px; */
 }
 

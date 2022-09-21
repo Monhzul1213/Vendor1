@@ -5,13 +5,15 @@
     "password": "Password",
     "logout": "Log out",
     "link": "www.ultimate.mn",
-    "signup":"Sign up"
+    "signup":"Sign up",
+    "username": "Username"
   },
   "copyright": "@2022 Ultimate Solutions, LLC",
   "errors": {
     "auth/invalid-email": "Email is invalid.",
     "auth/user-not-found": "User is not found.",
     "auth/wrong-password": "Password is wrong.",
+    "is_invalid": " email is invalid",
     "is_empty": " can't be empty.",
     "not_zero": " can't be 0.",
     "less_than": " can't be more than Receivable - Payable.",
@@ -102,16 +104,19 @@
     "balance": "Balance",
     "company": "Company",
     "password":"Password",
-    "vendorCount":"VendorCount",
-    "usevendorCount":"Use Vendor Count",
+    "vendorCount":"Vendor count",
+    "usevendorCount":"Use vendor count",
     "License":"LicenseAmt",
-    "webservice":"Web Service",
+    "webservice":"Web service",
     "address":"Address",
     "phone":"Phone",
-    "uselicensedate": "Use License date",
+    "uselicensedate": "Use license date",
     "licenseExpireDate":"License expired date",
     "bank":"Bank",
-    "bankacct":"Bank Account"
+    "bankacct":"Bank account",
+    "vendorname": "Vendor name",
+    "vendorcode":"Vendor code"
+
   },
   "filter": {
     "start_date": "Start date",
@@ -177,8 +182,10 @@
   "version": 6,
   "cmp_list":"COMPANY LIST",
   "new_cmp":"New company",
-  "new_vendor":"New Vendor",
+  "new_vendor":"New vendor",
   "vendor_list":"Vendor List",
   "user_email":"User Email",
-  "user_password": "User Password"
+  "user_password": "User Password",
+  "true": "True",
+  "false": "False"
 }

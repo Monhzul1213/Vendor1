@@ -5,10 +5,12 @@ import { BsChevronDoubleLeft, BsChevronDoubleRight, BsChevronLeft, BsChevronRigh
 import { usePagination, DOTS } from '../../helpers/usePagination';
 
 export function Pagination(props){
-  const { tableInstance, id } = props;
+  const { tableInstance, id, total, hasTotal } = props;
   const { Option } = Select;
   const { canPreviousPage, canNextPage, pageOptions, pageCount, gotoPage, nextPage, previousPage, setPageSize,
     state: { pageIndex, pageSize }} = tableInstance;
+  let first = pageIndex * pageSize + 1;
+  let last = (((pageIndex + 1) * pageSize) < total) ? ((pageIndex + 1) * pageSize) : total;
 
   const paginationRange = usePagination({ currentPage: pageIndex + 1, totalPageCount: pageOptions.length, siblingCount: 1, pageSize });
   const pageRange = [50, 100, 150];
@@ -46,6 +48,7 @@ export function Pagination(props){
           return (<Option key={item} value={item}>{item}</Option>)
         })}
       </Select>
+      {hasTotal ? <p className='page_showing'>{first}-{last} of {total}</p> : null}
     </div>
   )
 }

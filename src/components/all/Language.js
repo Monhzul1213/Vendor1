@@ -18,13 +18,13 @@ export function Language(props){
 
   const menu = (
     <Menu style={menuStyle}>
-      <Menu.Item key='en' onClick={() => changeLanguage('en')}>
+      <Menu.Item key='enl' onClick={() => changeLanguage('enl')}>
         <div className='menu_language_back'>
           <img src={flag_en} alt='Logo' className='menu_language_logo' />
           <span className='menu_language'>English</span>
         </div>
       </Menu.Item>
-      <Menu.Item key='mn' onClick={() => changeLanguage('mn')}>
+      <Menu.Item key='mon' onClick={() => changeLanguage('mon')}>
         <div className='menu_language_back'>
           <img src={flag_mn} alt='Logo' className='menu_language_logo'/>
           <span className='menu_language'>Монгол</span>
@@ -36,7 +36,7 @@ export function Language(props){
   return (
     <Dropdown overlay={menu} trigger={['click']} placement="bottomRight">
       <div className='menu_language_btn'>
-        <span className={hideArrow ? 'header_language_link' : 'menu_language_link'} onClick={e => e.preventDefault()}>{i18n?.language === 'mn' ? 'МН' : 'EN'}</span>
+        <span className={hideArrow ? 'header_language_link' : 'menu_language_link'} onClick={e => e.preventDefault()}>{i18n?.language === 'mon' ? 'МН' : 'EN'}</span>
         <DynamicMDIcon name='MdKeyboardArrowDown' className={hideArrow ? 'header_user_icon' : 'menu_language_arrow'} />
       </div>
     </Dropdown>

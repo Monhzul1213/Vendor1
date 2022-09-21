@@ -1,19 +1,15 @@
 
-import React, { useEffect, useState } from 'react';
-import { Modal, message, Form, Input } from 'antd';
+import React, { useEffect, useState, useRef} from 'react';
+import { Modal, message, Form, Input, Checkbox } from 'antd';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
-import {addDoc, collection , doc, setDoc, query, where} from 'firebase/firestore';
+import {addDoc, collection , doc, setDoc, query, where, getDocs} from 'firebase/firestore';
 import {db} from '../../firebase'
 import '../../css/card.css';
 //  import { sendRequest } from '../../services/constants.slice';
 import { formatNumber } from '../../helpers/formatNumber';
-import { CardDate, CardDateRange, CardInput, CardField, CardNote, Loader, DynamicAIIcon, Error, CardDropdown } from '../all';
+import {Cardlength, CardDate, CardDateRange, CardInput, CardInput1, CardField, CardNote, Loader, DynamicAIIcon, Error1, CardDropdown, Check, CardPassword } from '../all';
 import  {useSelector} from 'react-redux'
-import validator from 'validator'
-import Password from 'antd/lib/input/Password';
-import { login } from '../../services';
-import { confirmPasswordReset } from 'firebase/auth';
 
 export function Card(props){
   const login = useSelector(state => state.login?.user);
@@ -21,9 +17,6 @@ export function Card(props){
   const { selected, setSelected,  setData } = props;
     const { t } = useTranslation();
     const [disabled, setDisabled] = useState();
-  const [numbers, setNumbers] = useState('');
-  const [note, setNote] = useState({ value: '', error: null });
-  const [total, setTotal] = useState('');
   const [loader, setLoader] = useState(false);
   const [error, setError] = useState(null);
   const [Email, setEmail] = useState({ value: '', error: null });
@@ -31,12 +24,18 @@ export function Card(props){
   const [VendUserID, setVendUserID] = useState({ value: '', error: null });
   const [VendPass, setVendPass] = useState({ value: '', error: null });
   const [VendID, setVendID] = useState({ value: '', error: null });
+  const [VendName, setVendName] = useState({ value: '', error: null });
   const [UseLicenseDate, setUseLicenseDate] = useState({ value: '', error: null })
   const [LicenseExpireDate, setLicenseExpireDate] = useState({ value: '', error: null });
   const [Address, setAddress] = useState({ value: '', error: null });
   const [Phone, setPhone] = useState({ value: '', error: null });
   const [Bank, setBank] = useState({ value: '', error: null });
   const [BankAcct, setBankAcct] = useState({ value: '', error: null });
+  const [CreatedProgID, setCreatedProgID] = useState({ value: '', error: null });
+  const [ CreatedDate, setCreatedDate] = useState({ value: '', error: null });
+  const [CreatedUserName, setCreatedUserName] = useState({ value: '', error: null });
+  const [LastUpdate, setLastUpdate] = useState({ value: '', error: null });
+  const [LastUserName, setLastUserName] = useState({ value: '', error: null });
   const [loading, setLoading] = useState(false);
 
 
@@ -46,25 +45,24 @@ export function Card(props){
     setVendUserID({ value: selected?.VendUserID ?? '' });
     setVendPass({ value: selected?.VendPass ?? '' });
     setVendID({ value: selected?.VendID ?? '' });
-    setUseLicenseDate({ value: selected?.UseLicenseDate ?? '' });
-    // setLicenseExpireDate({ value: selected?.LicenseExpireDate ?? '' });
-    // console.log(selected?.ReqDate)
-    setLicenseExpireDate({ value: selected?.ReqDate ? moment(selected?.ReqDate, 'yyyy.MM.DD') : null });
+    setUseLicenseDate(selected?.UseLicenseDate ?? '');
+    setLicenseExpireDate({ value: selected?.LicenseExpireDate ? moment(selected?.LicenseExpireDate, 'yyyy.MM.DD') : null });
     setAddress({ value: selected?.Address ?? '' });
     setPhone({ value: selected?.Phone ?? '' });
     setBank({ value: selected?.Bank ?? '' });
     setBankAcct({ value: selected?.BankAcct ?? '' });
+    setVendName({ value: selected?.VendName ?? '' });
+    setCreatedDate({value:  selected?.CreatedDate ?? '' })
     setDisabled(disabled);
     
     return () => {};
   }, [selected]);
   
-   function handleSubmit(e){
+   async function handleSubmit(e){
     e.preventDefault()
-    console.log('saving butoom')
-    if(VendUserID?.value && VendPass?.value &&VendID?.value &&UseLicenseDate?.value &&LicenseExpireDate?.value  &&Phone?.value &&Address?.value &&  Email?.value&& Bank?.value && BankAcct?.value  ){
-      // console.log(VendUserID,)
-
+    console.log(UseLicenseDate)
+    // return;
+    if(VendUserID?.value && isValidEmail(VendUserID?.value) && VendPass &&VendID?.value &&VendName?.value &&UseLicenseDate   &&Phone?.value && !isNaN(Phone?.value)&&Address?.value &&  Email?.value&& isValidEmail(Email?.value) && Bank?.value && BankAcct?.value && !isNaN(BankAcct?.value)  ){
       setLoader(true);
       setError(null);
       let requests = [{
@@ -74,110 +72,123 @@ export function Card(props){
         ReqDate: LicenseExpireDate?.value?.format('yyyy.MM.DD')
       }];
       // if(selected) requests[0].RequestID = selected.RequestID;
-      console.log(requests);
+      // console.log(requests);
     if(selected){
       const userRef= doc(db, 'smVendorUsers', selected.id)
-      setDoc(userRef, {CpnyID: CpnyID?.value, VendUserID:VendUserID?.value, VendPass:VendPass?.value, VendID:VendID?.value, UseLicenseDate:UseLicenseDate?.value , LicenseExpireDate: LicenseExpireDate?.value?.format('yyyy.MM.DD'), Address:Address?.value, Phone:Phone?.value, Bank:Bank?.value, BankAcct:BankAcct?.value , Email:Email?.value})
+
+      let obj ={CpnyID: CpnyID?.value, VendUserID:VendUserID?.value?.trim(), VendPass:VendPass?.value, VendID:VendID?.value, VendName:VendName?.value, UseLicenseDate:UseLicenseDate , LicenseExpireDate: LicenseExpireDate?.value?.format('yyyy.MM.DD')
+      , Address:Address?.value, Phone:Phone?.value, Bank:Bank?.value, BankAcct:BankAcct?.value , Email:Email?.value, CreatedDate: CreatedDate?.value, LastUserName: VendName?.value, LastUpdate:  moment().format('yyyy.MM.DD, HH:mm:ss ')}
+      if(LicenseExpireDate?.value === '') {
+        obj.LicenseExpireDate = ''
+    } 
+      setDoc(userRef, obj )
+      onClose(true);
+      message.success(t('request_success'));
     }else{
-    const userCollRef= collection(db, 'smVendorUsers')
-    // const q1 = query(userCollRef, where("VendUserID", "!=", 'semjidmaa@noyonuul.mn'));
-    // let webUser = null;
-  //  forEach(doc => webUser = setData());
-    addDoc(userCollRef, {CpnyID: CpnyID?.value, VendUserID:VendUserID?.value, VendPass:VendPass?.value, VendID:VendID?.value, UseLicenseDate:UseLicenseDate?.value , LicenseExpireDate: LicenseExpireDate?.value?.format('yyyy.MM.DD'), Address:Address?.value, Phone:Phone?.value, Bank:Bank?.value, BankAcct:BankAcct?.value , Email:Email?.value})
-    .then(response => {  
-      if(response?.error){
-        setError(response?.error);
-      }
-      console.log(response)
-    })
+        const userCollRef= collection(db, 'smVendorUsers')
+        const q1 = query(userCollRef, where("VendUserID", "==", VendUserID?.value?.trim() ))
+        const query1 = await getDocs(q1)
+        let exists = null;
+        query1.forEach(doc => exists = doc.data());
+        //  console.log(exists)
+        if(exists){
+          setError("Хэрэглэгч бүртгэлтэй байна")
+        }  
+        else {
+          let obj = {
+            CpnyID: CpnyID?.value, VendUserID:VendUserID?.value?.trim(), VendPass:VendPass?.value, VendID:VendID?.value,  VendName:VendName?.value, UseLicenseDate:UseLicenseDate , Address:Address?.value, Phone:Phone?.value, Bank:Bank?.value, BankAcct:BankAcct?.value , Email:Email?.value,CreatedDate: moment().format('yyyy.MM.DD, HH:mm:ss '), CreatedUserName: VendName?.value, LastUserName: VendName?.value, LastUpdate:  moment().format('yyyy.MM.DD, h:mm:ss ')
+          }
+          if(LicenseExpireDate?.value === '') {
+              obj.LicenseExpireDate = ''
+          }   
+        addDoc(userCollRef,  obj)
+        onClose(true);
+        message.success(t('request_success'));
+        }
     }
-    
-    onClose(true);
-    message.success(t('request_success'));
     } else {
-      if(!VendUserID?.value) setVendUserID({ error: 'is_empty'});
+      if(!VendUserID?.value) setVendUserID({value: '', error: 'is_empty'});
       if(!VendPass?.value) setVendPass({value: '', error: 'is_empty'});
-      if(!UseLicenseDate?.value) setUseLicenseDate({value: '', error: 'is_empty'});
+      if(!VendName?.value) setVendName({value: '', error: 'is_empty'});
       if(!VendID?.value) setVendID({value: '', error: 'is_empty'});
       if(!LicenseExpireDate?.value) setLicenseExpireDate({value: '', error: 'is_empty'});
+      if(!UseLicenseDate?.value) setUseLicenseDate({value: '', error: 'is_empty'});
       if(!Bank?.value) setBank({value: '', error: 'is_empty'});
       if(!BankAcct?.value) setBankAcct({value: '', error: 'is_empty'});
       if(!Phone?.value) setPhone({value: '', error: 'is_empty'});
       if(!Address?.value) setAddress({value: '', error: 'is_empty'});
       if(!Email?.value) setEmail({value: '', error: 'is_empty'});
+      // else if(!isValidEmail(Email?.value)) setEmail({value: '', error: 'is_invalid'});
+      // else if(!isValidEmail(VendUserID?.value)) setVendUserID({value: '', error: 'is_invalid'});
+       if(!isValidEmail(VendUserID?.value)) setVendUserID({...VendUserID, ...{error: 'is_invalid'}});
+       if(!isValidEmail(Email?.value)) setEmail({...Email, ...{error: 'is_invalid'}});
+       else if(isNaN(Phone?.value)) setPhone({...Phone, ...{error: 'must_number'}});
+       else if(isNaN(BankAcct?.value)) setBankAcct({...BankAcct, ...{error: 'must_number'}});
+
     }
   }
-  // const changeBankAcct = value => {
-  //   if(isNaN(value?.value)) setBankAcct({ value: value?.value, error: 'must_number'});
-  //   else setBankAcct(value);
-  // }
-  // const changeEmail = (value) => {
-  //   // setVendUserID (value?.value);
-  //   if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(VendUserID)) {
-  //     setVendUserID({ value: value?.value, error: 'must_number'})
-  //   } else {
-  //     setVendUserID(value)
-  //   }
-  // }
-  // const handleChange = () => {
-  //   if (/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-z]+)$/.test(VendUserID))
-  //    {
-  //     setError('Email is valid');
-  //   } else {
-  //     setError("invalid");
-  //   }
+  const changePhone = value => {
+    if(isNaN(value?.value)) setPhone({ value: value?.value, error: 'must_number'});
+    else setPhone(value);
+  }
+  const changeBankacct = value => {
+    if(isNaN(value?.value)) setBankAcct({ value: value?.value, error: 'must_number'});
+    else setBankAcct(value);
+  }
+  function isValidEmail(email) {
+    return  /\S+@\S+\.\S+/.test(email);
+  }
+ 
+  const handleEnter = e => {
+    if (e?.key?.toLowerCase() === "enter") {
+      const form = e.target.form;
+      const index = [...form].indexOf(e.target);
+      form.elements[index + 1].focus();
+      e.preventDefault();
+    }
+  }
 
-    // setMessage(event.target.value);
-  // };
-  // const changeEmail = value => {
-  //   if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i(value?.value)) 
-  //   setCpnyID({ value: value?.value, error: 'must_number'})
-  //     // setError('Email is invalid');
-  //    else 
-  //    setCpnyID(value);
-    
-
-  //   // setCpnyID(e.target.value);
-  //   // if(isNaN(value?.value)) setEmail({ value: value?.value, error: 'бүртгэлтэй байна'});
-  //   // else setEmail(value);
-  // } 
   return (
     <Modal title={null} footer={null} closable={false} visible={visible} 
      width={700} >
       
       <DynamicAIIcon name='AiFillCloseCircle' className='close_icon' onClick={() => onClose(false)} />
-      <p className='card_title'>Шинэ Нийлүүлэгч</p>
-      {error ? <Error error={error} /> : null}
+      <p className='card_title'>{t('new_vendor')}</p>
+      {error ? <Error1 error={error} /> : null}
      <form className= 'card_container'
-      onSubmit={handleSubmit}>
+      onSubmit={handleSubmit}
+      >
         <div className='cart'>
-      <div className='card1'>
-        
-          <CardInput label={('user_email')} value={VendUserID} setValue={setVendUserID}/>
-      
-      <CardInput label={('user_password')} type='password' value={VendPass} setValue={setVendPass}/>
-      </div>
+      <CardInput label={('table.company')} className="ss" disabled={true}  value={CpnyID} setValue={setCpnyID} handleEnter={handleEnter} />
       <div className='card2'>
-   
-      <CardInput label={('table.company')} disabled={true}  value={CpnyID} setValue={setCpnyID} />
-      <CardInput label={('table.vendor')} value={VendID} setValue={setVendID}  /></div>
-      <div className='card3'>
-      <CardInput label={('table.uselicensedate')} value={UseLicenseDate} setValue={setUseLicenseDate}  />
-      <CardDate label={('table.licenseExpireDate')} value={LicenseExpireDate} setValue={setLicenseExpireDate}  disabledDate={d => !d || d.isBefore(moment().format('yyyy.MM.DD'))}/>
+       <Cardlength label={('table.vendorcode')} value={VendID} setValue={setVendID} handleEnter={handleEnter} />
+       <CardInput1 label={('table.vendorname')} value={VendName} setValue={setVendName} handleEnter={handleEnter} />
       </div>
-      <div className='card4'>
-      <CardInput label={('table.bank')} className='card_input' value={Bank} setValue={setBank}  />
-      <CardInput label={('table.bankacct')} className='card_input' value={BankAcct} setValue={setBankAcct}  /></div>
+      <div className='card1'>
+      <CardInput label={('user_email')} value={VendUserID} setValue={setVendUserID} handleEnter={handleEnter}/>
+      <CardPassword label={('user_password')} className='card_input2' value={VendPass} setValue={setVendPass} handleEnter={handleEnter} isPassword={true}/>
+      </div>
       <div className='card5'>
-      <CardInput label={('table.phone')} className='card_input' value={Phone} setValue={setPhone}  />
-      <CardInput label={('login.email')} className='card_input'  value={Email} setValue={setEmail}  /></div>
+      <CardInput label={('table.phone')} className='card_input' value={Phone} setValue={changePhone} handleEnter={handleEnter}  />
+      <CardInput1 label={('login.email')} className='card_input'  value={Email} setValue={setEmail} handleEnter={handleEnter}  /></div>
+      <div className='card4'>
+      <CardInput label={('table.bank')} className='card_input' value={Bank} setValue={setBank} handleEnter={handleEnter}  />
+      <CardInput1 label={('table.bankacct')} className='card_input' value={BankAcct} setValue={changeBankacct}handleEnter={handleEnter}  /></div>
       <div className='card'>
-      <CardNote label={('table.address')}   className='card_input' value={Address} setValue={setAddress}  /></div>
+      <CardNote label={('table.address')}   className='card_input' value={Address} setValue={setAddress} handleEnter={handleEnter}  /></div>
+      <div className='card3'>
+      <Check label={('table.uselicensedate')}  value={UseLicenseDate} setValue={setUseLicenseDate}/>
+      {/* <input type="checkbox" name='true' ref={ref}></input>
+      <input type="checkbox"></input> */}
+       {!disabled &&<CardDate label={('table.licenseExpireDate')} value={LicenseExpireDate} setValue={setLicenseExpireDate} disabled={ 
+        (UseLicenseDate === 'Y') ? false : true} 
+      disabledDate={d => !d || d.isBefore(moment().format('yyyy.MM.DD'))}
+      />}
       </div>
-      <button type='submit'
-      className='login_form_btn'> 
-      {loading === 'saving' ? <Loader className='login_loader' color='#fff' /> : t('save')}    
-      </button>  
+      </div>
+      {!disabled && <button type='submit' disabled={loader} className='login_form_btn'>
+        {loader ? <Loader className='login_loader' color='#fff' /> :t('save') }
+      </button>}
     </form>
     </Modal>
   )

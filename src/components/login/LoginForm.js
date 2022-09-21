@@ -33,8 +33,16 @@ export default function LoginForm(){
       
     }
   }
+  const handleEnter = e => {
+    if (e?.key?.toLowerCase() === "enter") {
+      const form = e.target.form;
+      const index = [...form].indexOf(e.target);
+      form.elements[index + 1].focus();
+      e.preventDefault();
+    }
+  }
 
-  const nameProps = { label: 'login.email', value: email, setValue: setEmail,  setError };
+  const nameProps = { label: 'login.username', value: email, setValue: setEmail,  setError, handleEnter };
   const passProps = { label: 'login.password', value: password, setValue: setPassword, setError, isPassword: true };
 
 return (

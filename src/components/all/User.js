@@ -40,8 +40,10 @@ export function User(){
       </Menu.Item>
       <Menu.Item
              >
-        <div className='menu_language_back' onClick={logoutOfApp}>
-          <span className='menu_language' >{t('login.logout')}</span>
+        
+        <div className='menu_logout_back' onClick={logoutOfApp}>
+         <DynamicAIIcon className='drop_icon' name='AiOutlineLogout'/>
+          <span className='menu_logout' iconAiOutlineLogout >{t('login.logout')}</span>
         </div> 
       </Menu.Item>
     </Menu>

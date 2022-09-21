@@ -12,6 +12,7 @@
   align-items: center;
 }
 
+
 .filter_back:focus-within {
   border-color: var(--link-color);
   -webkit-box-shadow: 0 0 3px 2px var(--link-color2);

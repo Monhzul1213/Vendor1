@@ -111,7 +111,7 @@ export function Card(props){
       if(!VendPass?.value) setVendPass({value: '', error: 'is_empty'});
       if(!VendName?.value) setVendName({value: '', error: 'is_empty'});
       if(!VendID?.value) setVendID({value: '', error: 'is_empty'});
-      if(!LicenseExpireDate?.value) setLicenseExpireDate({value: '', error: 'is_empty'});
+      // if(!LicenseExpireDate?.value) setLicenseExpireDate({value: '', error: 'is_empty'});
       if(!UseLicenseDate?.value) setUseLicenseDate({value: '', error: 'is_empty'});
       if(!Bank?.value) setBank({value: '', error: 'is_empty'});
       if(!BankAcct?.value) setBankAcct({value: '', error: 'is_empty'});

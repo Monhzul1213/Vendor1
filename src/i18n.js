@@ -12,8 +12,8 @@ i18n
     backend: {
       loadPath: '/assets/i18n/{{ns}}/{{lng}}.json'
     },
-    fallbackLng: 'mon',
-    lng: 'mon',
+    fallbackLng: 'mongol',
+    lng: 'mongol',
     debug: true,
     ns: ['translations'],
     defaultNS: 'translations',

@@ -85,7 +85,7 @@ input:-webkit-autofill:active{
 .login_input_back:focus-within {
   display: flex;
   position: relative;
-  background-color: var(--root-color);
+  background-color: white;
   border-radius: var(--radius);border-width: 1px;
   border-style: solid;
   border-color: var(--link-color);  background-color: rgba(0, 0, 0, 0);
@@ -103,7 +103,7 @@ input:-webkit-autofill:active{
   color: var(--text-color);
   font-size: 16px;
   padding: 0 10px;
-  /* background-color: var(--hover2-color);  */
+  /* background-color: #fff;  */
 }
 
 .ant-input:focus {
@@ -124,7 +124,7 @@ input:-webkit-autofill:active{
 
 .input-password {
   border: none;
-  height: var(--height);
+  /* height: var(--height); */
   flex: 1;
   border-radius: var(--radius);
   color: var(--text-color);
@@ -276,7 +276,7 @@ input:-webkit-autofill:active{
     bottom: 0;
     right: 0;
     width: 30%;
-    background-color: var(--root-color);
+    background-color: #dbdee0;
   }
 
   .login_form_container {

@@ -17,7 +17,7 @@ export function CardDate(props){
         disabled={disabled}
         format='yyyy.MM.DD'
         placeholder=''
-        // disabledDate={disabledDate}
+        disabledDate={disabledDate}
         onChange={onChange} />
       {value?.error ? <Error1 label={label} error={value?.error} fromForm={true} /> : null}
     </div>

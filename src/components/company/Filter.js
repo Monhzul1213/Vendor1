@@ -9,7 +9,7 @@ export function Filter(props) {
   return (
     <>
       <div className='filter_container2'>
-      <div className='filter_container3'>
+      {/* <div className='filter_container3'>
         <div className='filter_container'>
           <FilterInput
             label='table.vendorcode'
@@ -17,12 +17,10 @@ export function Filter(props) {
             setValue={setVendID} 
             // onPressEnter={() => setData(VendID)}
             icon='AiOutlineUser' />
-          <SearchButton 
-          // onClick={() => setData(data)} 
-          />
+         
         </div>
         
-      </div>
+      </div> */}
       <AddButton onClick={addRequest} addLabel='new_vendor' />
       </div>
     </>

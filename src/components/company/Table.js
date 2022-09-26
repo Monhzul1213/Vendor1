@@ -1,98 +1,280 @@
-import React, { useState, useEffect } from 'react';
+
+
+import React, { useRef, useState, useEffect } from 'react';
+import 'antd/dist/antd.css';
+// import './index.css';
+import { SearchOutlined } from '@ant-design/icons';
+import { Button, Input, Space, Table as AntTable } from 'antd';
 import { useTranslation } from 'react-i18next';
-import {collection, doc, getDocs} from 'firebase/firestore'
-import {db} from '../../firebase'
-import { useTable, usePagination, useRowSelect, useSortBy } from 'react-table';
-import { formatNumber } from '../../helpers/formatNumber';
-import '../../css/table.css';
-import { Pagination, Sort } from '../all';
+import '../../css/table.css'
+import { Pagination } from '../all';
 
-export function Table(props){
-  
-  const { data, setVisible, selected, setSelected, setData } = props;
-  const { t, i18n } = useTranslation();
-  const [columns, setColumns] = useState([]);
-  
-  useEffect(() => {
-    setColumns([
-      { Header: <div style={{textAlign:'center',}}> {t('table.company')}</div>, accessor: 'CpnyID', },
-      { Header: <div style={{textAlign:'center'}}> { t('table.vendorcode')}</div> , accessor: 'VendID', Cell: props => <div style={{textAlign: 'center'}}>{(props.value)}</div>   }, 
-      { Header: <div style={{textAlign:'center'}}> { t('table.vendorname')}</div> , accessor: 'VendName',  },
-      { Header: <div style={{textAlign:'center'}}> {t('user_email')}</div> , accessor: 'VendUserID', },
-      { Header: <div style={{textAlign:'center',}}> {t('user_password')}</div> , accessor: 'VendPass', },
-      { Header: <div style={{textAlign: 'center'}}>{ t('table.phone')}</div>, accessor: 'Phone' , Cell: props => <div style={{textAlign: 'center', paddingRight: 15}}>{(props.value)}</div>  },
-      { Header: <div style={{ textAlign:'center'}}>{ t('login.email')}</div>, accessor: 'Email' , },
-       { Header: <div style={{ textAlign:'center'}}>{ t('table.bank')}</div>, accessor: 'Bank' ,Cell: props => <div style={{ paddingRight: 15}}>{(props.value)}</div> },
-      { Header:<div style={{ textAlign:'center'}}>{ t('table.bankacct')}</div>, accessor: 'BankAcct' , Cell: props => <div style={{textAlign: 'center', paddingRight: 15}}>{(props.value)}</div> },
-      { Header: <div style={{textAlign:'center'}}>{ t('table.address')}</div> , accessor: 'Address' , Cell: props => <div style={{width: '200px'}}>{(props.value)}</div> },
-      { Header:<div style={{textAlign:'center'}}>{ t('table.uselicensedate')}</div>, accessor: 'UseLicenseDate', Cell: props => <div style={{textAlign: 'center'}}>{(props.value)}</div>},      
-      { Header: <div style={{textAlign:'center'}}>{ t('table.licenseExpireDate')}</div> , accessor: 'LicenseExpireDate' , Cell: props => <div style={{textAlign: 'center' , paddingRight: 10}}>{(props.value)}</div>},
-      { Header: <div style={{textAlign:'center'}}>{ t('Үүсгэсэн огноо')}</div> , accessor: 'CreatedDate' , Cell: props => <div style={{textAlign: 'center' , paddingRight: 10}}>{(props.value)}</div>},
-      
-     
-    ])
-    return () => {};
-  }, [i18n?.language])
+import Highlighter from 'react-highlight-words';
 
-  useEffect(() => {
-    if(!selected){
-      toggleAllRowsSelected(false);
-    }
-    return () => {};
-  }, [selected]);
+export const Table = (props) => {
+  const {data, setVisible, selected, setSelected, setData , CpnyID, setCpnyID} = props;
+  const [searchText, setSearchText] = useState('');
+  const [searchedColumn, setSearchedColumn] = useState('');
+  const searchInput = useRef(null);
+  const { t } = useTranslation();
 
-  const onRowClick = row => {
-    toggleAllRowsSelected(false);
-    row?.toggleRowSelected();
-    setVisible(true);
-    setSelected(row?.original);
-  }
-  const onClick = row =>{
-    toggleAllRowsSelected(false);
-    row?.toggleRowSelected();
-  }
-  const tableInstance = useTable( { columns, data, initialState: { pageIndex: 0, pageSize: 100, sortBy: [{ id: 'CreatedDate', desc: true }]  }}, useSortBy, usePagination, useRowSelect);
-  const { getTableProps, getTableBodyProps, headerGroups, prepareRow, page, toggleAllRowsSelected } = tableInstance;
+  const handleSearch = (selectedKeys, confirm, dataIndex) => {
+    confirm();
+    setSearchText(selectedKeys[0]);
+    setSearchedColumn(dataIndex);
+  };
 
-  return (
-    <div className='page_back'>
-      <div className='table_container'>
-        <table className='table_back' {...getTableProps()}>
-          <thead>
-            {headerGroups.map(headerGroup => (
-              <tr {...headerGroup.    getHeaderGroupProps()}>
-                {headerGroup.headers.map(column => (
-                  <th className='table_header_text' {...column.getHeaderProps(column.getSortByToggleProps())}>
-                    <div className='table_header_cell'>
-                      <span style={{flex: 1}}>{column.render('Header')}</span>
-                      <Sort data={column} />
-                    </div>
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody className='table_body_back' {...getTableBodyProps()}>
-            {page.map((row, i) => {
-              prepareRow(row)
-              let style = row?.original?.HexColor ? {backgroundColor: row?.original?.HexColor, borderColor: '#fff'} : {};
-              return (
-                <>
-                <tr className={row?.isSelected ? 'table_row_selected' : 'table_row'} {...row.getRowProps()} style={style} onClick={() => onClick(row)} onDoubleClick={() => onRowClick(row)}>
-                  {row.cells.map(cell => {
-                    return <td className='table_cell_text' {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                  })}
-                </tr>
-                 {/* {row?.original?.Address ? <tr className={row?.isSelected ? 'table_row_selected' : ''} colSpan={13} style={style} onClick={() => onClick(row)} onDoubleClick={() => onRowClick(row)}><td colSpan={13}>
-                 <p className='table_descr'>{t('table.address')}:     {row?.original?.Address}  </p>
-               </td></tr> : null} */}
-               </>
-              )
-            })}
-          </tbody>
-        </table>
+  const handleReset = (clearFilters) => {
+    clearFilters();
+    setSearchText('');
+  };
+
+  const getColumnSearchProps = (dataIndex) => ({
+    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+      <div
+        style={{
+          padding: 8,
+        }}
+      >
+        <Input
+          ref={searchInput}
+          placeholder={`Search ${dataIndex}`}
+          value={selectedKeys[0]}
+          onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+          onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+          style={{
+            marginBottom: 8,
+            display: 'block',
+          }}
+        />
+        <Space>
+          <Button
+            type="primary"
+            onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+            icon={<SearchOutlined />}
+            size="small"
+            style={{
+              width: 90,
+            }}
+          >
+            Search
+          </Button>
+          <Button
+         
+            size="small"
+            style={{
+              width: 90,
+            }}
+            onClick={() => {
+              confirm({
+                closeDropdown: false,
+              });
+            clearFilters && 
+            handleReset(clearFilters)
+            setSearchText(selectedKeys[0]);
+            setSearchedColumn(dataIndex);
+            }}
+          >
+            Reset
+          </Button>
+          {/* <Button
+            type="link"
+            size="small"
+            onClick={() => {
+              confirm({
+                closeDropdown: false,
+              });
+            setSearchText(selectedKeys[0]);
+            setSearchedColumn(dataIndex);
+            }}
+          >
+            Filter
+          </Button> */}
+        </Space>
       </div>
-      <Pagination tableInstance={tableInstance} hasTotal={true} total={data?.length}  />
-    </div>
-  )
-}
+    ),
+    filterIcon: (filtered) => (
+      <SearchOutlined
+        style={{
+          color: filtered ? '#1890ff' : undefined,
+        }}
+      />
+    ),
+    onFilter: (value, record) =>
+      record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
+
+    onFilterDropdownOpenChange: (visible) => {
+      if (visible) {
+        setTimeout(() => searchInput.current?.select(), 100);
+      }
+    },
+    render: (text) =>
+      searchedColumn === dataIndex ? (
+        <Highlighter
+          highlightStyle={{
+            backgroundColor: '#ffc069',
+            padding: 0,
+          }}
+          searchWords={[searchText]}
+          autoEscape
+          textToHighlight={text ? text.toString() : ''}
+        />
+      ) : (
+        text
+      ),
+  });
+
+  const columns = [
+    {
+      title: t('table.company'), 
+      // accessor: 'CpnyID' ,
+      dataIndex: 'CpnyID',
+      key: 'CpnyID',
+      align: 'left',
+      ...getColumnSearchProps('CpnyID'),
+      
+    },
+    {
+      title: t('table.vendorcode'),
+      dataIndex: 'VendID',
+      key: 'VendID',
+      // width: '20%',
+      ...getColumnSearchProps('VendID'),
+      // accessor: 'WebUserID'
+    },
+    {
+      title: t('table.vendorname'),
+      dataIndex: 'VendName',
+      key: 'VendName',
+      align: 'center',
+      ...getColumnSearchProps('VendName'),
+      sorter: (a, b) => a.VendName.length - b.VendName.length,
+      sortDirections: ['descend', 'ascend'],
+      accessor: 'VendName'
+    },
+    {
+      title: t('user_email'),
+      dataIndex: 'VendUserID',
+      key: 'VendUserID',
+      ...getColumnSearchProps('VendUserID'),
+      // sorter: (a, b) => a.Email.length - b.Email.length,
+      // sortDirections: ['descend', 'ascend'],
+      // accessor: 'WebPassword'
+      
+    },
+    {
+      title: t('user_password'),
+      dataIndex: 'VendPass',
+      key: 'VendPass',
+      align: 'center',
+      ...getColumnSearchProps('VendPass'),
+      // sorter: (a, b) => a.Phone.length - b.Phone  .length,
+      // sortDirections: ['descend', 'ascend'],
+      // accessor: 'WebPassword'
+    },  
+    {
+      title: t('table.phone'),
+      dataIndex: 'Phone',
+      key: 'Phone',
+      align: 'center',
+      ...getColumnSearchProps('Phone'),
+      // sorter: (a, b) => a.Phone.length - b.Phone  .length,
+      // sortDirections: ['descend', 'ascend'],
+      // accessor: 'WebPassword'
+    }, 
+   {
+      title: t('login.email'),
+      dataIndex: 'Email',
+      key: 'Email',
+      align: 'center',
+      ...getColumnSearchProps('Email'),
+      // sorter: (a, b) => a.VendorCount.length - b.VendorCount.length,
+      // sortDirections: ['descend', 'ascend'],
+      // accessor: 'WebPassword'
+    },   
+    {
+      title:  t('table.bank'),
+      dataIndex: 'Bank',
+      key: 'Bank',
+      align: 'right',
+
+      ...getColumnSearchProps('Bank'),
+      // sorter: (a, b) => a.LicenseAmt.length - b.LicenseAmt.length,
+      // sortDirections: ['descend', 'ascend'],
+      // accessor: 'WebPassword'
+      
+    },
+    {
+      title: t('table.bankacct'),
+      dataIndex: 'BankAcct',
+      key: 'BankAcct',
+      ...getColumnSearchProps('BankAcct'),
+      // sorter: (a, b) => a.WebServiceURL.length - b.WebServiceURL.length,
+      // sortDirections: ['descend', 'ascend'],
+      // accessor: 'WebPassword'
+    }, 
+    {
+      title: t('table.address'),
+      dataIndex: 'Address',
+      key: 'Address',
+      ...getColumnSearchProps('Address'),
+      // sorter: (a, b) => a.Address.length - b.Address.length,
+      // sortDirections: ['descend', 'ascend'],
+      // accessor: 'WebPassword'
+    },  
+    
+   
+    {
+      title: t('table.uselicensedate'),
+      dataIndex: 'UseLicenseDate',
+      key: 'UseLicenseDate',
+      ...getColumnSearchProps('UseLicenseDate'),
+      // sorter: (a, b) => a.TxnType.length - b.TxnType.length,
+      // sortDirections: ['descend', 'ascend'],
+      // accessor: 'WebPassword'
+    },  
+     {
+      title: t('table.licenseExpireDate'),
+      dataIndex: 'LicenseExpireDate',
+      key: 'LicenseExpireDate',
+      align: 'center',
+      ...getColumnSearchProps('LicenseExpireDate'),
+      // sorter: (a, b) => a.AppServerIP.length - b.AppServerIP.length,
+      // sortDirections: ['descend', 'ascend'],
+      // accessor: 'WebPassword'
+    },
+    {
+      title: t('Үүсгэсэн огноо'),
+      dataIndex: 'CreatedDate',
+      key: 'CreatedDate',
+      align: 'center',
+      // sortDirections: ['descend'],
+      ...getColumnSearchProps('CreatedDate'),
+      // sorter: (a, b) => a.CreatedDate.length - b.CreatedDate.length,
+      sortDirections: ['descend', 'ascend'],
+      accessor: 'CreatedDate'
+    },
+   
+   
+  ];
+
+  return <AntTable columns={columns} dataSource={data}
+  onRow={(record, rowIndex) => {
+    return {
+      // onClick: event => {
+      //   setVisible(true)
+      //   setSelected(rowIndex?.original);
+        
+      // }, // click row
+      onDoubleClick: event => {
+        setVisible(true)
+        // selected(rowIndex)
+        setSelected(record);
+        // toggleAllRowsSelected(false);
+        // rowIndex?.toggleRowSelected();
+        console.log(record)
+      }, // double click row
+    };
+  }}   />;
+  <Pagination />
+};

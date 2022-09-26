@@ -93,7 +93,7 @@ let filterProps = { addRequest,   setError, setData , setVisible ,VendID, setVen
             <Filter {...filterProps} />            
             <div className='data_back' id='inventory_page'>
               
-            {data?.length ? <Table data={data} setData={setData} selected={selected} setVisible={setVisible} 
+            {data?.length ? <Table sortDirections={["descend"]} data={data} setData={setData} selected={selected} setVisible={setVisible} 
             setSelected={setSelected} />: <Empty />}
              </div>
             </div>

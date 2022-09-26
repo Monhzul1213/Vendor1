@@ -6,7 +6,32 @@
   --padding-gap: 10px;
   --padding-gap2: 6px;
 }
-
+.ant-spin-nested-loading {
+  position: relative;
+  margin-top: 15px;
+} 
+.ant-table {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.85);
+  font-variant: tabular-nums;
+  line-height: 1.5715;
+  list-style: none;
+  font-feature-settings: 'tnum', "tnum";
+  position: relative;
+  font-size: 14px;
+  background: #fff;
+  border-radius: 2px;
+  overflow-x: scroll;
+}
+.ant-table-pagination-right {
+  justify-content: flex-start;
+}
+.ant-table-thead{
+  text-align: center;
+  color: #2159b0;
+}
 .empty_back {
   display: flex;
   flex-flow: column;

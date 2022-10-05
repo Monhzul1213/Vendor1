@@ -14,12 +14,13 @@ body {
   width: 5px;
   height: 5px
 }
-::-webkit-scrollbar-button {
+/* ::-webkit-scrollbar-button {
   background: #eee
-}
+} */
 
 ::-webkit-scrollbar-thumb {
-  background: #ccc
+  background: #ccc;
+ border-radius: 5px;
 }
 
 code {

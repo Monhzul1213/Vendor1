@@ -21,8 +21,9 @@ export default function LoginForm(){
     e.preventDefault();
     setLoading(true);
     setError(null);
-    const res = await getUser(email?.trim(), password?.trim());
-    console.log(res) 
+    const res = await getUser(email?.toLowerCase()
+    , password?.trim());
+    console.log(email?.trim().toLowerCase()) 
     if(res?.error){
       setError(res?.error);
       setLoading(false);

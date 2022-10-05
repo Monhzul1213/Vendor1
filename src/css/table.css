@@ -32,6 +32,24 @@
   text-align: center;
   color: #2159b0;
 }
+.ant-table-thead > tr > th {
+  position: relative;
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: 500;
+  text-align: center;
+  background: #fafafa;
+  border-bottom: 1px solid #f0f0f0;
+  background-color: #f0f0f0;
+  /* transition: background 0.3s ease;  */
+}
+.ant-table-wrapper {
+  clear: both;
+  width: 100%;
+}
+.ant-table table {
+  /* max-width: 100%; */
+  width: auto;
+}
 .empty_back {
   display: flex;
   flex-flow: column;
@@ -136,15 +154,25 @@
 /* .table_back td {
 } */
 
-.table_back tbody > tr:not(:first-child) > td {
+.ant-table tbody > tr> td {
   border-top: 1px solid var(--border-color);
 }
 
-.table_back tfoot > tr > td {
+/* .table_back tfoot > tr > td {
   border-top: 1px solid var(--border-color);
+} */
+.ant-table-thead > tr > th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 0  ;
+  height: 0em;
+  background-color: rgba(0, 0, 0, 0.06);
+  transform: translateY(-50%);
+  transition: background-color 0.3s;
+  content: '';
 }
-
-.table_back th:not(:last-child), .table_back td:not(:last-child) {
+.ant-table th:not(:last-child), .ant-table td:not(:last-child) {
   border-right: 1px solid var(--border-color);
 }
 

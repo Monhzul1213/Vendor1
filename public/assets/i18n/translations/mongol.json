@@ -6,7 +6,7 @@
     "logout": "Гарах",
     "link": "www.ultimate.mn",
     "signup":"Бүртгүүлэх",
-    "username": "Хэрэглэгч"
+    "username": "Нэвтрэх нэр"
   },
   "copyright": "@2022 Хязгааргүй шийдэл, ХХК",
   "errors": {
@@ -115,7 +115,9 @@
     "bank":"Банкны нэр",
     "bankacct":"Дансны дугаар",
     "vendorname": "Нийлүүлэгчийн нэр",
-    "vendorcode":"Нийлүүлэгчийн код"
+    "vendorcode":"Нийлүүлэгчийн код",
+    "company_name": "Компаний нэр"
+
   },
   "filter": {
     "start_date": "Эхлэх огноо",

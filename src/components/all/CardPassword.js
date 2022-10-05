@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Input as AntInput } from 'antd';
-import { Error } from './Error';
+import { Error1 } from './Error1';
 
 export function CardPassword(props){
   const { label, value, setValue, isPassword, handleEnter, setError } = props;
@@ -21,7 +21,7 @@ export function CardPassword(props){
         ? <AntInput.Password {...inputProps}  className='password'/>
         : <div className='login_input_back'><AntInput {...inputProps} /></div>
       }
-       {value?.error ? <Error label={label} error={value?.error} fromForm={true} /> : null}
+       {value?.error ? <Error1 label={label} error={value?.error} fromForm={true} /> : null}
     </div>
   )
 }

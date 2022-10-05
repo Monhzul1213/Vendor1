@@ -40,7 +40,7 @@ const [selected, setSelected] =useState(null);
      .then(response=>{
       response.docs.map(doc => {
         let user = {...doc.data(), ...{ id: doc?.id }};
-        console.log(user)
+        // console.log(user)
         users.push(user);
       })
       // console.log(users)
@@ -63,7 +63,7 @@ const [selected, setSelected] =useState(null);
   // }
 
 useEffect(() => {
-    getUser();
+    getUser();  
     return () => {};
 }, [])
 

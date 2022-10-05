@@ -12,9 +12,10 @@ import { Pagination } from '../all';
 import Highlighter from 'react-highlight-words';
 
 export const Table = (props) => {
-  const {data, setVisible, selected, setSelected, setData , CpnyID, setCpnyID} = props;
+  const {data, setVisible, selected, setSelected} = props;
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
+  const [filteredInfo, setFilteredInfo] = useState({});
   const searchInput = useRef(null);
   const { t } = useTranslation();
 
@@ -28,6 +29,11 @@ export const Table = (props) => {
     clearFilters();
     setSearchText('');
   };
+  const handleChange = (pagination, filters, sorter) => {
+    console.log('Various parameters', pagination, filters, sorter);
+    setFilteredInfo(filters);
+  };
+      
 
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
@@ -38,7 +44,7 @@ export const Table = (props) => {
       >
         <Input
           ref={searchInput}
-          placeholder={`Search ${dataIndex}`}
+          placeholder={`Search `}
           value={selectedKeys[0]}
           onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
           onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
@@ -108,6 +114,8 @@ export const Table = (props) => {
         setTimeout(() => searchInput.current?.select(), 100);
       }
     },
+ 
+   
     render: (text) =>
       searchedColumn === dataIndex ? (
         <Highlighter
@@ -123,14 +131,12 @@ export const Table = (props) => {
         text
       ),
   });
-
   const columns = [
     {
       title: t('table.company'), 
       // accessor: 'CpnyID' ,
       dataIndex: 'CpnyID',
       key: 'CpnyID',
-      align: 'left',
       ...getColumnSearchProps('CpnyID'),
       
     },
@@ -138,6 +144,7 @@ export const Table = (props) => {
       title: t('table.vendorcode'),
       dataIndex: 'VendID',
       key: 'VendID',
+      align: 'center',
       // width: '20%',
       ...getColumnSearchProps('VendID'),
       // accessor: 'WebUserID'
@@ -146,11 +153,10 @@ export const Table = (props) => {
       title: t('table.vendorname'),
       dataIndex: 'VendName',
       key: 'VendName',
-      align: 'center',
       ...getColumnSearchProps('VendName'),
-      sorter: (a, b) => a.VendName.length - b.VendName.length,
-      sortDirections: ['descend', 'ascend'],
-      accessor: 'VendName'
+      // sorter: (a, b) => a.VendName.length - b.VendName.length,
+      // sortDirections: ['descend', 'ascend'],
+      // accessor: 'VendName'
     },
     {
       title: t('user_email'),
@@ -166,7 +172,6 @@ export const Table = (props) => {
       title: t('user_password'),
       dataIndex: 'VendPass',
       key: 'VendPass',
-      align: 'center',
       ...getColumnSearchProps('VendPass'),
       // sorter: (a, b) => a.Phone.length - b.Phone  .length,
       // sortDirections: ['descend', 'ascend'],
@@ -186,7 +191,7 @@ export const Table = (props) => {
       title: t('login.email'),
       dataIndex: 'Email',
       key: 'Email',
-      align: 'center',
+      // align: 'center',
       ...getColumnSearchProps('Email'),
       // sorter: (a, b) => a.VendorCount.length - b.VendorCount.length,
       // sortDirections: ['descend', 'ascend'],
@@ -196,7 +201,7 @@ export const Table = (props) => {
       title:  t('table.bank'),
       dataIndex: 'Bank',
       key: 'Bank',
-      align: 'right',
+      // align: 'right',
 
       ...getColumnSearchProps('Bank'),
       // sorter: (a, b) => a.LicenseAmt.length - b.LicenseAmt.length,
@@ -208,6 +213,7 @@ export const Table = (props) => {
       title: t('table.bankacct'),
       dataIndex: 'BankAcct',
       key: 'BankAcct',
+      align: 'center',
       ...getColumnSearchProps('BankAcct'),
       // sorter: (a, b) => a.WebServiceURL.length - b.WebServiceURL.length,
       // sortDirections: ['descend', 'ascend'],
@@ -218,8 +224,8 @@ export const Table = (props) => {
       dataIndex: 'Address',
       key: 'Address',
       ...getColumnSearchProps('Address'),
-      // sorter: (a, b) => a.Address.length - b.Address.length,
-      // sortDirections: ['descend', 'ascend'],
+      sorter: (a, b) => a.Address.length - b.Address.length,
+      sortDirections: ['descend', 'ascend'],
       // accessor: 'WebPassword'
     },  
     
@@ -228,10 +234,27 @@ export const Table = (props) => {
       title: t('table.uselicensedate'),
       dataIndex: 'UseLicenseDate',
       key: 'UseLicenseDate',
-      ...getColumnSearchProps('UseLicenseDate'),
+      align: 'center',
+      // ...getColumnSearchProps('UseLicenseDate'),
       // sorter: (a, b) => a.TxnType.length - b.TxnType.length,
       // sortDirections: ['descend', 'ascend'],
       // accessor: 'WebPassword'
+      filters: [
+        {
+          text: t('true'),
+          value: 'Y',
+        },
+        {
+          text: t('false'),
+          value: 'N',
+        },
+       
+      ],
+      filteredValue: filteredInfo.UseLicenseDate || null,
+      onFilter: (value, record) => record.UseLicenseDate.includes(value),
+      // sorter: (a, b) => a.name.length - b.name.length,
+      // sortOrder: sortedInfo.columnKey === 'name' ? sortedInfo.order : null,
+      ellipsis: true,
     },  
      {
       title: t('table.licenseExpireDate'),
@@ -239,42 +262,35 @@ export const Table = (props) => {
       key: 'LicenseExpireDate',
       align: 'center',
       ...getColumnSearchProps('LicenseExpireDate'),
-      // sorter: (a, b) => a.AppServerIP.length - b.AppServerIP.length,
+      // sorter: (a, b) => new Date(a.CreatedDate) - new Date( b.CreatedDate),
       // sortDirections: ['descend', 'ascend'],
-      // accessor: 'WebPassword'
+      // accessor: 'LicenseExpireDate'
+      // defaultSortOrder: "descend"
+
     },
     {
       title: t('Үүсгэсэн огноо'),
       dataIndex: 'CreatedDate',
       key: 'CreatedDate',
       align: 'center',
-      // sortDirections: ['descend'],
       ...getColumnSearchProps('CreatedDate'),
-      // sorter: (a, b) => a.CreatedDate.length - b.CreatedDate.length,
+      sorter: (a, b) => new Date(a.CreatedDate) - new Date( b.CreatedDate),
       sortDirections: ['descend', 'ascend'],
-      accessor: 'CreatedDate'
+      accessor: 'CreatedDate',
+      // width: 0,
+      defaultSortOrder: "descend"
     },
-   
    
   ];
 
-  return <AntTable columns={columns} dataSource={data}
+  return <AntTable columns={columns} dataSource={data}  onChange={handleChange}
   onRow={(record, rowIndex) => {
     return {
-      // onClick: event => {
-      //   setVisible(true)
-      //   setSelected(rowIndex?.original);
-        
-      // }, // click row
       onDoubleClick: event => {
         setVisible(true)
-        // selected(rowIndex)
         setSelected(record);
-        // toggleAllRowsSelected(false);
-        // rowIndex?.toggleRowSelected();
         console.log(record)
-      }, // double click row
+      }, 
     };
   }}   />;
-  <Pagination />
 };

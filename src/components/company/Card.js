@@ -21,6 +21,7 @@ export function Card(props){
   const [error, setError] = useState(null);
   const [Email, setEmail] = useState({ value: '', error: null });
   const [CpnyID, setCpnyID] = useState({ value: '', error: null});
+  const [CpnyName, setCpnyName] = useState({ value: '', error: null});
   const [VendUserID, setVendUserID] = useState({ value: '', error: null });
   const [VendPass, setVendPass] = useState({ value: '', error: null });
   const [VendID, setVendID] = useState({ value: '', error: null });
@@ -36,16 +37,18 @@ export function Card(props){
   const [CreatedUserName, setCreatedUserName] = useState({ value: '', error: null });
   const [LastUpdate, setLastUpdate] = useState({ value: '', error: null });
   const [LastUserName, setLastUserName] = useState({ value: '', error: null });
+  const [IsFirst, setIsFirst] = useState({ value: 'Y', error: null });
   const [loading, setLoading] = useState(false);
 
 
   useEffect(() => {
     setEmail({ value: selected?.Email ?? '' });
     setCpnyID({ value: selected?.CpnyID ?? login?.CpnyID });
+    setCpnyName({ value: selected?.CpnyName ??'' });
     setVendUserID({ value: selected?.VendUserID ?? '' });
     setVendPass({ value: selected?.VendPass ?? '' });
     setVendID({ value: selected?.VendID ?? '' });
-    setUseLicenseDate(selected?.UseLicenseDate ?? '');
+    setUseLicenseDate(selected?.UseLicenseDate ?? 'Y');
     setLicenseExpireDate({ value: selected?.LicenseExpireDate ? moment(selected?.LicenseExpireDate, 'yyyy.MM.DD') : null });
     setAddress({ value: selected?.Address ?? '' });
     setPhone({ value: selected?.Phone ?? '' });
@@ -62,7 +65,7 @@ export function Card(props){
     e.preventDefault()
     console.log(UseLicenseDate)
     // return;
-    if(VendUserID?.value && isValidEmail(VendUserID?.value) && VendPass &&VendID?.value &&VendName?.value &&UseLicenseDate   &&Phone?.value && !isNaN(Phone?.value)&&Address?.value &&  Email?.value&& isValidEmail(Email?.value) && Bank?.value && BankAcct?.value && !isNaN(BankAcct?.value)  ){
+    if(CpnyName?.value && VendUserID?.value && isValidEmail(VendUserID?.value) && VendPass &&VendID?.value &&VendName?.value &&UseLicenseDate   &&Phone?.value && !isNaN(Phone?.value)&&Address?.value &&  Email?.value&& isValidEmail(Email?.value) && Bank?.value && BankAcct?.value && !isNaN(BankAcct?.value)  ){
       setLoader(true);
       setError(null);
       let requests = [{
@@ -74,39 +77,73 @@ export function Card(props){
       // if(selected) requests[0].RequestID = selected.RequestID;
       // console.log(requests);
     if(selected){
+      let exists = [];
       const userRef= doc(db, 'smVendorUsers', selected.id)
-
-      let obj ={CpnyID: CpnyID?.value, VendUserID:VendUserID?.value?.trim(), VendPass:VendPass?.value, VendID:VendID?.value, VendName:VendName?.value, UseLicenseDate:UseLicenseDate , LicenseExpireDate: LicenseExpireDate?.value?.format('yyyy.MM.DD')
-      , Address:Address?.value, Phone:Phone?.value, Bank:Bank?.value, BankAcct:BankAcct?.value , Email:Email?.value, CreatedDate: CreatedDate?.value, LastUserName: VendName?.value, LastUpdate:  moment().format('yyyy.MM.DD, HH:mm:ss ')}
-      if(LicenseExpireDate?.value === '') {
-        obj.LicenseExpireDate = ''
-    } 
-      setDoc(userRef, obj )
-      onClose(true);
-      message.success(t('request_success'));
-    }else{
+      // const q1 = query(userRef, where("VendUserID", "==", VendUserID?.value?.trim() ));
+      // const response = await getDocs(q1);
+      // response.docs.map(doc => {
+      //     let user = (doc.data());
+      //     exists.push(user.CpnyID)
+      //    })
+      // let isVal = exists.includes(CpnyID?.value)
+      // console.log(q1)
+      if(LicenseExpireDate?.value) {
+        let obj ={CpnyID: CpnyID?.value,CpnyName: CpnyName?.value, VendUserID:VendUserID?.value?.trim(), VendPass:VendPass?.value, VendID:VendID?.value, VendName:VendName?.value, UseLicenseDate:UseLicenseDate , LicenseExpireDate: LicenseExpireDate?.value?.format('yyyy.MM.DD')
+          , Address:Address?.value, Phone:Phone?.value, Bank:Bank?.value, BankAcct:BankAcct?.value , IsFirst: IsFirst?.value, Email:Email?.value, CreatedDate: CreatedDate?.value, LastUserName: VendName?.value, LastUpdate:  moment().format('yyyy.MM.DD, HH:mm:ss ')
+       
+          } 
+          setDoc(userRef, obj )
+          onClose(true);
+          message.success(t('request_success'));
+    
+        } 
+        else if(LicenseExpireDate?.value== null){
+          let obj ={CpnyID: CpnyID?.value,CpnyName: CpnyName?.value, VendUserID:VendUserID?.value?.trim(), VendPass:VendPass?.value, VendID:VendID?.value, VendName:VendName?.value, UseLicenseDate:UseLicenseDate 
+          , Address:Address?.value, Phone:Phone?.value, Bank:Bank?.value, BankAcct:BankAcct?.value ,IsFirst: IsFirst?.value, Email:Email?.value, CreatedDate: CreatedDate?.value, LastUserName: VendName?.value, LastUpdate:  moment().format('yyyy.MM.DD, HH:mm:ss ')
+          } 
+          setDoc(userRef, obj )
+          onClose(true);
+          message.success(t('request_success'));
+        }      
+    }
+    else{
+        let exists = [];
         const userCollRef= collection(db, 'smVendorUsers')
-        const q1 = query(userCollRef, where("VendUserID", "==", VendUserID?.value?.trim() ))
-        const query1 = await getDocs(q1)
-        let exists = null;
-        query1.forEach(doc => exists = doc.data());
-        //  console.log(exists)
-        if(exists){
+        const q1 = query(userCollRef, where("VendUserID", "==", VendUserID?.value?.trim() ));
+        const response = await getDocs(q1);
+        response.docs.map(doc => {
+            let user = (doc.data());
+            exists.push(user.CpnyID)
+           })
+        let isVal = exists.includes(CpnyID?.value)
+        // console.log(exists, isVal,CpnyID?.value )
+        if(isVal){
           setError("Хэрэглэгч бүртгэлтэй байна")
-        }  
-        else {
-          let obj = {
-            CpnyID: CpnyID?.value, VendUserID:VendUserID?.value?.trim(), VendPass:VendPass?.value, VendID:VendID?.value,  VendName:VendName?.value, UseLicenseDate:UseLicenseDate , Address:Address?.value, Phone:Phone?.value, Bank:Bank?.value, BankAcct:BankAcct?.value , Email:Email?.value,CreatedDate: moment().format('yyyy.MM.DD, HH:mm:ss '), CreatedUserName: VendName?.value, LastUserName: VendName?.value, LastUpdate:  moment().format('yyyy.MM.DD, h:mm:ss ')
-          }
-          if(LicenseExpireDate?.value === '') {
-              obj.LicenseExpireDate = ''
-          }   
-        addDoc(userCollRef,  obj)
-        onClose(true);
-        message.success(t('request_success'));
+        }  else {
+          if(LicenseExpireDate?.value) {
+            let obj = {
+              CpnyID: CpnyID?.value,CpnyName: CpnyName?.value, VendUserID:VendUserID?.value?.trim().toLowerCase(), VendPass:VendPass?.value, VendID:VendID?.value,  VendName:VendName?.value, UseLicenseDate:UseLicenseDate ,
+              LicenseExpireDate: LicenseExpireDate?.value?.format('yyyy.MM.DD'), 
+              Address:Address?.value, Phone:Phone?.value, Bank:Bank?.value, BankAcct:BankAcct?.value , Email:Email?.value,CreatedDate: moment().format('yyyy.MM.DD, HH:mm:ss '), 
+              IsFirst: IsFirst?.value, CreatedUserName: VendName?.value, LastUserName: VendName?.value, LastUpdate:  moment().format('yyyy.MM.DD, h:mm:ss ')
+            }
+            addDoc(userCollRef,  obj)
+            onClose(true);
+            message.success(t('request_success'));
+        
+            }  
+            else if(LicenseExpireDate?.value== null){
+            let obj ={CpnyID: CpnyID?.value,CpnyName: CpnyName?.value, VendUserID:VendUserID?.value?.trim(), VendPass:VendPass?.value, VendID:VendID?.value, VendName:VendName?.value, UseLicenseDate:UseLicenseDate 
+            , Address:Address?.value, Phone:Phone?.value, Bank:Bank?.value, BankAcct:BankAcct?.value , Email:Email?.value, IsFirst: IsFirst?.value, CreatedDate: moment().format('yyyy.MM.DD, HH:mm:ss '), LastUserName: VendName?.value, LastUpdate:  moment().format('yyyy.MM.DD, HH:mm:ss ')
+            } 
+            addDoc(userCollRef,  obj)
+            onClose(true);
+            message.success(t('request_success'));
+              }
         }
     }
     } else {
+      if(!CpnyName?.value) setCpnyName({value: '', error: 'is_empty'});
       if(!VendUserID?.value) setVendUserID({value: '', error: 'is_empty'});
       if(!VendPass?.value) setVendPass({value: '', error: 'is_empty'});
       if(!VendName?.value) setVendName({value: '', error: 'is_empty'});
@@ -159,7 +196,10 @@ export function Card(props){
       onSubmit={handleSubmit}
       >
         <div className='cart'>
+        <div className='card1'>
       <CardInput label={('table.company')} className="ss" disabled={true}  value={CpnyID} setValue={setCpnyID} handleEnter={handleEnter} />
+      <CardInput1 label={('table.company_name')} value={CpnyName} setValue={setCpnyName} handleEnter={handleEnter} />
+      </div>
       <div className='card2'>
        <Cardlength label={('table.vendorcode')} value={VendID} setValue={setVendID} handleEnter={handleEnter} />
        <CardInput1 label={('table.vendorname')} value={VendName} setValue={setVendName} handleEnter={handleEnter} />
@@ -184,6 +224,7 @@ export function Card(props){
         (UseLicenseDate === 'Y') ? false : true} 
       disabledDate={d => !d || d.isBefore(moment().format('yyyy.MM.DD'))}
       />}
+      {/* <Check label={('table.uselicensedate')}  value={UseLicenseDate} setValue={setUseLicenseDate}/> */}
       </div>
       </div>
       {!disabled && <button type='submit' disabled={loader} className='login_form_btn'>

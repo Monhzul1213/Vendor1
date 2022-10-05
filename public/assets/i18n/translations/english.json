@@ -115,7 +115,8 @@
     "bank":"Bank",
     "bankacct":"Bank account",
     "vendorname": "Vendor name",
-    "vendorcode":"Vendor code"
+    "vendorcode":"Vendor code",
+    "company_name": "Company name"
 
   },
   "filter": {

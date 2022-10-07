@@ -27,7 +27,23 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+#login_language_2 {
+  color: var(--root-color);
+  font-size: 15px;
+}
 
+#login_language_2a {
+  color: var(--root-color);
+  font-size: 18px;
+}
+
+.menu_language_btn:hover #login_language_2 {
+  color: var(--link-color);
+}
+
+.menu_language_btn:hover #login_language_2a {
+  color: var(--link-color);
+}
 .ant-spin.ant-spin-lg.ant-spin-spinning  {
   margin-top: 50px;
   width: 100%;
@@ -59,8 +75,10 @@ code {
 }
 
 .error_icon {
-  color: var(--danger-color);
+  color: var(--root-color);
   font-size: 18px;
+    min-width: 18px;
+    margin-top: 5px;
 }
 
 .error_text {
@@ -131,7 +149,7 @@ code {
 }
 
 .menu_language_arrow {
-  color: var(--text-color);
+  color: var(--root-color);
   font-size: 20px;
 }
 

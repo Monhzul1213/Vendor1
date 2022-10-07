@@ -4,11 +4,16 @@ import axios from 'axios';
 const initialState = {
   token: '',
   url: 'http://192.168.1.220:3737/VendorSystem.asmx/',
+
   user: null,
   collapsed: false,
   visible: false,
   vendID: null,
+  vendor: null,
   order: null,
+  webUser: null,
+  vendorUser: null,
+  toRemember: false,
 };
 
 export const loginSlice = createSlice({
@@ -22,8 +27,27 @@ export const loginSlice = createSlice({
       state.user = action.payload;
     },
     login: (state, action) => {
+      state.user = action.payload.user;
+      state.webUser = action.payload.user;
+      // state.url = action.payload?.url;
+      console.log(action.payload)
+      state.toRemember = action.payload?.toRemember;
+    },
+
+    setLogin: (state, action) => {
       state.user = action.payload;
-      // console.log(action.payload)
+      console.log(state)
+      state.url = action.payload?.url;
+      // state.vendID = action.payload?.vendorUser?.VendID;
+      state.webUser = action.payload?.webUser;
+      // state.vendorUser = action.payload?.vendorUser;
+      state.toRemember = action.payload?.toRemember;
+    },
+    setVendorUser: (state, action) => {
+      state.vendorUser = action.payload;
+    },
+    setWebUser: (state, action) => {
+      state.webUser = action.payload;
     },
     logout: state => {
       state.user = null;
@@ -38,23 +62,23 @@ export const loginSlice = createSlice({
     setVendID: (state, action) => {
       state.vendID = action.payload;
     },
-    setOrder: (state, action) => {
-      console.log(action.payload);
-      state.order = action.payload;
-    },
+    // setOrder: (state, action) => {
+    //   console.log(action.payload);
+    //   state.order = action.payload;
+    // },
   }
 });
 
-export const apiLogin = (username, password) => async dispatch => {
+export const apiLogin = (email, password) => async dispatch => {
   try {
-    console.log(initialState.url, username, password);
-    const response = await fetchRetry(initialState.url + 'Login', { username, password });
+    console.log(initialState.url, email, password);
+    const response = await fetchRetry(initialState.url + 'Login', { email, password });
     console.log(response);
     if(response?.error_code){
       return Promise.resolve({ error: response?.description });
     } else {
       dispatch(setToken(response?.access_token));
-      dispatch(setUser({ username, password }));
+      dispatch(setUser({ email, password }));
       return Promise.resolve({ error: null, token: response?.access_token });
     }
   } catch (err) {
@@ -74,6 +98,6 @@ function fetchRetry(url, auth, retries = 5) {
     });
 }
 
-export const { setToken, setUser, login, logout, setCollapsed, setVisible, setVendID, setOrder } = loginSlice.actions;
+export const { setToken, setUser, login, logout, setCollapsed, setVisible, setVendID, setOrder, setLogin } = loginSlice.actions;
 
 export const loginReducer = loginSlice.reducer;

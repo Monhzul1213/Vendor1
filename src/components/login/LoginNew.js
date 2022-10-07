@@ -1,0 +1,102 @@
+
+
+import React, { useState, useEffect } from 'react';
+import { Checkbox } from 'antd';
+import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import {getUser} from '../../firebase';
+import { login } from '../../services/login.slice';
+import { config } from '../../helpers/login.config';
+import  logo1_white  from '../../assets/logo1_white.png';
+import { Error, Language, Loader } from '../all';
+import { Input } from './Input';
+import { Social } from './Social';
+
+export default function LoginNew(){
+  const { t } = useTranslation();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [list, setList] = useState([]);
+  const [visible, setVisible] = useState(false);
+  const [tVisible, setTVisible] = useState(false);
+  const [tResponse, setTResponse] = useState(null);
+  const [checked, setChecked] = useState(false);
+  const user = useSelector(state => state.login.webUser);
+  const toRemember = useSelector(state => state.login.toRemember);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+ useEffect(() => {
+    if(user?.WebUserID) setEmail(user?.WebUserID);
+    if(toRemember && user?.WebPassword) setPassword(user?.WebPassword);
+    if(toRemember) setChecked(true);
+    console.log(user)
+    return () => {};
+  }, []);
+
+const handleEnter = e => {
+    if (e?.key?.toLowerCase() === "enter") {
+      const form = e.target.form;
+      const index = [...form].indexOf(e.target);
+      form.elements[index + 1].focus();
+      e.preventDefault();
+    }
+  }
+
+  const showError = error => {
+    setError(error);
+    setLoading(false);
+  }
+ const showList = users => {
+    setVisible(true);
+    setList(users);
+    setLoading(false)
+  }
+  const handleSubmit = async e => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+    const res = await getUser(email?.toLowerCase()
+    , password?.trim());
+    console.log(email?.trim().toLowerCase()) 
+    if(res?.error){
+      setError(res?.error);
+      setLoading(false);
+    } else {
+      dispatch(login({user: res.webUser, toRemember: checked}))
+
+      // console.log(res.webUser)
+      
+    }
+  }
+
+const nameProps = { label: 'login.username', value: email, setValue: setEmail,  setError, handleEnter };
+const passProps = { label: 'login.password', value: password, setValue: setPassword, setError, isPassword: true };
+
+return (
+    <div className='login_back_3'>
+      <img src={logo1_white} alt='Logo' className='login_form_logo3' />
+      <div className='login_header_3'>
+        <Language id='login_language_2' />
+      </div>
+      <form onSubmit={handleSubmit} className='login_form_3'>
+        <p className='login_title_3'>{t('ADMIN VENDOR')}</p>
+        <Input {...nameProps} />
+        <Input {...passProps} />
+        {error ? <Error error={error} id='login_error_3' /> : null}
+        <button type='submit' className='login_form_btn' id='login_form_btn3'>
+          {loading ? <Loader className='login_loader' color='#fff' /> : t('login.login')}
+        </button>
+        <div className='pass_row'>
+          <Checkbox className='remember_check' checked={checked} onChange={e => setChecked(e?.target?.checked)}>{t('remember')}</Checkbox>
+          {/* <a className='forgot_link'>{t('forgot')}</a>  */}
+        </div>
+        <Social />
+        <a className='copyright_text' target="_blank" href={'https://' + t('login.link')} id='copy'>{t('login.link')}</a>
+        <span className='copyright_text2'>2022</span>
+      </form>
+    </div>
+  )
+}

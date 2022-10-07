@@ -8,7 +8,7 @@ import { DynamicMDIcon } from './DynamicIcon';
 
 export function Language(props){
   const { i18n } = useTranslation();
-  const { hideArrow } = props;
+  const { hideArrow, id } = props;
 
   const menuStyle = {paddingTop: 5, paddingBottom: 5, borderRadius: 5};
 
@@ -36,8 +36,8 @@ export function Language(props){
   return (
     <Dropdown overlay={menu} trigger={['click']} placement="bottomRight">
       <div className='menu_language_btn'>
-        <span className={hideArrow ? 'header_language_link' : 'menu_language_link'} onClick={e => e.preventDefault()}>{i18n?.language === 'mongolS' ? 'МН' : 'EN'}</span>
-        <DynamicMDIcon name='MdKeyboardArrowDown' className={hideArrow ? 'header_user_icon' : 'menu_language_arrow'} />
+        <span className={hideArrow ? 'header_language_link' : 'menu_language_link'} onClick={e => e.preventDefault()} id={id}>{i18n?.language === 'mongol' ? 'МН' : 'EN'}</span>
+        <DynamicMDIcon name='MdKeyboardArrowDown' className={hideArrow ? 'header_user_icon' : 'menu_language_arrow'}  id={id + 'a'}/>
       </div>
     </Dropdown>
   )

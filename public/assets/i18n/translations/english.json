@@ -188,5 +188,9 @@
   "user_email":"User Email",
   "user_password": "User Password",
   "true": "True",
-  "false": "False"
+  "false": "False",
+  "visit": "Visit",
+  "terms": "Terms of service",
+  "remember": "Remember password",
+  "forgot": "Forgot password?"
 }

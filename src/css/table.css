@@ -10,6 +10,7 @@
   position: relative;
   margin-top: 15px;
 } 
+
 .ant-table {
   box-sizing: border-box;
   margin: 0;
@@ -32,6 +33,12 @@
   text-align: center;
   color: #2159b0;
 }
+
+/* .ant-table-tbody{
+  /* text-align: center; 
+  background-color: #2159b0;
+  grid-row-start: auto;
+} */
 .ant-table-thead > tr > th {
   position: relative;
   color: rgba(0, 0, 0, 0.85);
@@ -49,6 +56,8 @@
 .ant-table table {
   /* max-width: 100%; */
   width: auto;
+  height: 10px;
+
 }
 .empty_back {
   display: flex;

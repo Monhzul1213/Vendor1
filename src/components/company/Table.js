@@ -268,18 +268,18 @@ export const Table = (props) => {
       // defaultSortOrder: "descend"
 
     },
-    {
-      title: t('Үүсгэсэн огноо'),
-      dataIndex: 'CreatedDate',
-      key: 'CreatedDate',
-      align: 'center',
-      ...getColumnSearchProps('CreatedDate'),
-      sorter: (a, b) => new Date(a.CreatedDate) - new Date( b.CreatedDate),
-      sortDirections: ['descend', 'ascend'],
-      accessor: 'CreatedDate',
-      // width: 0,
-      defaultSortOrder: "descend"
-    },
+    // {
+    //   title: t('Үүсгэсэн огноо'),
+    //   dataIndex: 'CreatedDate',
+    //   key: 'CreatedDate',
+    //   align: 'center',
+    //   ...getColumnSearchProps('CreatedDate'),
+    //   sorter: (a, b) => new Date(a.CreatedDate) - new Date( b.CreatedDate),
+    //   sortDirections: ['descend', 'ascend'],
+    //   accessor: 'CreatedDate',
+    //   // width: 0,
+    //   defaultSortOrder: "descend"
+    // },
    
   ];
 

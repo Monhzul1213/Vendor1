@@ -113,8 +113,8 @@
     "phone":"Phone",
     "uselicensedate": "Use license date",
     "licenseExpireDate":"License expired date",
-    "bank":"Bank",
-    "bankacct":"Bank account",
+    "bank":"Information of bank 1",
+    "bankacct":"Information of bank 2",
     "vendorname": "Vendor name",
     "vendorcode":"Vendor code",
     "company_name": "Company name"

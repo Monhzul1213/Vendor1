@@ -17,6 +17,7 @@ export function CardInput(props){
     <div className='card_input_container'>
       <p className='card_input_label'>{t(label)}</p>
       <input className='card_input'
+      id={id}
         disabled={disabled}
         value={value?.value}
         onChange={onChange}

@@ -211,9 +211,10 @@ export function Card(props){
       <div className='card5'>
       <CardInput label={('table.phone')} className='card_input' value={Phone} setValue={changePhone} handleEnter={handleEnter}  />
       <CardInput1 label={('login.email')} className='card_input'  value={Email} setValue={setEmail} handleEnter={handleEnter}  /></div>
-      <div className='card4'>
-      <CardInput label={('table.bank')} className='card_input' value={Bank} setValue={setBank} handleEnter={handleEnter}  />
-      <CardInput1 label={('table.bankacct')} className='card_input' value={BankAcct} setValue={changeBankacct}handleEnter={handleEnter}  /></div>
+      <div className='card'>
+      <CardInput label={('table.bank')} className='card_input' value={Bank} setValue={setBank} handleEnter={handleEnter} id='bank' />
+      <CardInput label={('table.bankacct')} className='card_input' value={BankAcct} setValue={changeBankacct}handleEnter={handleEnter} id='bankacct'  />
+      </div>
       <div className='card'>
       <CardNote label={('table.address')}   className='card_input' value={Address} setValue={setAddress} handleEnter={handleEnter}  /></div>
       <div className='card3'>

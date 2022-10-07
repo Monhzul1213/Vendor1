@@ -257,6 +257,12 @@
     border-radius: 2px;
     /* overflow: scroll; */
   }
+  #bank{
+    width: 98%;
+  }
+  #bankacct{
+    width: 98%;
+  }
   .card_input_label1 {
     color: var(--text-color2);
     font-size: 13px;

@@ -114,8 +114,8 @@
     "phone":"Утасны дугаар",
     "uselicensedate": "Лиценз сунгах",
     "licenseExpireDate":"Лиценз дуусах",
-    "bank":"Банкны нэр",
-    "bankacct":"Дансны дугаар",
+    "bank":"Банкны мэдээлэл 1",
+    "bankacct":"Банкны мэдээлэл 2",
     "vendorname": "Нийлүүлэгчийн нэр",
     "vendorcode":"Нийлүүлэгчийн код",
     "company_name": "Компаний нэр"

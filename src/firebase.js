@@ -2,7 +2,7 @@
 import { initializeApp } from 'firebase/app';
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 // import { , , addDoc, limit, query, where, getDocs, getDoc, doc, updateDoc } from "firebase/firestore";
-import { config1, randomtoken } from './helpers'
+import { config, randomtoken } from './helpers'
 import {
   getFirestore,
   collection, 
@@ -27,7 +27,7 @@ import {
 } from 'firebase/auth';
 
 
-const app = initializeApp(config1?.firebaseConfig);
+const app = initializeApp(config?.firebaseConfig);
 const db = getFirestore(app);
 export const auth = getAuth(app);
 export {

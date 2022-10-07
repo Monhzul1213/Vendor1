@@ -2,6 +2,7 @@ export * from './Loader';
 export * from './Language';
 export * from './Error';
 export * from './Error1';
+export * from './Error2';
 export * from './Empty';
 export * from './Sort';
 export * from './Pagination';

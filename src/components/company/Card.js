@@ -43,8 +43,8 @@ export function Card(props){
 
   useEffect(() => {
     setEmail({ value: selected?.Email ?? '' });
-    setCpnyID({ value: selected?.CpnyID ?? login?.CpnyID });
-    setCpnyName({ value: selected?.CpnyName ??'' });
+    setCpnyID({ value: selected?.CpnyID ?? '' });
+    setCpnyName({ value: selected?.CpnyName ?? login?.CpnyName });
     setVendUserID({ value: selected?.VendUserID ?? '' });
     setVendPass({ value: selected?.VendPass ?? '' });
     setVendID({ value: selected?.VendID ?? '' });
@@ -88,7 +88,7 @@ export function Card(props){
       // let isVal = exists.includes(CpnyID?.value)
       // console.log(q1)
       if(LicenseExpireDate?.value) {
-        let obj ={CpnyID: CpnyID?.value,CpnyName: CpnyName?.value, VendUserID:VendUserID?.value?.trim(), VendPass:VendPass?.value, VendID:VendID?.value, VendName:VendName?.value, UseLicenseDate:UseLicenseDate , LicenseExpireDate: LicenseExpireDate?.value?.format('yyyy.MM.DD')
+        let obj ={CpnyID: CpnyID?.value,CpnyName: CpnyName?.value,  VendUserID:VendUserID?.value?.trim().toLowerCase(), VendPass:VendPass?.value, VendID:VendID?.value, VendName:VendName?.value, UseLicenseDate:UseLicenseDate , LicenseExpireDate: LicenseExpireDate?.value?.format('yyyy.MM.DD')
           , Address:Address?.value, Phone:Phone?.value, Bank:Bank?.value, BankAcct:BankAcct?.value , IsFirst: IsFirst?.value, Email:Email?.value, CreatedDate: CreatedDate?.value, LastUserName: VendName?.value, LastUpdate:  moment().format('yyyy.MM.DD, HH:mm:ss ')
        
           } 
@@ -98,7 +98,7 @@ export function Card(props){
     
         } 
         else if(LicenseExpireDate?.value== null){
-          let obj ={CpnyID: CpnyID?.value,CpnyName: CpnyName?.value, VendUserID:VendUserID?.value?.trim(), VendPass:VendPass?.value, VendID:VendID?.value, VendName:VendName?.value, UseLicenseDate:UseLicenseDate 
+          let obj ={CpnyID: CpnyID?.value,CpnyName: CpnyName?.value,  VendUserID:VendUserID?.value?.trim().toLowerCase(), VendPass:VendPass?.value, VendID:VendID?.value, VendName:VendName?.value, UseLicenseDate:UseLicenseDate 
           , Address:Address?.value, Phone:Phone?.value, Bank:Bank?.value, BankAcct:BankAcct?.value ,IsFirst: IsFirst?.value, Email:Email?.value, CreatedDate: CreatedDate?.value, LastUserName: VendName?.value, LastUpdate:  moment().format('yyyy.MM.DD, HH:mm:ss ')
           } 
           setDoc(userRef, obj )
@@ -133,7 +133,7 @@ export function Card(props){
         
             }  
             else if(LicenseExpireDate?.value== null){
-            let obj ={CpnyID: CpnyID?.value,CpnyName: CpnyName?.value, VendUserID:VendUserID?.value?.trim(), VendPass:VendPass?.value, VendID:VendID?.value, VendName:VendName?.value, UseLicenseDate:UseLicenseDate 
+            let obj ={CpnyID: CpnyID?.value,CpnyName: CpnyName?.value,  VendUserID:VendUserID?.value?.trim().toLowerCase(), VendPass:VendPass?.value, VendID:VendID?.value, VendName:VendName?.value, UseLicenseDate:UseLicenseDate 
             , Address:Address?.value, Phone:Phone?.value, Bank:Bank?.value, BankAcct:BankAcct?.value , Email:Email?.value, IsFirst: IsFirst?.value, CreatedDate: moment().format('yyyy.MM.DD, HH:mm:ss '), LastUserName: VendName?.value, LastUpdate:  moment().format('yyyy.MM.DD, HH:mm:ss ')
             } 
             addDoc(userCollRef,  obj)
@@ -197,8 +197,8 @@ export function Card(props){
       >
         <div className='cart'>
         <div className='card1'>
-      <CardInput label={('table.company')} className="ss" disabled={true}  value={CpnyID} setValue={setCpnyID} handleEnter={handleEnter} />
-      <CardInput1 label={('table.company_name')} value={CpnyName} setValue={setCpnyName} handleEnter={handleEnter} />
+      <CardInput label={('table.company')} className="ss"  value={CpnyID} setValue={setCpnyID} handleEnter={handleEnter} />
+      <CardInput1 label={('table.company_name')} value={CpnyName} disabled={true} setValue={setCpnyName} handleEnter={handleEnter} />
       </div>
       <div className='card2'>
        <Cardlength label={('table.vendorcode')} value={VendID} setValue={setVendID} handleEnter={handleEnter} />
@@ -206,7 +206,7 @@ export function Card(props){
       </div>
       <div className='card1'>
       <CardInput label={('user_email')} value={VendUserID} setValue={setVendUserID} handleEnter={handleEnter}/>
-      <CardPassword label={('user_password')} className='card_input2' value={VendPass} setValue={setVendPass} handleEnter={handleEnter} isPassword={true}/>
+      <CardInput1 label={('user_password')} className='card_input2' value={VendPass} setValue={setVendPass} handleEnter={handleEnter} isPassword={true}/>
       </div>
       <div className='card5'>
       <CardInput label={('table.phone')} className='card_input' value={Phone} setValue={changePhone} handleEnter={handleEnter}  />

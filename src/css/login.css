@@ -1,4 +1,4 @@
-@import '../color.css';
+/* @import '../color.css';
 .admin{
   color: #1372bb;
   font-size: 16px;
@@ -78,7 +78,6 @@ input:-webkit-autofill:active{
   background-color: var(--hover2-color);
   border-radius: var(--radius);
   width: 100%;
-  /* height: 50px; */
   border: none;
 }
 
@@ -103,7 +102,6 @@ input:-webkit-autofill:active{
   color: var(--text-color);
   font-size: 16px;
   padding: 0 10px;
-  /* background-color: #fff;  */
 }
 
 .ant-input:focus {
@@ -124,7 +122,6 @@ input:-webkit-autofill:active{
 
 .input-password {
   border: none;
-  /* height: var(--height); */
   flex: 1;
   border-radius: var(--radius);
   color: var(--text-color);
@@ -132,16 +129,7 @@ input:-webkit-autofill:active{
   padding: 0 10px;
   background-color: var(--hover2-color);
 }
-/* .ant-input-password {
-  border: none;
-  height: var(--height);
-  flex: 1;
-  border-radius: var(--radius);
-  color: var(--text-color);
-  font-size: 16px;
-  padding: 0 10px;
-  background-color: var(--hover2-color);
-} */
+
 
 .login_input_icon {
   position: absolute;
@@ -251,9 +239,7 @@ input:-webkit-autofill:active{
 }
 
 @media only screen and (min-width: 720px) {
-  /* .login_image_container {
-    display: none;
-  } */
+ 
 
   .login_slides {
     height: 100vh;
@@ -279,15 +265,7 @@ input:-webkit-autofill:active{
     right: 0;
     width: 30%;
     background-color: #dbdee0;
-    /* position: absolute;
-    background-color: var(--root-color);
-    border-radius: 15px;
-    width: 40vw;
-    top: 10vh;
-    right: 20vw;
-    height: 80vh;
-    display: flex;
-    overflow-y: scroll; */
+   
   }
 
   .login_form_container {
@@ -319,4 +297,4 @@ input:-webkit-autofill:active{
   height: 8px;
   border-radius: 10px;
   opacity: 1;
-}
+} */

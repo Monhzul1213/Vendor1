@@ -6,7 +6,8 @@
     "logout": "Log out",
     "link": "www.ultimate.mn",
     "signup":"Sign up",
-    "username": "Username"
+    "username": "Username",
+    "conf_password": "Password /Confirm/"
   },
   "copyright": "@2022 Ultimate Solutions, LLC",
   "errors": {
@@ -192,5 +193,12 @@
   "visit": "Visit",
   "terms": "Terms of service",
   "remember": "Remember password",
-  "forgot": "Forgot password?"
+  "forgot": "Forgot password?",
+  "reset": "Reset password",
+  "send": "Send",
+  "back": "Back",
+  "sent": "We have sent password reset instructions to your email.",
+  "change": "Change password",
+  "pass_match": "The password confirmation does not match",
+  "pass_success": "Your password has been updated successfully."
 }

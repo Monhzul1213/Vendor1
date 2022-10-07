@@ -98,7 +98,32 @@ input:-webkit-autofill:active{
   /* background-color: var(--danger-color); */
   border-radius: var(--radius);
 }
+/* .pass:focus {
+  background-color: rgba(0, 0, 0, 0);
+  border-width: 1px;
+  border-style: solid;
+  border-color: #ffffff66;
+  border-radius: 40px;
+  -webkit-box-shadow: 0 0 3px 2px var(--link-color2);
+  -moz-box-shadow: 0 0 3px 2px var(--link-color2);
+  box-shadow: 0 0 3px 2px var(--link-color2);
+}
 
+
+
+.pass {
+  border: none;
+  height: var(--height);
+  flex: 1;
+  border-radius: 40px;
+  color: var(--root-color);
+  font-size: 16px;
+  padding: 0 15px;
+  background-color: #ffffff33;
+} */
+#username{
+  color: var(--root-color);
+}
 .ant-input {
   all: unset;
   height: var(--height);
@@ -106,38 +131,12 @@ input:-webkit-autofill:active{
   border-radius: 40px;
   /* border-radius: var(--radius); */
   /* color: var(--text-color); */
-  color: var(--root-color);
+  /* color: var(--root-color); */
   font-size: 16px;
   padding: 0 15px;
   /* background-color: var(--hover2-color); */
 }
-
-.ant-input:focus {
-  background-color: rgba(0, 0, 0, 0);
-  border-width: 1px;
-  border-style: solid;
-  border-color: #ffffff66;
-  border-radius: 40px;
-  /* border-radius: var(--radius); */
-  -webkit-box-shadow: 0 0 3px 2px var(--link-color2);
-  -moz-box-shadow: 0 0 3px 2px var(--link-color2);
-  box-shadow: 0 0 3px 2px var(--link-color2);
-}
-
-.ant-input-affix-wrapper-focused {
-  /* background-color: var(--danger-color) !important; */
-  border-width: 1px !important;
-  border-style: solid !important;
-  border-color: var(--link-color) !important;
-  /* border-radius: var(--radius) !important; */
-  border-radius: 40px !important;
-  -webkit-box-shadow: 0 0 3px 2px var(--link-color2) !important;
-  -moz-box-shadow: 0 0 3px 2px var(--link-color2) !important;
-  box-shadow: 0 0 3px 2px var(--link-color2) !important;
-  overflow: 'hidden' !important;
-}
-
-.ant-input-password {
+.pass {
   border: none;
   height: var(--height);
   flex: 1;
@@ -150,6 +149,22 @@ input:-webkit-autofill:active{
   background-color: #ffffff33;
   /* background-color: var(--hover2-color); */
 }
+.pass:focus {
+  background-color: rgba(0, 0, 0, 0);
+  border-width: 1px;
+  border-style: solid;
+  border-color: #ffffff66;
+  border-radius: 40px;
+  /* border-radius: var(--radius); */
+  -webkit-box-shadow: 0 0 3px 2px var(--link-color2);
+  -moz-box-shadow: 0 0 3px 2px var(--link-color2);
+  box-shadow: 0 0 3px 2px var(--link-color2);
+}
+
+
+
+
+
 
 .login_input_icon {
   position: absolute;
@@ -587,7 +602,7 @@ input:-webkit-autofill:active{
 .social_header {
   display: flex;
   flex-flow: row;
-  margin: 40px 0 5px 0;
+  margin: 85px 0 5px 0;
   align-items: center;
   justify-content: center;
 }
@@ -795,7 +810,10 @@ ol ol > li:before {
   font-weight: 500;
   color: var(--root-color1);
 }
-
+.forgot_link:hover {
+  color: var(--link-color);
+  cursor: pointer;
+}
 .ant-input-password-icon.anticon {
   color: var(--root-color);
 }
@@ -813,4 +831,66 @@ ol ol > li:before {
   position: absolute;
   top: 10px;
   right: 10px;
+}
+
+.rback_row {
+  margin-top: 35px;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+}
+
+.rback_link {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+}
+
+.rback_link:hover .rback_icon, .rback_link:hover .rback_text {
+  color: var(--link-color);
+}
+
+.rback_icon {
+  color: var(--root-color1);
+  font-size: 16px;
+  margin-right: 5px;
+}
+
+.rback_text {
+  color: var(--root-color1);
+  font-size: 14px;
+  font-weight: 550;
+}
+
+.sent_back {
+  background-color: #ffffff15;
+  border-radius: 5px;
+  margin-top: 20px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  padding: 10px 10px;
+}
+
+.sent_icon_back {
+  background-color: #ffffff55;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sent_icon {
+  color: var(--root-color);
+  font-size: 20px;
+}
+
+.sent_text {
+  color: var(--root-color1);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 550;
+  margin: 5px 0 0 0;
 }

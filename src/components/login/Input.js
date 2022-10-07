@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Input as AntInput } from 'antd';
 
 export function Input(props){
-  const { label, value, setValue, isPassword, handleEnter, setError } = props;
+  const { label, value, setValue, isPassword, handleEnter, setError, id } = props;
   const { t } = useTranslation();
 
   const onChange = e => {
@@ -16,8 +16,8 @@ export function Input(props){
   return (
     <div className='login_input_container3'>
       {isPassword
-        ? <AntInput.Password {...inputProps} />
-        : <div className='login_input_back3'><AntInput {...inputProps} /></div>
+        ? <AntInput.Password {...inputProps} className='pass'/>
+        : <div className='login_input_back3'><AntInput {...inputProps} id={id}/></div>
       }
     </div>
 

@@ -9,7 +9,8 @@ export const config1 = {//test
       measurementId: "G-V6P4QY6KEY"
     },
     api_url: "http://192.168.1.220:3737/VendorSystem.asmx/",
-    version: "Test"
+    version: "Test",
+    domain: "http://192.168.1.133:3000",
   }
   export const config = {//production
     firebaseConfig: {
@@ -22,5 +23,6 @@ export const config1 = {//test
       measurementId: "G-4QZQVDV9XH"
     },
     api_url: "http://202.131.232.101:3737/VendorSystem.asmx/",
-    version: ""
+    version: "",
+    domain: "http://vendor.ultimate.mn",
   }

@@ -75,6 +75,12 @@ code {
 }
 
 .error_icon {
+  color: var(--danger-color);
+  font-size: 18px;
+    min-width: 18px;
+    /* margin-top: 5px; */
+}
+.error_icon2 {
   color: var(--root-color);
   font-size: 18px;
     min-width: 18px;

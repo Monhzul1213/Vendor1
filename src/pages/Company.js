@@ -31,13 +31,14 @@ const [selected, setSelected] =useState(null);
 }
 
 
-  function getUser(){
+ async function getUser(){
     let users = []
     const userCollectionRef =collection(db, 'smVendorUsers')
-    const q1 = query(userCollectionRef, where("CpnyID", "==",  login.CpnyID));
-    // console.log(login.CpnyID)
-     getDocs(q1 )
-     .then(response=>{
+    const q1 = query(userCollectionRef, where("CpnyID", "==", login.CpnyID));
+    
+    console.log(login.CpnyID)
+   await getDocs(q1)
+    .then(response=>{
       response.docs.map(doc => {
         let user = {...doc.data(), ...{ id: doc?.id }};
         // console.log(user)
@@ -47,20 +48,9 @@ const [selected, setSelected] =useState(null);
       setData(users)
       setOriginalData(users)
       return Promise.resolve(setData(users))
-     }).catch(error=> console.log(error.message))
+     }
+     ).catch(error=> console.log(error.message))
   }
-  // const getData = async (VendName) => {
-  //   let filters = [{ "FieldName": "VendID", "Value": login?.vendID }];
-  //   if(VendName) filters.push({ "FieldName": "VendName", "Value": VendName });
-    
-  //   let data = { BusinessObject: filters };
-  //   setLoading(true);
-  //   setError(null);
-  //   const response = await dispatch(getList(login, 'InventoryInfo', data));
-  //   response?.error ? setError(response?.error) : setData(response?.data?.inInventory);
-  //   setLoading(false);
-  //   if(!keepOpen) setVisible(false);
-  // }
 
 useEffect(() => {
     getUser();  

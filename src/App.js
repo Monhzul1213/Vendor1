@@ -5,6 +5,8 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import {Login} from './pages/Login'
 import {Company} from './pages/Company'
 import {Loading} from './pages/Loading'
+import {PasswordForgot} from './pages/PasswordForgot'
+import {PasswordReset} from './pages/PasswordReset'
 import { setIsLoggedIn } from './services';
 
 
@@ -39,6 +41,8 @@ export function App() {
   <BrowserRouter>
     <Routes>
       <Route path='*' element={<Login />} />
+      <Route path='/forgot_password' element={<PasswordForgot />} />
+      <Route path='/reset_password' element={<PasswordReset />} />
     </Routes>
   </BrowserRouter>
 );

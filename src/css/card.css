@@ -341,6 +341,7 @@
     align-items: center;
     /* background-color: var(--hover2-color); */
   }
+  
   .card_note {
     min-height: 80px;
     background-color: var(--root-color);

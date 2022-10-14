@@ -81,7 +81,6 @@ export function PasswordForgot(){
 
   return (
     <div className='login_back_3'>
-      {visible ? <ModalCompany {...listProps} /> : null}
       <img src={logo1_white} alt='Logo' className='login_form_logo3' />
       <div className='login_header_3'>
         <Language id='login_language_2' />

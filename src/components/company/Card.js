@@ -56,11 +56,11 @@ async function handleSubmit(e){
     e.preventDefault()
     setLoader(true);
     setError(null);
-
+    
     let isLicenseValid = UseLicenseDate === 'N' ? true : LicenseExpireDate?.value ? true : false;
     console.log('isLicenseValid', isLicenseValid)
     
-    if( CpnyName?.value && VendUserID?.value && isValidEmail(VendUserID?.value) && VendPass &&VendID?.value &&VendName?.value && isLicenseValid    &&Phone?.value && !isNaN(Phone?.value) && Address?.value && Email?.value && isValidEmail(Email?.value) && Bank1?.value && Bank2?.value && !isNaN(Bank2?.value)){
+  if( CpnyName?.value && VendUserID?.value && isValidEmail(VendUserID?.value) && VendPass &&VendID?.value &&VendName?.value && isLicenseValid    &&Phone?.value && !isNaN(Phone?.value) && Address?.value && Email?.value && isValidEmail(Email?.value) && Bank1?.value && Bank2?.value && !isNaN(Bank2?.value)){
 
     let obj = {CpnyID: CpnyID?.value,
       CpnyName: CpnyName?.value, 
@@ -118,7 +118,7 @@ async function handleSubmit(e){
         message.success(t('request_success'));   
         }
       } 
-    } 
+  } 
     else {
       if(!CpnyName?.value) setCpnyName({value: '', error: 'is_empty'});
       if(!VendUserID?.value) setVendUserID({value: '', error: 'is_empty'});

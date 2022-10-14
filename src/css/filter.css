@@ -168,6 +168,23 @@
   padding-left: 32px;
 }
 
+.filter_check .ant-checkbox .ant-checkbox-inner {
+  background-color: var(--root-color);
+  border-color: var(--border-color);
+  height: 18px;
+  width: 18px;
+}
+
+.filter_check .ant-checkbox-checked .ant-checkbox-inner {
+  background-color: var(--link-color);
+  border-color: var(--link-color);
+}
+
+.filter_check > span {
+  color: var(--text-color2);
+  font-size: 14px;
+  font-weight: 500;
+}
 @media only screen and (min-width: 960px) {
   .filter_back {
     background-color: var(--root-color);
@@ -684,22 +701,4 @@
     bottom: 0;
     right: 0;
   }
-}
-
-.filter_check .ant-checkbox .ant-checkbox-inner {
-  background-color: var(--root-color);
-  border-color: var(--border-color);
-  height: 18px;
-  width: 18px;
-}
-
-.filter_check .ant-checkbox-checked .ant-checkbox-inner {
-  background-color: var(--link-color);
-  border-color: var(--link-color);
-}
-
-.filter_check > span {
-  color: var(--text-color2);
-  font-size: 14px;
-  font-weight: 500;
 }

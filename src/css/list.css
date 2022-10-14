@@ -1,88 +1,5 @@
 @import '../color.css';
 
-.page_container {
-  padding: 15px;
-  background-color: var(--hover2-color);
-  /* overflow-y: scroll; */
-  flex: 1;
-  /* overflow-x: scroll; */
-  /* height: 600px; */
-}
-
-.table_container {
-  overflow-x: scroll;
-  width: 100%;
-  overflow-y: scroll;
-}
-
-.data_back {
-  display: flex;
-  flex-flow: row;
-  flex: 1;
-  overflow-x: scroll;
-}
-
-.printer_fab {
-  color: var(--link-color);
-  font-size: 22px;
-}
-
-.printer_fab:hover {
-  color: var(--hover-color);
-  cursor: pointer;
-}
-
-.gap {
-  height: 10px;
-  width: 10px;
-}
-
-.dcard_row {
-  display: flex;
-  flex-flow: row;
-  flex-wrap: wrap;
-  flex: 1;
-}
-
-.chart_cont {
-  background-color: #fff;
-  border-radius: 5px;
-  padding: 5px;
-}
-
-.tool_back {
-  background-color: #fff;
-  border-radius: 5px;
-  -webkit-box-shadow: 0 0 10px 5px #00000028;
-  -moz-box-shadow: 0 0 10px 5px  #00000028;
-  box-shadow: 0 0 10px 5px  #00000028;
-  padding: 7px 10px;
-}
-
-.tool_title {
-  color: var(--text-color);
-  font-size: 14px;
-  font-weight: 600;
-  margin: 0 0 2px 0;
-}
-
-.tool_value {
-  font-size: 15px;
-  margin: 0;
-  line-height: 18px;
-}
-
-.chart_back {
-  background-color: #fff;
-  border-radius: 5px;
-  padding: 5px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-}
-
 @media only screen and (min-width: 440px) {
   .page_back {
     min-width: 474px;
@@ -284,4 +201,83 @@
     width: 60%;
     line-height: 18px;
   }
+}
+.page_container {
+  padding: 15px;
+  background-color: var(--hover2-color);
+  flex: 1;
+}
+
+.table_container {
+  overflow-x: scroll;
+  width: 100%;
+  overflow-y: scroll;
+}
+
+.data_back {
+  display: flex;
+  flex-flow: row;
+  flex: 1;
+  overflow-x: scroll;
+}
+
+.printer_fab {
+  color: var(--link-color);
+  font-size: 22px;
+}
+
+.printer_fab:hover {
+  color: var(--hover-color);
+  cursor: pointer;
+}
+
+.gap {
+  height: 10px;
+  width: 10px;
+}
+
+.dcard_row {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.chart_cont {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.tool_back {
+  background-color: #fff;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 10px 5px #00000028;
+  -moz-box-shadow: 0 0 10px 5px  #00000028;
+  box-shadow: 0 0 10px 5px  #00000028;
+  padding: 7px 10px;
+}
+
+.tool_title {
+  color: var(--text-color);
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 2px 0;
+}
+
+.tool_value {
+  font-size: 15px;
+  margin: 0;
+  line-height: 18px;
+}
+
+.chart_back {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }

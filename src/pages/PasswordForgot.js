@@ -88,7 +88,7 @@ export function PasswordForgot(){
       </div>
       <form onSubmit={handleSubmit} className='login_form_3'>
         <p className='login_title_3'>{t('reset')}</p>
-        <Input {...emailProps} />
+        <Input {...emailProps}  id='username'/>
         {error ? <Error error={error} id='login_error_3' /> : null}
         <button type='submit' className='login_form_btn' id='login_form_btn3'>
           {loading ? <Loader className='login_loader' color='#fff' /> : t('send')}

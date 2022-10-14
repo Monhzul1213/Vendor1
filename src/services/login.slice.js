@@ -33,14 +33,11 @@ export const loginSlice = createSlice({
       console.log(action.payload)
       state.toRemember = action.payload?.toRemember;
     },
-
     setLogin: (state, action) => {
       state.user = action.payload;
       console.log(state)
       state.url = action.payload?.url;
-      // state.vendID = action.payload?.vendorUser?.VendID;
       state.webUser = action.payload?.webUser;
-      // state.vendorUser = action.payload?.vendorUser;
       state.toRemember = action.payload?.toRemember;
     },
     setVendorUser: (state, action) => {

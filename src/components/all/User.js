@@ -6,9 +6,10 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { logout as out, selectUser } from '../../services';
 import { auth, getAuth, logout } from '../../firebase';
 import { DynamicMDIcon, DynamicAIIcon } from './DynamicIcon';
+import { vendor_pdf } from '../../assets';
 
 export function User(){
-  const { t } = useTranslation();
+  const { t , i18n} = useTranslation();
   const [user] = useAuthState(auth);
 
   const [loading, setLoading] = useState(false);
@@ -22,6 +23,9 @@ export function User(){
   };
   const menuStyle = {paddingTop: 5, paddingBottom: 5, borderRadius: 5};
 
+  const onPressLanguage = () => {
+    i18n.changeLanguage(i18n?.language === 'mongol' ? 'english' : 'mongol');
+  }
 
   const menu = (
     <Menu style={menuStyle}>
@@ -30,17 +34,29 @@ export function User(){
           <DynamicAIIcon className='drop_user_icon' name='AiOutlineUser' />
           <div>
             <p className='drop_user_name'>{user?.displayName}</p>
-            <p className='drop_user_email'>{login?.CpnyID }</p>
+            {/* <p className='drop_user_email'>{login?.CpnyID }</p> */}
             <p className='drop_user_email'>{login?.WebUserID  }</p>
           </div>
         </div>
       </Menu.Item>
-      <Menu.Item>
+      <Menu.Item key='guide'>
+        <a href={vendor_pdf} target='_blank' rel='noopener noreferrer'>
+          <div className='menu_language_back2'>
+            <DynamicMDIcon className='menu_icon2' name='MdHelpOutline' />
+            <span className='menu_language'>{t('guide')}</span>
+          </div>
+        </a>
+      </Menu.Item>
+      <Menu.Item key='language' onClick={onPressLanguage}>
+        <div className='menu_language_back2'>
+          <DynamicMDIcon className='menu_icon2' name='MdLanguage' />
+          <span className='menu_language'>{i18n?.language === 'mongol' ? 'Монгол' : 'English'}</span>
+        </div>
+      </Menu.Item>
+      <Menu.Item key='divider'>
         <div className='divider' />
       </Menu.Item>
-      <Menu.Item
-             >
-        
+      <Menu.Item >
         <div className='menu_logout_back' onClick={logoutOfApp}>
          <DynamicAIIcon className='drop_icon' name='AiOutlineLogout'/>
           <span className='menu_logout' iconAiOutlineLogout >{t('login.logout')}</span>

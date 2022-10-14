@@ -2,7 +2,7 @@
 import { initializeApp } from 'firebase/app';
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 // import { , , addDoc, limit, query, where, getDocs, getDoc, doc, updateDoc } from "firebase/firestore";
-import { config, randomtoken } from './helpers'
+import { config1, randomtoken, config } from './helpers'
 import {
   getFirestore,
   collection, 
@@ -51,23 +51,7 @@ export {
   getAuth,
   updateDoc
 };
-// export const getUser = async (email, password) => {
-//   try {
-//     const userRef = collection(db, "smWebUsers");
-//     const q = query(userRef, where("WebUserID", "==", email ), where("WebPassword", "==", password));
-//     const querySnapshot = await getDocs(q);
-//     let user = null;
-//     querySnapshot.forEach((doc) => {
-//       user = doc.data();
-//       console.log(doc.data())
-//     })  
-//     // console.log('====', email, password)
-//     return Promise.resolve({ error: false});
-//   } catch (err) {
-//     console.error('Хэрэглэгч бүртгэлгүй байна');
-//     return Promise.resolve({ error: err.code });
-//   }
-// }
+
 export const getUser = async (email, password) => {
   // console.log(email.includes(email.toLowerCase()))
   try {

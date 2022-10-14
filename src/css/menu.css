@@ -114,7 +114,17 @@
     color: var(--root-color);
     font-size: 18px;
   }
+  .drop_user_vend {
+    display: none;
+  }
 
+  .drop_user_vend2 {
+    color: var(--text-color);
+    margin: 0 0 10px 0;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 20px;
+  }
   .ant-breadcrumb-link {
     color: var(--root-color);
     font-size: 16px;
@@ -188,7 +198,18 @@
     color: var(--text-color);
     font-size: 18px;
   }
+  .drop_user_vend {
+    border-radius: 5px;
+    color: var(--text-color);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    margin: 0 5px 0 0;
+  }
 
+  .drop_user_vend2 {
+    display: none;
+  }
   
   .header_name {
       font-size: 20px;
@@ -458,4 +479,21 @@
 
 .logo_link:hover {
   cursor: pointer;
+}
+#pdf_link {
+  padding-left: 10px;
+}
+
+.pdf_item:hover .menu_item_img {
+  filter: var(--active-filter);
+}
+
+.pdf_item:hover .menu_item_label {
+  color: var(--side-active-color);
+}
+
+.menu_icon2 {
+  color: var(--text-color2);
+  font-size: 18px;
+  margin-right: 5px;
 }

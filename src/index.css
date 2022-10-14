@@ -22,7 +22,11 @@ body {
   background: #ccc;
  border-radius: 5px;
 }
-
+.divider {
+  background-color: var(--border-color);
+  flex: 1 1;
+  height: 1px;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -101,6 +105,12 @@ code {
 
 .menu_language_back {
   padding: 5px;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+}
+.menu_language_back2 {
+  padding: 0 5px 2px 5px;
   display: flex;
   flex-flow: row;
   align-items: center;

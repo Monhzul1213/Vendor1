@@ -83,19 +83,6 @@ export const Table = (props) => {
           >
             Reset
           </Button>
-          {/* <Button
-            type="link"
-            size="small"
-            onClick={() => {
-              confirm({
-                closeDropdown: false,
-              });
-            setSearchText(selectedKeys[0]);
-            setSearchedColumn(dataIndex);
-            }}
-          >
-            Filter
-          </Button> */}
         </Space>
       </div>
     ),
@@ -141,6 +128,14 @@ export const Table = (props) => {
       
     },
     {
+      title: t('table.company_name'), 
+      // accessor: 'CpnyID' ,
+      dataIndex: 'CpnyName',
+      key: 'CpnyName',
+      ...getColumnSearchProps('CpnyName'),
+      
+    },
+    {
       title: t('table.vendorcode'),
       dataIndex: 'VendID',
       key: 'VendID',
@@ -153,6 +148,7 @@ export const Table = (props) => {
       title: t('table.vendorname'),
       dataIndex: 'VendName',
       key: 'VendName',
+      width: '200px',
       ...getColumnSearchProps('VendName'),
       // sorter: (a, b) => a.VendName.length - b.VendName.length,
       // sortDirections: ['descend', 'ascend'],
@@ -199,11 +195,11 @@ export const Table = (props) => {
     },   
     {
       title:  t('table.bank'),
-      dataIndex: 'Bank',
-      key: 'Bank',
+      dataIndex: 'Bank1',
+      key: 'Bank1',
       // align: 'right',
 
-      ...getColumnSearchProps('Bank'),
+      ...getColumnSearchProps('Bank1'),
       // sorter: (a, b) => a.LicenseAmt.length - b.LicenseAmt.length,
       // sortDirections: ['descend', 'ascend'],
       // accessor: 'WebPassword'
@@ -211,13 +207,10 @@ export const Table = (props) => {
     },
     {
       title: t('table.bankacct'),
-      dataIndex: 'BankAcct',
-      key: 'BankAcct',
+      dataIndex: 'Bank2',
+      key: 'Bank2',
       align: 'center',
-      ...getColumnSearchProps('BankAcct'),
-      // sorter: (a, b) => a.WebServiceURL.length - b.WebServiceURL.length,
-      // sortDirections: ['descend', 'ascend'],
-      // accessor: 'WebPassword'
+      ...getColumnSearchProps('Bank2'),
     }, 
     {
       title: t('table.address'),
@@ -252,8 +245,6 @@ export const Table = (props) => {
       ],
       filteredValue: filteredInfo.UseLicenseDate || null,
       onFilter: (value, record) => record.UseLicenseDate.includes(value),
-      // sorter: (a, b) => a.name.length - b.name.length,
-      // sortOrder: sortedInfo.columnKey === 'name' ? sortedInfo.order : null,
       ellipsis: true,
     },  
      {
@@ -262,34 +253,20 @@ export const Table = (props) => {
       key: 'LicenseExpireDate',
       align: 'center',
       ...getColumnSearchProps('LicenseExpireDate'),
-      // sorter: (a, b) => new Date(a.CreatedDate) - new Date( b.CreatedDate),
-      // sortDirections: ['descend', 'ascend'],
-      // accessor: 'LicenseExpireDate'
-      // defaultSortOrder: "descend"
 
     },
-    // {
-    //   title: t('Үүсгэсэн огноо'),
-    //   dataIndex: 'CreatedDate',
-    //   key: 'CreatedDate',
-    //   align: 'center',
-    //   ...getColumnSearchProps('CreatedDate'),
-    //   sorter: (a, b) => new Date(a.CreatedDate) - new Date( b.CreatedDate),
-    //   sortDirections: ['descend', 'ascend'],
-    //   accessor: 'CreatedDate',
-    //   // width: 0,
-    //   defaultSortOrder: "descend"
-    // },
    
   ];
 
-  return <AntTable columns={columns} dataSource={data}  onChange={handleChange}
+  return <AntTable classname='table1' columns={columns } dataSource={data}  onChange={handleChange}
   onRow={(record, rowIndex) => {
     return {
+      
       onDoubleClick: event => {
         setVisible(true)
         setSelected(record);
         console.log(record)
+        
       }, 
     };
   }}   />;

@@ -17,20 +17,9 @@
   margin: 10px 20px ;
 }
 
-/* .ss{
-   height: 40px;
+#ss{
     background-color: var(--hover2-color);
-    border: none;
-    border-style: solid;
-    border-color: #d9d9d9;
-    border-radius: var(--radius-table);
-    border-width: 1px;
-    width: 100%;
-    margin: 5px 0  ;
-    color: var(--text-color);
-    font-size: 15px;
-    padding: 0 10px;
-} */
+}
 
 .ant-modal {
   box-sizing: border-box;
@@ -260,9 +249,7 @@
   #bank{
     width: 98%;
   }
-  #bankacct{
-    width: 98%;
-  }
+  
   .card_input_label1 {
     color: var(--text-color2);
     font-size: 13px;

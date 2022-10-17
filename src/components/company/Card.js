@@ -157,50 +157,43 @@ const handleEnter = e => {
   }
 
   return (
-    <Modal title={null} footer={null} closable={false} visible={visible} 
-     width={700} >
-      
+  <Modal title={null} footer={null} closable={false} visible={visible} width={700} >
       <DynamicAIIcon name='AiFillCloseCircle' className='close_icon' onClick={() => onClose(false)} />
       <p className='card_title'>{t('new_vendor')}</p>
       {error ? <Error1 error={error} /> : null}
-     <form className= 'card_container'
-      onSubmit={handleSubmit}
-      >
+     
+     <form className= 'card_container' onSubmit={handleSubmit} >
         <div className='cart'>
-        <div className='card1'>
-      <CardInput label={('table.company')} id="ss" disabled={true}  value={CpnyID} setValue={setCpnyID} handleEnter={handleEnter} />
-      <CardInput1 label={('table.company_name')} id="ss" value={CpnyName} disabled={true} setValue={setCpnyName} handleEnter={handleEnter} />
-      </div>
-      <div className='card2'>
-      <Cardlength label={('table.vendorcode')} value={VendID} setValue={setVendID} handleEnter={handleEnter}/>
-      <CardInput1 label={('table.vendorname')} value={VendName} setValue={setVendName} handleEnter={handleEnter} />
-      </div>
-      <div className='card1'>
-      <CardInput label={('user_email')} value={VendUserID} setValue={setVendUserID} handleEnter={handleEnter}/>
-      <CardInput1 label={('user_password')} className='card_input2' value={VendPass} setValue={setVendPass} handleEnter={handleEnter} isPassword={true}/>
-      </div>
-      <div className='card5'>
-      <CardInput label={('table.phone')} value={Phone} setValue={changePhone} handleEnter={handleEnter}  />
-      <CardInput1 label={('login.email')}  value={Email} setValue={setEmail} handleEnter={handleEnter}  /></div>
-      <div className='card'>
-      <CardInput label={('table.bank')} value={Bank1} setValue={setBank1} handleEnter={handleEnter} id='bank' />
-      <CardInput label={('table.bankacct')}value={Bank2} setValue={setBank2}handleEnter={handleEnter} id='bank'  />
-      </div>
-      <div className='card'>
-      <CardNote label={('table.address')} value={Address} setValue={setAddress} handleEnter={handleEnter}/></div>
-      <div className='card3'>
-      <Check label={('table.uselicensedate')}  value={UseLicenseDate} setValue={setUseLicenseDate}/>
-      {/* <input type="checkbox" name='true' ref={ref}></input>
-      <input type="checkbox"></input> */}
-       {!disabled && <CardDate label={('table.licenseExpireDate')} value={LicenseExpireDate} setValue={setLicenseExpireDate} disabled={(UseLicenseDate === 'Y') ? false : true} 
-      />}
-      {/* <Check label={('table.uselicensedate')}  value={UseLicenseDate} setValue={setUseLicenseDate}/> */}
-      </div>
+          <div className='card1'>
+            <CardInput label={('table.company')} id="ss" disabled={true}  value={CpnyID} setValue={setCpnyID} handleEnter={handleEnter} />
+            <CardInput1 label={('table.company_name')} id="ss" value={CpnyName} disabled={true} setValue={setCpnyName} handleEnter={handleEnter} />
+          </div>
+          <div className='card1'>
+            <Cardlength label={('table.vendorcode')} value={VendID} setValue={setVendID} handleEnter={handleEnter}/>
+            <CardInput1 label={('table.vendorname')} value={VendName} setValue={setVendName} handleEnter={handleEnter} />
+          </div>
+          <div className='card1'>
+            <CardInput label={('user_email')} value={VendUserID} setValue={setVendUserID} handleEnter={handleEnter}/>
+            <CardInput1 label={('user_password')} className='card_input2' value={VendPass} setValue={setVendPass} handleEnter={handleEnter} isPassword={true}/>
+          </div>
+          <div className='card1'>
+            <CardInput label={('table.phone')} value={Phone} setValue={changePhone} handleEnter={handleEnter}  />
+            <CardInput1 label={('login.email')}  value={Email} setValue={setEmail} handleEnter={handleEnter}  /></div>
+          <div className='card'>
+            <CardInput label={('table.bank')} value={Bank1} setValue={setBank1} handleEnter={handleEnter} id='bank' />
+            <CardInput label={('table.bankacct')}value={Bank2} setValue={setBank2}handleEnter={handleEnter} id='bank'  />
+          </div>
+          <div className='card'>
+            <CardNote label={('table.address')} value={Address} setValue={setAddress} handleEnter={handleEnter}/></div>
+          <div className='card1'>
+            <Check label={('table.uselicensedate')}  value={UseLicenseDate} setValue={setUseLicenseDate}/>
+            {!disabled && <CardDate label={('table.licenseExpireDate')} value={LicenseExpireDate} setValue={setLicenseExpireDate} disabled={(UseLicenseDate === 'Y') ? false : true} />}
+          </div>
       </div>
       {!disabled && <button type='submit' disabled={loader} className='login_form_btn'>
         {loader ? <Loader className='login_loader' color='#fff' /> :t('save') }
       </button>}
     </form>
-    </Modal>
+  </Modal>
   )
 }

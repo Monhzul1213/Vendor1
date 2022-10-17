@@ -59,10 +59,6 @@ export const loginSlice = createSlice({
     setVendID: (state, action) => {
       state.vendID = action.payload;
     },
-    // setOrder: (state, action) => {
-    //   console.log(action.payload);
-    //   state.order = action.payload;
-    // },
   }
 });
 

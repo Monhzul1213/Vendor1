@@ -4,10 +4,10 @@ import React, { useRef, useState, useEffect } from 'react';
 import 'antd/dist/antd.css';
 // import './index.css';
 import { SearchOutlined } from '@ant-design/icons';
-import { Button, Input, Space, Table as AntTable } from 'antd';
+import { Button, Input, Space, Table as AntTable, Pagination } from 'antd';
 import { useTranslation } from 'react-i18next';
 import '../../css/table.css'
-import { Pagination } from '../all';
+// import { Pagination } from '../all';
 
 import Highlighter from 'react-highlight-words';
 
@@ -118,7 +118,18 @@ export const Table = (props) => {
         text
       ),
   });
-  const columns = [
+
+const prop = {
+    // bordered: true,
+    // loading: false,
+    // pagination: { position: "bottom" },
+    // size: "200px",
+    // title: undefined,
+    // showHeader: true,
+    // rowSelection: {},
+    // scroll: { y: 200 }
+  };
+const columns = [
     {
       title: t('table.company'), 
       // accessor: 'CpnyID' ,
@@ -258,16 +269,18 @@ export const Table = (props) => {
    
   ];
 
-  return <AntTable classname='table1' columns={columns } dataSource={data}  onChange={handleChange}
+  return <>
+  <AntTable {...prop}  columns={columns } dataSource={data}  onChange={handleChange}
+    pagination={{ defaultPageSize: 50, showSizeChanger: true, pageSizeOptions: ['50', '100', '150']}}
+    // pagination1={false}
   onRow={(record, rowIndex) => {
     return {
-      
-      onDoubleClick: event => {
+        onDoubleClick: event => {
         setVisible(true)
         setSelected(record);
-        console.log(record)
-        
-      }, 
-    };
-  }}   />;
+        console.log(rowIndex )
+      }} 
+  } }  />
+  {/* <Pagination className='pagination'/> */}
+  </>
 };

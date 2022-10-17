@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useSearchParams } from 'react-router-dom';
 import emailjs from '@emailjs/browser';
-
 import '../css/login1.css';
 import { getWebsByEmail, setWebToken } from '../firebase';
 import  logo1_white  from '../assets/logo1_white.png';
 import { DynamicAIIcon, Error, Language, Loader } from '../components/all';
-import { Input, ModalCompany } from '../components/login';
+import { Input } from '../components/login';
 import { config1 } from '../helpers/login.config';
 
 export function PasswordForgot(){
@@ -20,7 +19,7 @@ export function PasswordForgot(){
   const [visible, setVisible] = useState(false);
   const [searchParams] = useSearchParams();
 
-  useEffect(() => {
+useEffect(() => {
     let email = searchParams?.get('email');
     setEmail(email ?? '');
     return () => {};

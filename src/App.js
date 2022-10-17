@@ -36,7 +36,6 @@ export function App() {
     // return () => window.removeEventListener('storage', () => console.log('storage remove'))
   }, []);
   
-//  if(!user) return (<Login />);
  if(!user) return (
   <BrowserRouter>
     <Routes>

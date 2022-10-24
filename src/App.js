@@ -18,6 +18,7 @@ export function App() {
   useEffect(() => {
     if(!window.sessionStorage.length){
       window.localStorage.setItem('getSessionStorage', Date.now());
+      console.log(window.localStorage)
     } else {
       dispatch(setIsLoggedIn(true));
     }
@@ -30,6 +31,7 @@ export function App() {
         dispatch(setIsLoggedIn(true));
       } else if(event.key == 'CREDENTIALS_FLUSH'){
         dispatch(setIsLoggedIn(false));
+        console.log('storage')
         window.sessionStorage.removeItem('CREDENTIALS_TOKEN');
       }
     });
@@ -38,11 +40,13 @@ export function App() {
   
  if(!user) return (
   <BrowserRouter>
+    <Suspense fallback={<Loading />}>
     <Routes>
       <Route path='*' element={<Login />} />
       <Route path='/forgot_password' element={<PasswordForgot />} />
       <Route path='/reset_password' element={<PasswordReset />} />
     </Routes>
+    </Suspense>
   </BrowserRouter>
 );
   return (

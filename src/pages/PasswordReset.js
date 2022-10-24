@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 
-import '../css/login1.css';
-import  logo1_white  from '../assets/logo1_white.png';
+import '../css/login.css';
+import logo1_white from '../assets/logo1_white.png';
 import { checkWebToken, updateWebPassword } from '../firebase';
 import { DynamicAIIcon, Error, Language, Loader } from '../components/all';
 import { Input } from '../components/login';

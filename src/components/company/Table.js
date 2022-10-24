@@ -227,10 +227,7 @@ const columns = [
       title: t('table.address'),
       dataIndex: 'Address',
       key: 'Address',
-      ...getColumnSearchProps('Address'),
-      sorter: (a, b) => a.Address.length - b.Address.length,
-      sortDirections: ['descend', 'ascend'],
-      // accessor: 'WebPassword'
+      ...getColumnSearchProps('Address')
     },  
     
    
@@ -239,10 +236,6 @@ const columns = [
       dataIndex: 'UseLicenseDate',
       key: 'UseLicenseDate',
       align: 'center',
-      // ...getColumnSearchProps('UseLicenseDate'),
-      // sorter: (a, b) => a.TxnType.length - b.TxnType.length,
-      // sortDirections: ['descend', 'ascend'],
-      // accessor: 'WebPassword'
       filters: [
         {
           text: t('true'),
@@ -266,11 +259,23 @@ const columns = [
       ...getColumnSearchProps('LicenseExpireDate'),
 
     },
+    {
+      title: t('Үүсгэсэн огноо'),
+      dataIndex: 'CreatedDate',
+      key: 'CreatedDate',
+      align: 'center',
+      ...getColumnSearchProps('CreatedDate'),
+      sorter: (a, b) => new Date(a.CreatedDate) - new Date( b.CreatedDate),
+      sortDirections: ['descend', 'ascend'],
+      accessor: 'CreatedDate',
+      defaultSortOrder: 'descend'
+
+    },
    
   ];
 
   return <>
-  <AntTable {...prop}  columns={columns } dataSource={data}  onChange={handleChange}
+  <AntTable {...prop}  columns={columns } dataSource={data}  onChange={handleChange} 
     pagination={{ defaultPageSize: 50, showSizeChanger: true, pageSizeOptions: ['50', '100', '150']}}
     // pagination1={false}
   onRow={(record, rowIndex) => {
@@ -280,7 +285,8 @@ const columns = [
         setSelected(record);
         console.log(rowIndex )
       }} 
-  } }  />
+  } } 
+   />
   {/* <Pagination className='pagination'/> */}
   </>
 };

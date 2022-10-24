@@ -9,7 +9,7 @@ export function Error(props){
 
   return (
     <div className={fromForm ? 'error_back_no_margin' : 'error_back'}>
-      <DynamicAIIcon name='AiOutlineInfoCircle' className='error_icon' id={id + 'a'} />
+      <DynamicAIIcon name='AiOutlineInfoCircle' id={id+'b'} className='error_icon' />
       <span className='error_text' id={id}>{label ? (t(label) + t('errors.' + error)) : error}</span>
       {/* <span className='error_text'>{label ? t(label) : ''}{t('errors.' + error)}</span> */}
     </div>

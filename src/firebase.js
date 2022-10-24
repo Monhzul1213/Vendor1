@@ -4,19 +4,7 @@ import { getStorage, ref, getDownloadURL } from "firebase/storage";
 // import { , , addDoc, limit, query, where, getDocs, getDoc, doc, updateDoc } from "firebase/firestore";
 import { config1, randomtoken, config } from './helpers'
 import {
-  getFirestore,
-  collection, 
-  getDocs,
-  addDoc,
-  deleteDoc,
-  serverTimestamp,
-  doc,
-  orderBy,
-  limit,
-  onSnapshot,
-  getDoc,updateDoc,
-  query, setDoc, where
-} from 'firebase/firestore';
+  getFirestore,  collection,  getDocs,  addDoc,  deleteDoc,  serverTimestamp, doc, orderBy,  limit, onSnapshot,  getDoc,  updateDoc,  query, setDoc, where } from 'firebase/firestore';
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -30,34 +18,14 @@ import {
 const app = initializeApp(config?.firebaseConfig);
 const db = getFirestore(app);
 export const auth = getAuth(app);
-export {
-  db,
-  collection,
-  getDocs,
-  addDoc,
-  deleteDoc,
-  serverTimestamp,
-  doc,
-  orderBy,
-  limit,
-  onSnapshot,
-  query,
-  createUserWithEmailAndPassword,
-  updateProfile,
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-  signOut,
-  setDoc,
-  getAuth,
-  updateDoc
-};
+export { db, collection, getDocs, addDoc, deleteDoc, serverTimestamp, doc, orderBy, limit, onSnapshot, query ,  createUserWithEmailAndPassword, updateProfile, onAuthStateChanged, signInWithEmailAndPassword,
+signOut, setDoc, getAuth, updateDoc }
 
 export const getUser = async (email, password) => {
   // console.log(email.includes(email.toLowerCase()))
   try {
     const userRef = collection(db, "smWebUsers");
     const q1 = query(userRef, where("WebUserID", "==", email.toLowerCase()), limit(1));
-    // const q2 = query(userRef, where("WebUserID", "==", email), limit(1));
     const query1 = await getDocs(q1);
       let webUser = null;
       query1.forEach(doc => webUser = doc.data());
@@ -66,15 +34,13 @@ export const getUser = async (email, password) => {
     } else if(webUser?.WebPassword !== password){
       return Promise.resolve({ error: 'Хэрэглэгчийн нууц үг буруу байна.' })
     } 
-      // console.log(webUser)
-      // return Promise.resolve({webUser})
       else return Promise.resolve({ error: false, webUser });
-    
   } catch (err) {
     console.error(err);
     return Promise.resolve({ error: err.code });
   }
 }
+
 export const logout = () => {
   signOut(auth);
 };
@@ -84,7 +50,7 @@ export const getWebsByEmail = async email => {
     const userRef = collection(db, "smWebUsers");
     const q1 = query(userRef, where("WebUserID", "==", email?.toLowerCase()));
     const query1 = await getDocs(q1);
-    const users = [];
+    const users = []
     query1.forEach(doc => {
       let user = doc.data();
       if(user) user.id = doc.id;

@@ -5,9 +5,9 @@ import emailjs from '@emailjs/browser';
 import '../css/login1.css';
 import { getWebsByEmail, setWebToken } from '../firebase';
 import  logo1_white  from '../assets/logo1_white.png';
-import { DynamicAIIcon, Error, Language, Loader } from '../components/all';
+import { DynamicAIIcon, Error, Language, Loader, Error2 } from '../components/all';
 import { Input } from '../components/login';
-import { config1 } from '../helpers/login.config';
+import { config1, config } from '../helpers/login.config';
 
 export function PasswordForgot(){
   const { t } = useTranslation();
@@ -25,29 +25,29 @@ useEffect(() => {
     return () => {};
   }, []);
 
-  const showError = error => {
+const showError = error => {
     setError(error);
     setLoading(false);
   }
 
-  const showList = users => {
+const showList = users => {
     setVisible(true);
     setList(users);
     setLoading(false)
   }
 
-  const sendEmail = async id => {
+const sendEmail = async id => {
     setLoading(true);
     const response = await setWebToken(id);
     console.log(response);
     if(response?.error) showError(response?.error);
     else {
-      const link = config1?.domain + '/reset_password?id=' + id + '&token=' + response?.ResetToken;
-      console.log(config1?.domain)
+      const link = config?.domain + '/reset_password?id=' + id + '&token=' + response?.ResetToken;
+      console.log("555555555555", config?.domain)
       const templateParams = { to: email?.trim(), link };
       emailjs.send('service_k7osau8','template_6qxxzw8', templateParams, 'q2YX3XN0cT2C8g_Ni')
         .then((response) => {
-          console.log('SUCCESS!', response.status,templateParams);
+          console.log('SUCCESS!', response.status, templateParams);
           setSent(true);
           setLoading(false);
         }, (err) => {
@@ -59,7 +59,7 @@ useEffect(() => {
     }
   }
   
-  const handleSubmit = async e => {
+const handleSubmit = async e => {
     e.preventDefault();
     setLoading(true);
     setSent(false);
@@ -70,14 +70,7 @@ useEffect(() => {
     else sendEmail(response?.id);
   }
 
-  const onClose = async user => {
-    setVisible(false);
-    if(user) sendEmail(user?.id);
-  }
-
-  const emailProps = { label: 'login.email', value: email, setValue: setEmail, setError };
-  const listProps = { visible, list, onClose };
-
+const emailProps = { label: 'login.email', value: email, setValue: setEmail, setError };
   return (
     <div className='login_back_3'>
       <img src={logo1_white} alt='Logo' className='login_form_logo3' />
@@ -87,7 +80,7 @@ useEffect(() => {
       <form onSubmit={handleSubmit} className='login_form_3'>
         <p className='login_title_3'>{t('reset')}</p>
         <Input {...emailProps}  id='username'/>
-        {error ? <Error error={error} id='login_error_3' /> : null}
+        {error ? <Error2 error={error} id='login_error_3' /> : null}
         <button type='submit' className='login_form_btn' id='login_form_btn3'>
           {loading ? <Loader className='login_loader' color='#fff' /> : t('send')}
         </button>
@@ -96,7 +89,7 @@ useEffect(() => {
           <p className='sent_text'>{t('sent')}</p>
         </div>}
         <div className='rback_row'>
-          <Link to='/' className='rback_link'>
+          <Link to='/admin' className='rback_link'>
             <DynamicAIIcon className='rback_icon' name='AiOutlineArrowLeft' />
             <span className='rback_text'>{t('back')}</span>
           </Link>

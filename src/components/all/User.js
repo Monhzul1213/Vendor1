@@ -25,6 +25,7 @@ export function User(){
 
   const onPressLanguage = () => {
     i18n.changeLanguage(i18n?.language === 'mongol' ? 'english' : 'mongol');
+    console.log(login)
   }
 
   const menu = (

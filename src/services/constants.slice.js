@@ -50,6 +50,7 @@ export const constantsSlice = createSlice({
     },
     setIsLoggedIn: (state, action) => {
       state.loggedIn = action.payload;
+      console.log(state.loggedIn)
     },
     clearConstants: (state, action) => {
       state.orders = [];

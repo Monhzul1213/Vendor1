@@ -106,7 +106,8 @@
 .ant-table-thead > tr > th {
   position: relative;
   color: rgba(0, 0, 0, 0.85);
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 13px;
   text-align: center;
   background: #fafafa;
   border-bottom: 1px solid #f0f0f0;

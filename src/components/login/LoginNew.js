@@ -28,6 +28,8 @@ export default function LoginNew(){
   const toRemember = useSelector(state => state.login.toRemember);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  
  useEffect(() => {
     if(user?.WebUserID) setEmail(user?.WebUserID);
     if(toRemember && user?.WebPassword) setPassword(user?.WebPassword);
@@ -60,19 +62,16 @@ const handleEnter = e => {
     setError(null);
     const res = await getUser(email?.toLowerCase()
     , password?.trim());
-    console.log(email?.trim().toLowerCase()) 
+    console.log(res.webUser) 
     if(res?.error){
       setError(res?.error);
       setLoading(false);
     } else {
       dispatch(login({user: res.webUser, toRemember: checked}))
-
-      // console.log(res.webUser)
-      
     }
   }
   const onForgot = () => {
-    navigate({ pathname: "forgot_password", search: createSearchParams({ email }).toString()});
+    navigate({ pathname: "/forgot_password", search: createSearchParams({ email }).toString()});
   }
 const nameProps = { label: 'login.username', value: email, setValue: setEmail,  setError, handleEnter, };
 const passProps = { label: 'login.password', value: password, setValue: setPassword, setError, isPassword: true };

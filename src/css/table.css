@@ -53,7 +53,7 @@
   font-size: 14px;
   background: #fff;
   border-radius: 2px;
-  overflow-x: scroll;
+  /* overflow: scroll; */
 }
 .ant-table-pagination-right {
   justify-content: flex-start;
@@ -117,14 +117,17 @@
 }
 .ant-table-wrapper {
   clear: both;
-  width: 100%;
-}
-.ant-table table {
-  /* max-width: 100%; */
-  width: auto;
-  height: 10px;
+  /* width: 100%; */
 
 }
+.ant-table table{
+  /* width: auto; */
+}
+/* .ant-table-thead{
+  width: fit-content;
+  display: flex;
+  flex: 1;
+} */
 .empty_back {
   display: flex;
   flex-flow: column;
@@ -156,8 +159,8 @@
 
 .table_back {
   background-color: var(--root-color);
-  width: 100%;
-  min-width: 600px;
+  /* width: 100%; */
+  /* min-width: 600px; */
   flex: 1;
 }
 
@@ -234,7 +237,7 @@
   position: absolute;
   top: 50%;
   right: 0;
-  width: 0  ;
+  /* width: 0  ; */
   height: 0em;
   background-color: rgba(0, 0, 0, 0.06);
   transform: translateY(-50%);

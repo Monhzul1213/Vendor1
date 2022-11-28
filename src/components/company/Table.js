@@ -6,6 +6,8 @@ import 'antd/dist/antd.css';
 import { SearchOutlined } from '@ant-design/icons';
 import { Button, Input, Space, Table as AntTable, Pagination } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { useDimensions } from '../../helpers/useDimensions'
+
 import '../../css/table.css'
 // import { Pagination } from '../all';
 
@@ -17,6 +19,7 @@ export const Table = (props) => {
   const [searchedColumn, setSearchedColumn] = useState('');
   const [filteredInfo, setFilteredInfo] = useState({});
   const searchInput = useRef(null);
+  const { height } = useDimensions();
   const { t } = useTranslation();
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -119,16 +122,7 @@ export const Table = (props) => {
       ),
   });
 
-const prop = {
-    // bordered: true,
-    // loading: false,
-    // pagination: { position: "bottom" },
-    // size: "200px",
-    // title: undefined,
-    // showHeader: true,
-    // rowSelection: {},
-    // scroll: { y: 200 }
-  };
+
 const columns = [
     {
       title: t('table.company'), 
@@ -136,6 +130,7 @@ const columns = [
       dataIndex: 'CpnyID',
       key: 'CpnyID',
       ...getColumnSearchProps('CpnyID'),
+      width: 110
       
     },
     {
@@ -144,6 +139,8 @@ const columns = [
       dataIndex: 'CpnyName',
       key: 'CpnyName',
       ...getColumnSearchProps('CpnyName'),
+      width: 120
+
       
     },
     {
@@ -151,38 +148,31 @@ const columns = [
       dataIndex: 'VendID',
       key: 'VendID',
       align: 'center',
-      // width: '20%',
       ...getColumnSearchProps('VendID'),
-      // accessor: 'WebUserID'
+      width: 150
+
     },
     {
       title: t('table.vendorname'),
       dataIndex: 'VendName',
       key: 'VendName',
-      width: '200px',
       ...getColumnSearchProps('VendName'),
-      // sorter: (a, b) => a.VendName.length - b.VendName.length,
-      // sortDirections: ['descend', 'ascend'],
-      // accessor: 'VendName'
+      width: 150
+
     },
     {
       title: t('user_email'),
       dataIndex: 'VendUserID',
       key: 'VendUserID',
       ...getColumnSearchProps('VendUserID'),
-      // sorter: (a, b) => a.Email.length - b.Email.length,
-      // sortDirections: ['descend', 'ascend'],
-      // accessor: 'WebPassword'
-      
+      width: 210
     },
     {
       title: t('user_password'),
       dataIndex: 'VendPass',
       key: 'VendPass',
       ...getColumnSearchProps('VendPass'),
-      // sorter: (a, b) => a.Phone.length - b.Phone  .length,
-      // sortDirections: ['descend', 'ascend'],
-      // accessor: 'WebPassword'
+      width: 130
     },  
     {
       title: t('table.phone'),
@@ -190,30 +180,21 @@ const columns = [
       key: 'Phone',
       align: 'center',
       ...getColumnSearchProps('Phone'),
-      // sorter: (a, b) => a.Phone.length - b.Phone  .length,
-      // sortDirections: ['descend', 'ascend'],
-      // accessor: 'WebPassword'
+      width: 130
     }, 
    {
       title: t('login.email'),
       dataIndex: 'Email',
       key: 'Email',
-      // align: 'center',
+      width: 210,
       ...getColumnSearchProps('Email'),
-      // sorter: (a, b) => a.VendorCount.length - b.VendorCount.length,
-      // sortDirections: ['descend', 'ascend'],
-      // accessor: 'WebPassword'
     },   
     {
       title:  t('table.bank'),
       dataIndex: 'Bank1',
       key: 'Bank1',
-      // align: 'right',
-
       ...getColumnSearchProps('Bank1'),
-      // sorter: (a, b) => a.LicenseAmt.length - b.LicenseAmt.length,
-      // sortDirections: ['descend', 'ascend'],
-      // accessor: 'WebPassword'
+      width: 130
       
     },
     {
@@ -222,10 +203,12 @@ const columns = [
       key: 'Bank2',
       align: 'center',
       ...getColumnSearchProps('Bank2'),
+      width: 130
     }, 
     {
       title: t('table.address'),
       dataIndex: 'Address',
+      width: 180,
       key: 'Address',
       ...getColumnSearchProps('Address')
     },  
@@ -235,6 +218,7 @@ const columns = [
       title: t('table.uselicensedate'),
       dataIndex: 'UseLicenseDate',
       key: 'UseLicenseDate',
+      width: 150,
       align: 'center',
       filters: [
         {
@@ -257,27 +241,28 @@ const columns = [
       key: 'LicenseExpireDate',
       align: 'center',
       ...getColumnSearchProps('LicenseExpireDate'),
-
+      width: 100,
     },
     {
       title: t('Үүсгэсэн огноо'),
       dataIndex: 'CreatedDate',
       key: 'CreatedDate',
       align: 'center',
-      ...getColumnSearchProps('CreatedDate'),
+      // ...getColumnSearchProps('CreatedDate'),
       sorter: (a, b) => new Date(a.CreatedDate) - new Date( b.CreatedDate),
       sortDirections: ['descend', 'ascend'],
       accessor: 'CreatedDate',
-      defaultSortOrder: 'descend'
-
+      defaultSortOrder: 'descend',
+      width: 120
     },
    
   ]; 
 
   return <>
-  <AntTable {...prop}  columns={columns } dataSource={data}  onChange={handleChange} 
-    pagination={{ defaultPageSize: 50, showSizeChanger: true, pageSizeOptions: ['50', '100', '150']}}
-    // pagination1={false}
+  <AntTable columns={columns } dataSource={data}  onChange={handleChange}
+    pagination={{ defaultPageSize: 50, showSizeChanger: true, pageSizeOptions: ['50', '100', '150']}}  
+    scroll={{ x: 'max-content', y: height - 260 , scrollToFirstRowOnChange: false
+    }}
   onRow={(record, rowIndex) => {
     return {
         onDoubleClick: event => {

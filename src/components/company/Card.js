@@ -60,7 +60,7 @@ async function handleSubmit(e){
     let isLicenseValid = UseLicenseDate === 'N' ? true : LicenseExpireDate?.value ? true : false;
     console.log('isLicenseValid', isLicenseValid)
     
-  if( CpnyName?.value && VendUserID?.value && isValidEmail(VendUserID?.value) && VendPass &&VendID?.value &&VendName?.value && isLicenseValid    &&Phone?.value && !isNaN(Phone?.value) && Address?.value && Email?.value && isValidEmail(Email?.value) && Bank1?.value && Bank2?.value){
+  if( CpnyName?.value && VendUserID?.value && isValidEmail(VendUserID?.value) && VendPass &&VendID?.value &&VendName?.value && isLicenseValid    &&Phone?.value && !isNaN(Phone?.value) && Address?.value && Email?.value && isValidEmail(Email?.value) && Bank1?.value ){
 
     let obj = {CpnyID: CpnyID?.value,
       CpnyName: CpnyName?.value, 
@@ -128,7 +128,7 @@ async function handleSubmit(e){
       if(UseLicenseDate === 'Y' && !LicenseExpireDate?.value) setLicenseExpireDate({value: '', error: 'is_empty'});
       if(UseLicenseDate === 'N') setLicenseExpireDate({value:''});
       if(!Bank1?.value) setBank1({value: '', error: 'is_empty'});
-      if(!Bank2?.value) setBank2({value: '', error: 'is_empty'});
+      // if(!Bank2?.value) setBank2({value: '', error: 'is_empty'});
       if(!Phone?.value) setPhone({value: '', error: 'is_empty'});
       if(!Address?.value) setAddress({value: '', error: 'is_empty'});
       if(!Email?.value) setEmail({value: '', error: 'is_empty'});

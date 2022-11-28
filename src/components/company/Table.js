@@ -272,7 +272,7 @@ const columns = [
 
     },
    
-  ];
+  ]; 
 
   return <>
   <AntTable {...prop}  columns={columns } dataSource={data}  onChange={handleChange} 

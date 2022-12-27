@@ -21,6 +21,7 @@ export const Table = (props) => {
   const searchInput = useRef(null);
   const { height } = useDimensions();
   const { t } = useTranslation();
+  const [sort, setSort] = useState('ascend');
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
@@ -157,8 +158,8 @@ const columns = [
       dataIndex: 'VendName',
       key: 'VendName',
       ...getColumnSearchProps('VendName'),
-      width: 150
-
+      width: 150,
+      // }),
     },
     {
       title: t('user_email'),
@@ -203,7 +204,7 @@ const columns = [
       key: 'Bank2',
       align: 'center',
       ...getColumnSearchProps('Bank2'),
-      width: 130
+      width: 130,
     }, 
     {
       title: t('table.address'),
@@ -242,16 +243,18 @@ const columns = [
       align: 'center',
       ...getColumnSearchProps('LicenseExpireDate'),
       width: 100,
+      sorter: (a, b) => new Date(a.LicenseExpireDate) - new Date( b.LicenseExpireDate),
+      // sortDirections: ['descend', 'ascend'],
+      // defaultSortOrder: 'descend',
     },
     {
-      title: t('Үүсгэсэн огноо'),
+      title: ('Үүсгэсэн огноо'),
       dataIndex: 'CreatedDate',
       key: 'CreatedDate',
       align: 'center',
       // ...getColumnSearchProps('CreatedDate'),
       sorter: (a, b) => new Date(a.CreatedDate) - new Date( b.CreatedDate),
       sortDirections: ['descend', 'ascend'],
-      accessor: 'CreatedDate',
       defaultSortOrder: 'descend',
       width: 120
     },
@@ -259,7 +262,8 @@ const columns = [
   ]; 
 
   return <>
-  <AntTable columns={columns } dataSource={data}  onChange={handleChange}
+  <AntTable columns={columns } dataSource={data}  onChange={handleChange} 
+  //sort= {{ id: 'CreatedDate', desc: true }}
     pagination={{ defaultPageSize: 50, showSizeChanger: true, pageSizeOptions: ['50', '100', '150']}}  
     scroll={{ x: 'max-content', y: height - 260 , scrollToFirstRowOnChange: false
     }}

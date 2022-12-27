@@ -60,7 +60,7 @@ async function handleSubmit(e){
     let isLicenseValid = UseLicenseDate === 'N' ? true : LicenseExpireDate?.value ? true : false;
     console.log('isLicenseValid', isLicenseValid)
     
-  if( CpnyName?.value && VendUserID?.value && isValidEmail(VendUserID?.value) && VendPass &&VendID?.value &&VendName?.value && isLicenseValid    &&Phone?.value && !isNaN(Phone?.value) && Address?.value && Email?.value && isValidEmail(Email?.value) && Bank1?.value ){
+  if( CpnyName?.value && VendUserID?.value && isValidEmail(VendUserID?.value) && VendPass &&VendID?.value &&VendName?.value && isLicenseValid    &&Phone?.value  && Address?.value && Email?.value && isValidEmail(Email?.value) && Bank1?.value ){
 
     let obj = {CpnyID: CpnyID?.value,
       CpnyName: CpnyName?.value, 
@@ -76,14 +76,13 @@ async function handleSubmit(e){
       IsFirst: IsFirst?.value, 
       Email:Email?.value,  
       LastUserName: VendName?.value,
-      CreatedDate: CreatedDate?.value,
-      LastUpdate:  moment().format('yyyy.MM.DD, HH:mm:ss '),    
+      CreatedDate:  CreatedDate?.value,
+      LastUpdate:  moment().format('yyyy.MM.DD'),    
       LicenseExpireDate: LicenseExpireDate?.value,
       } 
     if(selected){
         const userRef= doc(db, 'smVendorUsers', selected.id)
           if(LicenseExpireDate?.value === null){
-            console.log('0000000')
             setDoc(userRef, obj)
           }
           else {
@@ -106,7 +105,7 @@ async function handleSubmit(e){
           setError("Хэрэглэгч бүртгэлтэй байна")
         }  
         else {
-          obj.CreatedDate = moment().format('yyyy.MM.DD, HH:mm:ss')
+          obj.CreatedDate = moment().format('yyyy.MM.DD  ')
           if(LicenseExpireDate?.value === null){
             addDoc(userCollRef, obj)
           }
@@ -134,7 +133,7 @@ async function handleSubmit(e){
       if(!Email?.value) setEmail({value: '', error: 'is_empty'});
        if(!isValidEmail(VendUserID?.value)) setVendUserID({...VendUserID, ...{error: 'is_invalid'}});
        if(!isValidEmail(Email?.value)) setEmail({...Email, ...{error: 'is_invalid'}});
-       else if(isNaN(Phone?.value)) setPhone({...Phone, ...{error: 'must_number'}});
+      //  else if(isNaN(Phone?.value)) setPhone({...Phone, ...{error: 'must_number'}});
     }
     setLoader(false)
 }

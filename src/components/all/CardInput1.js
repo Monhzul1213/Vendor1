@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Error1 } from './Error1';
 
 export function CardInput1(props){
-  const { label, value, setValue, handleEnter, disabled, id, vLabel } = props;
+  const { label, value, setValue, handleEnter, disabled, id,  } = props;
   const { t } = useTranslation();
 
   const onChange = e => setValue({ value: e?.target?.value, error: null });

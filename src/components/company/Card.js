@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef} from 'react';
+import React, { useEffect, useState, } from 'react';
 import { Modal, message } from 'antd';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
@@ -58,9 +58,7 @@ async function handleSubmit(e){
     setError(null);
     
     let isLicenseValid = UseLicenseDate === 'N' ? true : LicenseExpireDate?.value ? true : false;
-    console.log('isLicenseValid', isLicenseValid)
-    
-  if( CpnyName?.value && VendUserID?.value && isValidEmail(VendUserID?.value) && VendPass &&VendID?.value &&VendName?.value && isLicenseValid    &&Phone?.value  && Address?.value && Email?.value && isValidEmail(Email?.value) && Bank1?.value ){
+  if( CpnyName?.value && VendUserID?.value && isValidEmail(VendUserID?.value) && VendPass &&VendID?.value &&VendName?.value && isLicenseValid    &&Phone?.value && !isNaN(Phone?.value) && Address?.value && Email?.value && isValidEmail(Email?.value) && Bank1?.value ){
 
     let obj = {CpnyID: CpnyID?.value,
       CpnyName: CpnyName?.value, 
@@ -77,7 +75,7 @@ async function handleSubmit(e){
       Email:Email?.value,  
       LastUserName: VendName?.value,
       CreatedDate:  CreatedDate?.value,
-      LastUpdate:  moment().format('yyyy.MM.DD'),    
+      LastUpdate:  moment().format('yyyy.MM.DD, HH:mm:ss'),    
       LicenseExpireDate: LicenseExpireDate?.value,
       } 
     if(selected){
@@ -96,7 +94,7 @@ async function handleSubmit(e){
         const userCollRef= collection(db, 'smVendorUsers')
         const q1 = query(userCollRef, where("VendUserID", "==", VendUserID?.value?.trim() ));
         const response = await getDocs(q1);
-        response.docs.map(doc => {
+        response.docs.forEach(doc => {
             let user = (doc.data());
             exists.push(user.CpnyID)
            })
@@ -105,7 +103,7 @@ async function handleSubmit(e){
           setError("Хэрэглэгч бүртгэлтэй байна")
         }  
         else {
-          obj.CreatedDate = moment().format('yyyy.MM.DD  ')
+          obj.CreatedDate = moment().format('yyyy.MM.DD, HH:mm:ss')
           if(LicenseExpireDate?.value === null){
             addDoc(userCollRef, obj)
           }
@@ -116,7 +114,7 @@ async function handleSubmit(e){
         onClose(true);
         message.success(t('request_success'))
         }
-      } 
+      }
   } 
     else {
       if(!CpnyName?.value) setCpnyName({value: '', error: 'is_empty'});
@@ -127,13 +125,12 @@ async function handleSubmit(e){
       if(UseLicenseDate === 'Y' && !LicenseExpireDate?.value) setLicenseExpireDate({value: '', error: 'is_empty'});
       if(UseLicenseDate === 'N') setLicenseExpireDate({value:''});
       if(!Bank1?.value) setBank1({value: '', error: 'is_empty'});
-      // if(!Bank2?.value) setBank2({value: '', error: 'is_empty'});
       if(!Phone?.value) setPhone({value: '', error: 'is_empty'});
       if(!Address?.value) setAddress({value: '', error: 'is_empty'});
       if(!Email?.value) setEmail({value: '', error: 'is_empty'});
        if(!isValidEmail(VendUserID?.value)) setVendUserID({...VendUserID, ...{error: 'is_invalid'}});
        if(!isValidEmail(Email?.value)) setEmail({...Email, ...{error: 'is_invalid'}});
-      //  else if(isNaN(Phone?.value)) setPhone({...Phone, ...{error: 'must_number'}});
+       else if(isNaN(Phone?.value)) setPhone({...Phone, ...{error: 'must_number'}});
     }
     setLoader(false)
 }

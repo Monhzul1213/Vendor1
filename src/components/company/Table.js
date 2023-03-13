@@ -1,27 +1,21 @@
 
 
-import React, { useRef, useState, useEffect } from 'react';
-import 'antd/dist/antd.css';
-// import './index.css';
+import React, { useRef, useState } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
-import { Button, Input, Space, Table as AntTable, Pagination } from 'antd';
+import { Button, Input, Space, Table as AntTable } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useDimensions } from '../../helpers/useDimensions'
-
+import moment from 'moment'
 import '../../css/table.css'
-// import { Pagination } from '../all';
-
 import Highlighter from 'react-highlight-words';
 
 export const Table = (props) => {
-  const {data, setVisible, selected, setSelected} = props;
+  const {data, setVisible,  setSelected} = props;
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
-  const [filteredInfo, setFilteredInfo] = useState({});
   const searchInput = useRef(null);
   const { height } = useDimensions();
   const { t } = useTranslation();
-  const [sort, setSort] = useState('ascend');
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
@@ -33,14 +27,11 @@ export const Table = (props) => {
     clearFilters();
     setSearchText('');
   };
-  const handleChange = (pagination, filters, sorter) => {
-    console.log('Various parameters', pagination, filters, sorter);
-    setFilteredInfo(filters);
-  };
+
       
 
   const getColumnSearchProps = (dataIndex) => ({
-    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters , close}) => (
       <div
         style={{
           padding: 8,
@@ -48,7 +39,7 @@ export const Table = (props) => {
       >
         <Input
           ref={searchInput}
-          placeholder={`Search `}
+          placeholder={t('search')}
           value={selectedKeys[0]}
           onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
           onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
@@ -67,25 +58,38 @@ export const Table = (props) => {
               width: 90,
             }}
           >
-            Search
+            {t('search')}
           </Button>
           <Button
-         
+            onClick={() => clearFilters && handleReset(clearFilters)}
             size="small"
             style={{
               width: 90,
             }}
+          >
+            Reset
+          </Button>
+          <Button
+            type="link"
+            size="small"
             onClick={() => {
               confirm({
                 closeDropdown: false,
               });
-            clearFilters && 
-            handleReset(clearFilters)
-            setSearchText(selectedKeys[0]);
-            setSearchedColumn(dataIndex);
+              setSearchText(selectedKeys[0]);
+              setSearchedColumn(dataIndex);
             }}
           >
-            Reset
+            Filter
+          </Button>
+          <Button
+            type="link"
+            size="small"
+            onClick={() => {
+              close();
+            }}
+          >
+            {t('close')}
           </Button>
         </Space>
       </div>
@@ -221,20 +225,6 @@ const columns = [
       key: 'UseLicenseDate',
       width: 150,
       align: 'center',
-      filters: [
-        {
-          text: t('true'),
-          value: 'Y',
-        },
-        {
-          text: t('false'),
-          value: 'N',
-        },
-       
-      ],
-      filteredValue: filteredInfo.UseLicenseDate || null,
-      onFilter: (value, record) => record.UseLicenseDate.includes(value),
-      ellipsis: true,
     },  
      {
       title: t('table.licenseExpireDate'),
@@ -243,17 +233,17 @@ const columns = [
       align: 'center',
       ...getColumnSearchProps('LicenseExpireDate'),
       width: 100,
-      sorter: (a, b) => new Date(a.LicenseExpireDate) - new Date( b.LicenseExpireDate),
-      // sortDirections: ['descend', 'ascend'],
-      // defaultSortOrder: 'descend',
     },
     {
       title: ('Үүсгэсэн огноо'),
       dataIndex: 'CreatedDate',
       key: 'CreatedDate',
       align: 'center',
-      // ...getColumnSearchProps('CreatedDate'),
-      sorter: (a, b) => new Date(a.CreatedDate) - new Date( b.CreatedDate),
+      sorter: {
+        compare: (a, b) =>
+          moment(a.CreatedDate, "yyyy.MM.DD, HH:mm:ss") - moment(b.CreatedDate, "yyyy.MM.DD, HH:mm:ss"),
+      },
+      // sorter: (a, b) => new Date(a.CreatedDate).getTime() - new Date(b.CreatedDate).getTime(),
       sortDirections: ['descend', 'ascend'],
       defaultSortOrder: 'descend',
       width: 120
@@ -262,8 +252,7 @@ const columns = [
   ]; 
 
   return <>
-  <AntTable columns={columns } dataSource={data}  onChange={handleChange} 
-  //sort= {{ id: 'CreatedDate', desc: true }}
+  <AntTable columns={columns } dataSource={data}
     pagination={{ defaultPageSize: 50, showSizeChanger: true, pageSizeOptions: ['50', '100', '150']}}  
     scroll={{ x: 'max-content', y: height - 260 , scrollToFirstRowOnChange: false
     }}
@@ -272,7 +261,6 @@ const columns = [
         onDoubleClick: event => {
         setVisible(true)
         setSelected(record);
-        console.log(rowIndex )
       }} 
   } } 
    />

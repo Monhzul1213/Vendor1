@@ -1,10 +1,10 @@
-import React,{useState} from 'react';
+import React from 'react';
 import { Menu, Dropdown } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { logout as out, selectUser } from '../../services';
-import { auth, getAuth, logout } from '../../firebase';
+import { logout as out,  } from '../../services';
+import { auth, logout } from '../../firebase';
 import { DynamicMDIcon, DynamicAIIcon } from './DynamicIcon';
 import { vendor_pdf } from '../../assets';
 
@@ -12,14 +12,12 @@ export function User(){
   const { t , i18n} = useTranslation();
   const [user] = useAuthState(auth);
 
-  const [loading, setLoading] = useState(false);
   const login = useSelector(state => state.login?.user);
   const dispatch = useDispatch();
 
   const logoutOfApp = () => {
     logout();
     dispatch(out());
-    // console.log(user)
   };
   const menuStyle = {paddingTop: 5, paddingBottom: 5, borderRadius: 5};
 

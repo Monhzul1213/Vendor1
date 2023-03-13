@@ -1,7 +1,7 @@
-import React, { useEffect, useState, Suspense } from 'react';
+import React, { useEffect,  Suspense } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-
+import { BrowserRouter, Routes, Route,  } from 'react-router-dom';
+import 'antd/dist/antd.css';
 import {Login} from './pages/Login'
 import {Company} from './pages/Company'
 import {Loading} from './pages/Loading'
@@ -23,13 +23,13 @@ export function App() {
       dispatch(setIsLoggedIn(true));
     }
     window.addEventListener('storage', function(event){
-      if(event.key == 'getSessionStorage') {
+      if(event.key === 'getSessionStorage') {
         window.localStorage.setItem('sessionStorage', Date.now());
         window.localStorage.removeItem('sessionStorage');
-      } else if(event.key == 'sessionStorage' && !window.sessionStorage.length){
+      } else if(event.key === 'sessionStorage' && !window.sessionStorage.length){
         window.sessionStorage.setItem('CREDENTIALS_TOKEN', Date.now());
         dispatch(setIsLoggedIn(true));
-      } else if(event.key == 'CREDENTIALS_FLUSH'){
+      } else if(event.key === 'CREDENTIALS_FLUSH'){
         dispatch(setIsLoggedIn(false));
         console.log('storage')
         window.sessionStorage.removeItem('CREDENTIALS_TOKEN');

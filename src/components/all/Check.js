@@ -1,13 +1,11 @@
 import * as React from 'react';
-import { Checkbox, Row, Col, Radio } from 'antd';
+import {  Radio } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { Error } from './Error';
-import Password from 'antd/lib/input/Password';
 export function Check(props) {
-    const { label, value, setValue, handleEnter, disabled, id, vLabel } = props;
+    const { label, value, setValue,} = props;
     const { t } = useTranslation();
 
-//   const onChange = e => setValue({ value: e?.target?.value, error: null });
  
   const onChange = (e) => {
     console.log( e.target.value);

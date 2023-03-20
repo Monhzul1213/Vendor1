@@ -177,7 +177,7 @@ const columns = [
       dataIndex: 'VendPass',
       key: 'VendPass',
       ...getColumnSearchProps('VendPass'),
-      width: 130
+      width: 140
     },  
     {
       title: t('table.phone'),

@@ -1,10 +1,7 @@
 
 import { initializeApp } from 'firebase/app';
-import { getStorage, ref, getDownloadURL } from "firebase/storage";
-// import { , , addDoc, limit, query, where, getDocs, getDoc, doc, updateDoc } from "firebase/firestore";
 import { config1, randomtoken, config } from './helpers'
-import {
-  getFirestore,  collection,  getDocs,  addDoc,  deleteDoc,  serverTimestamp, doc, orderBy,  limit, onSnapshot,  getDoc,  updateDoc,  query, setDoc, where } from 'firebase/firestore';
+import { getFirestore,  collection,  getDocs,  addDoc,  deleteDoc,  serverTimestamp, doc, orderBy,  limit, onSnapshot,  getDoc,  updateDoc,  query, setDoc, where } from 'firebase/firestore';
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -22,7 +19,6 @@ export { db, collection, getDocs, addDoc, deleteDoc, serverTimestamp, doc, order
 signOut, setDoc, getAuth, updateDoc }
 
 export const getUser = async (email, password) => {
-  // console.log(email.includes(email.toLowerCase()))
   try {
     const userRef = collection(db, "smWebUsers");
     const q1 = query(userRef, where("WebUserID", "==", email.toLowerCase()), limit(1));

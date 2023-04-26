@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../css/menu.css';
-import {User} from '../all/User'
+import { User } from '../all/User'
 import logo_new from '../../assets/logo_new.png'
 import { useTranslation } from 'react-i18next';
 

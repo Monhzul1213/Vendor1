@@ -1,6 +1,6 @@
 
 import { initializeApp } from 'firebase/app';
-import { config1, randomtoken, config } from './helpers'
+import { randomtoken, config } from './helpers'
 import { getFirestore,  collection,  getDocs,  addDoc,  deleteDoc,  serverTimestamp, doc, orderBy,  limit, onSnapshot,  getDoc,  updateDoc,  query, setDoc, where } from 'firebase/firestore';
 import {
   getAuth,

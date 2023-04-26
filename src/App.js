@@ -1,12 +1,12 @@
 import React, { useEffect,  Suspense } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { BrowserRouter, Routes, Route,  } from 'react-router-dom';
-import 'antd/dist/antd.css';
-import {Login} from './pages/Login'
-import {Company} from './pages/Company'
-import {Loading} from './pages/Loading'
-import {PasswordForgot} from './pages/PasswordForgot'
-import {PasswordReset} from './pages/PasswordReset'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import 'antd/dist/antd.min.css';
+import { Login } from './pages/Login';
+import { Company } from './pages/Company';
+import { Loading } from './pages/Loading';
+import { PasswordForgot } from './pages/PasswordForgot';
+import { PasswordReset } from './pages/PasswordReset';
 import { setIsLoggedIn } from './services';
 
 
@@ -35,7 +35,7 @@ export function App() {
         window.sessionStorage.removeItem('CREDENTIALS_TOKEN');
       }
     });
-    // return () => window.removeEventListener('storage', () => console.log('storage remove'))
+   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   
  if(!user) return (

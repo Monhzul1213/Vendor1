@@ -1,6 +1,5 @@
 @import './color.css';
 
-
 @media only screen and (min-width: 960px) {
   .error1 {
     display: flex;

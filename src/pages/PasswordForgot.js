@@ -5,9 +5,9 @@ import emailjs from '@emailjs/browser';
 import '../css/login1.css';
 import { getWebsByEmail, setWebToken } from '../firebase';
 import  logo1_white  from '../assets/logo1_white.png';
-import { DynamicAIIcon, Error, Language, Loader, Error2 } from '../components/all';
+import { DynamicAIIcon, Language, Loader, Error2 } from '../components/all';
 import { Input } from '../components/login';
-import { config1, config } from '../helpers/login.config';
+import { config } from '../helpers/login.config';
 
 export function PasswordForgot(){
   const { t } = useTranslation();
@@ -15,14 +15,13 @@ export function PasswordForgot(){
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
-  const [list, setList] = useState([]);
-  const [visible, setVisible] = useState(false);
   const [searchParams] = useSearchParams();
 
 useEffect(() => {
     let email = searchParams?.get('email');
     setEmail(email ?? '');
     return () => {};
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 const showError = error => {
@@ -31,8 +30,6 @@ const showError = error => {
   }
 
 const showList = users => {
-    setVisible(true);
-    setList(users);
     setLoading(false)
   }
 
@@ -71,6 +68,7 @@ const handleSubmit = async e => {
   }
 
 const emailProps = { label: 'login.email', value: email, setValue: setEmail, setError };
+
   return (
     <div className='login_back_3'>
       <img src={logo1_white} alt='Logo' className='login_form_logo3' />

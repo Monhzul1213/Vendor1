@@ -2,11 +2,11 @@ import React, { useEffect, useState, } from 'react';
 import { Modal, message } from 'antd';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
-import {addDoc, collection , doc, setDoc, query, where, getDocs} from 'firebase/firestore';
-import {db} from '../../firebase'
+import { addDoc, collection , doc, setDoc, query, where, getDocs } from 'firebase/firestore';
+import { db } from '../../firebase'
 import '../../css/card.css';
-import{Cardlength, CardDate, CardInput, CardInput1,CardNote,Loader,DynamicAIIcon,Error1, Check} from '../all';
-import  {useSelector} from 'react-redux'
+import { Cardlength, CardDate, CardInput, CardInput1, CardNote, Loader, DynamicAIIcon, Error1, Check } from '../all';
+import { useSelector } from 'react-redux'
 
 export function Card(props){
   const login = useSelector(state => state.login?.user);
@@ -29,7 +29,7 @@ export function Card(props){
   const [Bank1, setBank1] = useState({ value: '', error: null });
   const [Bank2, setBank2] = useState({ value: '', error: null });
   const [ CreatedDate, setCreatedDate] = useState({ value: '', error: null });
-  const [IsFirst, setIsFirst] = useState({ value: 'Y', error: null });
+  const [IsFirst] = useState({ value: 'Y', error: null });
 
 
   useEffect(() => {
@@ -48,31 +48,32 @@ export function Card(props){
     setVendName({ value: selected?.VendName ?? '' });
     setCreatedDate({value:  selected?.CreatedDate ?? '' })
     setDisabled(disabled);
-    
     return () => {};
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selected]);
   
 async function handleSubmit(e){
     e.preventDefault()
     setLoader(true);
     setError(null);
-    
     let isLicenseValid = UseLicenseDate === 'N' ? true : LicenseExpireDate?.value ? true : false;
-  if( CpnyName?.value && VendUserID?.value && isValidEmail(VendUserID?.value) && VendPass &&VendID?.value &&VendName?.value && isLicenseValid    &&Phone?.value && !isNaN(Phone?.value) && Address?.value && Email?.value && isValidEmail(Email?.value) && Bank1?.value ){
-
-    let obj = {CpnyID: CpnyID?.value,
+    if( CpnyName?.value && VendUserID?.value && isValidEmail(VendUserID?.value) 
+      && VendPass &&VendID?.value &&VendName?.value && isLicenseValid &&Phone?.value 
+      && !isNaN(Phone?.value) && Address?.value && Email?.value && isValidEmail(Email?.value) && Bank1?.value ){
+    let obj = {
+      CpnyID: CpnyID?.value,
       CpnyName: CpnyName?.value, 
-      VendUserID:VendUserID?.value?.trim().toLowerCase(), 
-      VendPass:VendPass?.value, 
-      VendID:VendID?.value, 
-      VendName:VendName?.value, 
+      VendUserID: VendUserID?.value?.trim().toLowerCase(), 
+      VendPass: VendPass?.value, 
+      VendID: VendID?.value, 
+      VendName: VendName?.value, 
       UseLicenseDate: UseLicenseDate , 
       Address: Address?.value, 
-      Phone:Phone?.value, 
-      Bank1:Bank1?.value, 
-      Bank2:Bank2?.value ,
+      Phone: Phone?.value, 
+      Bank1: Bank1?.value, 
+      Bank2: Bank2?.value ,
       IsFirst: IsFirst?.value, 
-      Email:Email?.value,  
+      Email: Email?.value,  
       LastUserName: VendName?.value,
       CreatedDate:  CreatedDate?.value,
       LastUpdate:  moment().format('yyyy.MM.DD, HH:mm:ss'),    
@@ -153,12 +154,11 @@ const handleEnter = e => {
   }
 
   return (
-  <Modal title={null} footer={null} closable={false} visible={visible} width={700} >
+  <Modal title={null} footer={null} closable={false} open = {visible} width={700} >
       <DynamicAIIcon name='AiFillCloseCircle' className='close_icon' onClick={() => onClose(false)} />
       <p className='card_title'>{t('new_vendor')}</p>
       {error ? <Error1 error={error} /> : null}
-     
-     <form className= 'card_container' onSubmit={handleSubmit} >
+      <form className= 'card_container' onSubmit={handleSubmit} >
         <div className='cart'>
           <div className='card1'>
             <CardInput label={('table.company')} id="ss" disabled={true}  value={CpnyID} setValue={setCpnyID} handleEnter={handleEnter} />

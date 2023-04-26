@@ -4,7 +4,6 @@ import axios from 'axios';
 const initialState = {
   token: '',
   url: 'http://192.168.1.220:3737/VendorSystem.asmx/',
-
   user: null,
   collapsed: false,
   visible: false,

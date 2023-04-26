@@ -5,9 +5,8 @@ import { Checkbox } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, createSearchParams } from 'react-router-dom';
-import {getUser} from '../../firebase';
+import { getUser } from '../../firebase';
 import { login } from '../../services/login.slice';
-import { config } from '../../helpers/login.config';
 import  logo1_white  from '../../assets/logo1_white.png';
 import { Error2, Language, Loader } from '../all';
 import { Input } from './Input';
@@ -19,10 +18,6 @@ export default function LoginNew(){
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [list, setList] = useState([]);
-  const [visible, setVisible] = useState(false);
-  const [tVisible, setTVisible] = useState(false);
-  const [tResponse, setTResponse] = useState(null);
   const [checked, setChecked] = useState(false);
   const user = useSelector(state => state.login.webUser);
   const toRemember = useSelector(state => state.login.toRemember);
@@ -34,8 +29,8 @@ export default function LoginNew(){
     if(user?.WebUserID) setEmail(user?.WebUserID);
     if(toRemember && user?.WebPassword) setPassword(user?.WebPassword);
     if(toRemember) setChecked(true);
-    console.log(user)
     return () => {};
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 const handleEnter = e => {
@@ -47,22 +42,11 @@ const handleEnter = e => {
     }
   }
 
-  const showError = error => {
-    setError(error);
-    setLoading(false);
-  }
- const showList = users => {
-    setVisible(true);
-    setList(users);
-    setLoading(false)
-  }
   const handleSubmit = async e => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    const res = await getUser(email?.toLowerCase()
-    , password?.trim());
-    console.log(res.webUser) 
+    const res = await getUser(email?.toLowerCase(), password?.trim());
     if(res?.error){
       setError(res?.error);
       setLoading(false);
@@ -70,11 +54,10 @@ const handleEnter = e => {
       dispatch(login({user: res.webUser, toRemember: checked}))
     }
   }
-  const onForgot = () => {
-    navigate({ pathname: "/forgot_password", search: createSearchParams({ email }).toString()});
-  }
-const nameProps = { label: 'login.username', value: email, setValue: setEmail,  setError, handleEnter, };
-const passProps = { label: 'login.password', value: password, setValue: setPassword, setError, isPassword: true };
+
+  const onForgot = () => { navigate({ pathname: "/forgot_password", search: createSearchParams({ email }).toString()})}
+  const nameProps = { label: 'login.username', value: email, setValue: setEmail,  setError, handleEnter, };
+  const passProps = { label: 'login.password', value: password, setValue: setPassword, setError, isPassword: true };
 
 return (
     <div className='login_back_3'>
@@ -95,7 +78,7 @@ return (
           <span className='forgot_link' onClick={onForgot}>{t('forgot')}</span> 
         </div>
         <Social />
-        <a className='copyright_text' target="_blank" href={'https://' + t('login.link')} id='copy'>{t('login.link')}</a>
+        <a className='copyright_text' target="blank" href={'https://' + t('login.link')} id='copy'>{t('login.link')}</a>
         <span className='copyright_text2'>2022</span>
       </form>
     </div>

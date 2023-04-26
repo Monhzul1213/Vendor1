@@ -10,7 +10,6 @@ export * from './AddButton';
 export * from './DynamicIcon';
 export * from './IconButton';
 export * from './User';
-export * from './CardDropdown';
 export * from './CardInput';
 export * from './CardInput1';
 export * from './CardNote';

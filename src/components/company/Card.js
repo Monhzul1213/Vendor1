@@ -28,7 +28,7 @@ export function Card(props){
   const [Phone, setPhone] = useState({ value: '', error: null });
   const [Bank1, setBank1] = useState({ value: '', error: null });
   const [Bank2, setBank2] = useState({ value: '', error: null });
-  const [ CreatedDate, setCreatedDate] = useState({ value: '', error: null });
+  const [CreatedDate, setCreatedDate] = useState({ value: '', error: null });
   const [IsFirst] = useState({ value: 'Y', error: null });
 
 

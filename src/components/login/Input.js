@@ -22,14 +22,4 @@ export function Input(props){
     </div>
 
   )
-
-  return (
-    <div className='login_input_container'>
-      <p className='login_input_label'>{t(label)}</p>
-      {isPassword
-        ? <AntInput.Password {...inputProps} />
-        : <div className='login_input_back'><AntInput {...inputProps} /></div>
-      }
-    </div>
-  )
 }

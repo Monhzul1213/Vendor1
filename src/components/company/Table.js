@@ -61,23 +61,18 @@ export const Table = (props) => {
             {t('search')}
           </Button>
           <Button
-            onClick={() => clearFilters && handleReset(clearFilters)}
+            type="primary"
             size="small"
             style={{
               width: 90,
             }}
-          >
-            Reset
-          </Button>
-          <Button
-            type="link"
-            size="small"
             onClick={() => {
+              clearFilters && handleReset(clearFilters)
               confirm({
                 closeDropdown: false,
               });
               setSearchText(selectedKeys[0]);
-              setSearchedColumn(dataIndex);
+              setSearchedColumn(dataIndex );
             }}
           >
             Filter

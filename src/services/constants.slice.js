@@ -66,7 +66,7 @@ export const constantsSlice = createSlice({
 });
 
 export const getList = (login, api, data, setFunction) => async dispatch => {
-  const { token, user, url, webUser } = login;
+  const { token, url, webUser } = login;
   try {
     console.log(url + api, token);
     console.log(data);
@@ -102,7 +102,7 @@ export const getList = (login, api, data, setFunction) => async dispatch => {
 }
 
 export const getField = (login, api, setFunction) => async dispatch => {
-  const { token, user, url, webUser } = login;
+  const { token, url, webUser } = login;
   try {
     console.log(url + api, token)
     const response = await fetchRetry(url + api, token);
@@ -137,7 +137,7 @@ export const getField = (login, api, setFunction) => async dispatch => {
 }
 
 export const getConstants = (login, type, setFunction) => async dispatch => {
-  const { token, user, url, webUser } = login;
+  const { token, url, webUser } = login;
   try {
     console.log(url, token);
     const response = await fetchRetry(url + 'GetConstants?ConstType=' + type, token);
@@ -172,7 +172,7 @@ export const getConstants = (login, type, setFunction) => async dispatch => {
 };
 
 export const sendRequest = (login, api, data) => async dispatch => {
-  const { token, user, url, webUser } = login;
+  const { token, url, webUser } = login;
   try {
     console.log(url + api, token);
     console.log(data)

@@ -66,7 +66,7 @@ return (
         <Language id='login_language_2' />
       </div>
       <form onSubmit={handleSubmit} className='login_form_3'>
-        <p className='login_title_3'>{t('ADMIN VENDOR')}</p>
+        <p className='login_title_3'>{t('admin')}</p>
         <Input {...nameProps} id='username' />
         <Input {...passProps} />
         {error ? <Error2 error={error} id='login_error_3' /> : null}

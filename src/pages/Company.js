@@ -35,7 +35,7 @@ export function Company(){
       setOriginalData(users)
       return Promise.resolve(setData(users))
      }
-     ).catch(error=> console.log(error.message))
+     ).catch(error=> error.message)
 }
 
 useEffect(() => {

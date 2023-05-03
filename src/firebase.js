@@ -32,7 +32,6 @@ export const getUser = async (email, password) => {
     } 
       else return Promise.resolve({ error: false, webUser });
   } catch (err) {
-    console.error(err);
     return Promise.resolve({ error: err.code });
   }
 }
@@ -60,7 +59,6 @@ export const getWebsByEmail = async email => {
       return Promise.resolve({ error: null, users });
     }
   } catch (error) {
-    console.error(error);
     return Promise.resolve({ error: error.code });
   }
 }
@@ -72,7 +70,6 @@ export const setWebToken = async id => {
     await updateDoc(docRef, { ResetToken });
     return Promise.resolve({ error: null, ResetToken });
   } catch (error) {
-    console.error(error);
     return Promise.resolve({ error: error.code });
   }
 }
@@ -89,7 +86,6 @@ export const checkWebToken = async (id, token) => {
       return Promise.resolve({ error: 'Имейл бүртгэлгүй байна.' });
     }
   } catch (error) {
-    console.error(error);
     return Promise.resolve({ error: error.code });
   }
 }
@@ -100,7 +96,6 @@ export const updateWebPassword = async (id, password) => {
     await updateDoc(docRef, { WebPassword: password, ResetToken: null });
     return Promise.resolve({ error: null });
   } catch (error) {
-    console.error(error);
     return Promise.resolve({ error: error.code });
   }
 }

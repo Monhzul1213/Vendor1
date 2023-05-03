@@ -203,5 +203,6 @@
   "pass_match": "The password confirmation does not match",
   "pass_success": "Your password has been updated successfully.",
   "guide": "User guide",
-  "admin" : "ADMIN VENDOR"
+  "admin" : "ADMIN VENDOR",
+  "filtered" : "Filter"
 }

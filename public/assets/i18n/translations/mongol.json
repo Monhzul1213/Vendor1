@@ -209,5 +209,6 @@
   "pass_success": "Таны нууц үг амжилттай солигдлоо.",
   "post_txn1": "Тайлант хугацааны үлдэгдэл",
   "guide": "Гарын авлага",
-  "admin" : "ADMIN VENDOR"
+  "admin" : "ADMIN VENDOR",
+  "filtered" : "Болих"
 }

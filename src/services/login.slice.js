@@ -29,12 +29,10 @@ export const loginSlice = createSlice({
       state.user = action.payload.user;
       state.webUser = action.payload.user;
       // state.url = action.payload?.url;
-      console.log(action.payload)
       state.toRemember = action.payload?.toRemember;
     },
     setLogin: (state, action) => {
       state.user = action.payload;
-      console.log(state)
       state.url = action.payload?.url;
       state.webUser = action.payload?.webUser;
       state.toRemember = action.payload?.toRemember;
@@ -63,9 +61,7 @@ export const loginSlice = createSlice({
 
 export const apiLogin = (email, password) => async dispatch => {
   try {
-    console.log(initialState.url, email, password);
     const response = await fetchRetry(initialState.url + 'Login', { email, password });
-    console.log(response);
     if(response?.error_code){
       return Promise.resolve({ error: response?.description });
     } else {
@@ -84,7 +80,6 @@ function fetchRetry(url, auth, retries = 5) {
       return res?.data;
     }).catch(error => {
       if(error?.message === 'Network Error' && retries > 0){
-        console.log('retrying network', retries);
         return fetchRetry(url, auth, retries - 1)
       }
     });

@@ -8,7 +8,6 @@ export function Check(props) {
 
  
   const onChange = (e) => {
-    console.log( e.target.value);
     setValue(e.target.value);
   };
   return (

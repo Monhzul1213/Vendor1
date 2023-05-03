@@ -18,7 +18,6 @@ export function App() {
   useEffect(() => {
     if(!window.sessionStorage.length){
       window.localStorage.setItem('getSessionStorage', Date.now());
-      console.log(window.localStorage)
     } else {
       dispatch(setIsLoggedIn(true));
     }
@@ -31,7 +30,6 @@ export function App() {
         dispatch(setIsLoggedIn(true));
       } else if(event.key === 'CREDENTIALS_FLUSH'){
         dispatch(setIsLoggedIn(false));
-        console.log('storage')
         window.sessionStorage.removeItem('CREDENTIALS_TOKEN');
       }
     });

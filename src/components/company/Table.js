@@ -17,7 +17,7 @@ export const Table = (props) => {
   const { height } = useDimensions();
   const { t } = useTranslation();
 
-  const handleSearch = (selectedKeys, confirm, dataIndex) => {
+const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
     setSearchText(selectedKeys[0]);
     setSearchedColumn(dataIndex);
@@ -28,16 +28,17 @@ export const Table = (props) => {
     setSearchText('');
   };
 
-      
 
   const getColumnSearchProps = (dataIndex) => ({
-    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters , close}) => (
+    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
       <div
         style={{
           padding: 8,
         }}
+        onKeyDown={(e) => e.stopPropagation()}
       >
         <Input
+          className='ant_search'
           ref={searchInput}
           placeholder={t('search')}
           value={selectedKeys[0]}
@@ -71,16 +72,16 @@ export const Table = (props) => {
               confirm({
                 closeDropdown: false,
               });
-              setSearchText(selectedKeys[0]);
+              // setSearchText(selectedKeys[0]);
               setSearchedColumn(dataIndex );
             }}
           >
-            Filter
+            {t('filtered')}
           </Button>
           <Button
             type="link"
             size="small"
-            onClick={() => {
+            handleClick={() => {
               close();
             }}
           >
@@ -104,8 +105,6 @@ export const Table = (props) => {
         setTimeout(() => searchInput.current?.select(), 100);
       }
     },
- 
-   
     render: (text) =>
       searchedColumn === dataIndex ? (
         <Highlighter
@@ -126,22 +125,17 @@ export const Table = (props) => {
 const columns = [
     {
       title: t('table.company'), 
-      // accessor: 'CpnyID' ,
       dataIndex: 'CpnyID',
       key: 'CpnyID',
       ...getColumnSearchProps('CpnyID'),
       width: 110
-      
     },
     {
       title: t('table.company_name'), 
-      // accessor: 'CpnyID' ,
       dataIndex: 'CpnyName',
       key: 'CpnyName',
       ...getColumnSearchProps('CpnyName'),
       width: 120
-
-      
     },
     {
       title: t('table.vendorcode'),
@@ -150,7 +144,6 @@ const columns = [
       align: 'center',
       ...getColumnSearchProps('VendID'),
       width: 150
-
     },
     {
       title: t('table.vendorname'),
@@ -158,7 +151,6 @@ const columns = [
       key: 'VendName',
       ...getColumnSearchProps('VendName'),
       width: 150,
-      // }),
     },
     {
       title: t('user_email'),
@@ -238,7 +230,6 @@ const columns = [
         compare: (a, b) =>
           moment(a.CreatedDate, "yyyy.MM.DD, HH:mm:ss") - moment(b.CreatedDate, "yyyy.MM.DD, HH:mm:ss"),
       },
-      // sorter: (a, b) => new Date(a.CreatedDate).getTime() - new Date(b.CreatedDate).getTime(),
       sortDirections: ['descend', 'ascend'],
       defaultSortOrder: 'descend',
       width: 120
@@ -246,19 +237,17 @@ const columns = [
    
   ]; 
 
-  return <>
-  <AntTable columns={columns } dataSource={data}
+  return (
+    <AntTable columns={columns } dataSource={data}
     pagination={{ defaultPageSize: 50, showSizeChanger: true, pageSizeOptions: ['50', '100', '150']}}  
-    scroll={{ x: 'max-content', y: height - 260 , scrollToFirstRowOnChange: false
-    }}
-  onRow={(record, rowIndex) => {
+    scroll={{ x: 'max-content', y: height - 260 , scrollToFirstRowOnChange: false }}
+    onRow={(record) => {
     return {
         onDoubleClick: event => {
         setVisible(true)
         setSelected(record);
       }} 
-  } } 
+    }} 
    />
-  {/* <Pagination className='pagination'/> */}
-  </>
+  )
 };

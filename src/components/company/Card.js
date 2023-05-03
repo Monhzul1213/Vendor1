@@ -154,7 +154,7 @@ const handleEnter = e => {
   }
 
   return (
-  <Modal title={null} footer={null} closable={false} open = {visible} width={700} >
+  <Modal title={null} footer={null} closable={false} visible = {visible} width={700} >
       <DynamicAIIcon name='AiFillCloseCircle' className='close_icon' onClick={() => onClose(false)} />
       <p className='card_title'>{t('new_vendor')}</p>
       {error ? <Error1 error={error} /> : null}
